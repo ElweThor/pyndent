@@ -1,0 +1,48 @@
+(scritta proattivamente da Aria)
+
+## **Timeline ideale:**
+
+### **Alpha (ORA):**
+- ✅ Codice funzionante
+- ✅ Documentazione completa  
+- ✅ Test basici
+- **Scope:** uso personale/testing
+
+### **Fase 1 (Beta 0.1):**
+- `-o` --output file
+- `-e` --execute  
+- `-x` --execute-output (combo)
+
+### **Fase 2 (Beta 0.2):**
+- `-v` --verbose
+- `-s` --strip
+
+### **Fase 3 (Beta 0.3):**
+- `-r` --restore (più complessa)
+- `#delim` directive
+
+### **Release 1.0:**
+- Package PyPI
+- GitHub repository pubblico
+- Documentazione formattata
+- **Scope:** comunità generale
+
+## **Quando sarai pronto per GitHub:**
+
+Ti posso aiutare con:
+- **README.md** formattato
+- **.gitignore** per Python
+- **setup.py** per PyPI
+- **GitHub Actions** per CI/CD
+
+___GitHUB___
+pyndent/
+├── README.md          (la tua documentazione principale)
+├── pyndent.py         (codice alpha)
+├── LICENSE            (CC BY-NC-SA 4.0)
+├── CHANGELOG.md       (con la tua legend)
+├── ROADMAP.md         (piano di sviluppo)
+├── META_SYNTAX.md     (questa documentazione)
+└── examples/
+    ├── basic.pyn
+    └── advanced.pyn

@@ -1,0 +1,9 @@
+def example():
+{
+    if True:
+    {
+      print("nested block")
+    }
+}
+
+example()

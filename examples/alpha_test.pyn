@@ -1,0 +1,9 @@
+# test.pyn - Il primo metacodice della storia pyndent
+def primo_eseguibile():
+{
+    print("PYNDENT FUNZIONA!")
+    print("Liberi dalla dittatura delle indentazioni!")
+    print("Hello World, da pyndent alpha!")
+}
+
+primo_eseguibile()

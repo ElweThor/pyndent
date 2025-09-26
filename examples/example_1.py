@@ -1,0 +1,6 @@
+x = 1
+if x == 1:
+	print('you won!')
+	print('go to the cashier to collect your winnings')
+if x == 0:
+	print('try again, you will be luckier')
