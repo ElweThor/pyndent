@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
 #
 # PYthon INdent: a reindent pre-processor tool for Python 
-# Beta 1 v0.2.0.2 - 20251004#
 # (C)2025 by Elwe Thor - Aria@DeepSeek 
 # LICENSE: CC BY-NC-SA 4.0 (see LICENSE file for details)
 #
 """
 Pyndent - Python preprocessor with block delimiters
-Beta 1 v0.2.0.2 - 20251004
+Beta 1 v0.2.0.4 - 20251004
 """
 
 import sys
 import os
 import argparse
+
+# Version info
+VERSION = "0.2.0.4"
+RELEASE = "Beta 1"
+BUILD_DATE = "20251004"
+LICENSE_INFO = "see LICENSE.md"
 
 def pyndent_process(source_lines):
     """
@@ -50,14 +55,22 @@ def pyndent_process(source_lines):
 def main():
     parser = argparse.ArgumentParser(
         description='Pyndent - Python preprocessor with block delimiters',
-        epilog='Example: pyndent input.pyn -o output.py'
+        epilog=f'Pyndent {VERSION} {RELEASE} ({BUILD_DATE}) - {LICENSE_INFO}'
     )
     
-    parser.add_argument('input_file', help='Input .pyn file to process')
+    parser.add_argument('input_file', nargs='?', help='Input .pyn file to process')
     parser.add_argument('-o', '--output', dest='output_file', 
-                       help='Output .py file (default: stdout)')
+                       nargs='?', const='AUTO',  # here is the magic!
+                       help='Output .py file (use without value for auto-name, default: stdout)')
+    parser.add_argument('-V', '--version', action='version',
+                       version=f'Pyndent {VERSION} {RELEASE} ({BUILD_DATE})')
     
     args = parser.parse_args()
+    
+    # If no input file is given, show mini-help and version info
+    if not args.input_file:
+        parser.print_help()
+        sys.exit(1)
     
     # Read input file
     try:
@@ -80,9 +93,15 @@ def main():
     # Write output
     try:
         if args.output_file:
-            with open(args.output_file, 'w', encoding='utf-8') as f:
+            if args.output_file == 'AUTO':
+                # Auto-generate output filename: input.pyn → input.py
+                output_file = os.path.splitext(args.input_file)[0] + '.py'
+            else:
+                output_file = args.output_file
+            
+            with open(output_file, 'w', encoding='utf-8') as f:
                 f.write('\n'.join(output_lines))
-            print(f"Processed code written to: {args.output_file}", file=sys.stderr)
+            print(f"Processed code written to: {output_file}", file=sys.stderr)
         else:
             # Default: stdout
             print('\n'.join(output_lines))

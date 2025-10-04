@@ -1,9 +1,11 @@
 # Changelog
 
-[![Beta](https://img.shields.io/badge/version-0.2.0.2--beta-yellow)]()
+[![Beta](https://img.shields.io/badge/version-0.2.0.4--beta-yellow)]()
 [![Status](https://img.shields.io/badge/status-beta-yellow)]()
 
-## 2025-10-04 - v0.2.0.2 (Beta 1)
+## 2025-10-04 - v0.2.0.4 (Beta 1)
+- .4 **ET+AR**: -h/--help added: show mini/full help
+- .3 **ET+AR**: -V/--version added: show current version and build date
 - .2 **ET+AR**: argparse included, to manage -o/--output switch and future ones seamlessy
 - .1 **ET+AR**: Beta 1 build with -o/--output <filename>.py
 

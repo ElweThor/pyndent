@@ -1,10 +1,11 @@
 # 🐍 Pyndent - Solving Python's Indentation Dilemma
 
-[![Version](https://img.shields.io/badge/version-0.2.0.2--beta-yellow)]()
+[![Version](https://img.shields.io/badge/version-0.2.0.4--beta-yellow)]()
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE.md)
 
 > **Preprocessor that adds block delimiters to Python, making indentation errors a thing of the past.**
-> *Now in BETA with `-o/--output` file support and argparse!*
+
+> *Now in BETA 1 with -V/--version, -h/--help, `-o/--output` file support and argparse!*
 
 ## 🚀 Quick Start
 
