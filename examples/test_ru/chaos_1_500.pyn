@@ -1,0 +1,525 @@
+# chaos_1_500.pyn
+
+def main():
+{
+    # starting main
+    print("=== Starting chaos_1_500 test ===")
+    data = list(range(1, 11))
+    for x in data:
+    {
+        if x % 2 == 0:
+        {
+            print("Even:", x)
+        }
+        else:
+        {
+            print("Odd:", x)
+        }
+    }
+    nested_func()
+}
+
+def nested_func():
+{
+    # nested dictionary iteration
+    a = {"keyA":[1,2], "keyB":[3,4], "keyC":[5,6]}
+    for k,v in a.items():
+    {
+        print(k, v)
+        for n in v:
+        {
+            if n % 2 == 0:
+            {
+                print(k, "even", n)
+            }
+            else:
+            {
+                print(k, "odd", n)
+            }
+        }
+    }
+    deeper_nested()
+}
+
+def deeper_nested():
+{
+    # triple nested loops
+    for i in range(3):
+    {
+        for j in range(3):
+        {
+            for k in range(3):
+            {
+                if (i+j+k) % 2 == 0:
+                {
+                    print("Nested even:", i,j,k)
+                }
+                else:
+                {
+                    print("Nested odd:", i,j,k)
+                }
+            }
+        }
+    }
+}
+
+def sum_nested():
+{
+    # sum combinations
+    for x in range(5):
+    {
+        for y in range(4):
+        {
+            for z in range(3):
+            {
+                total = x+y+z
+                if total % 2 == 0:
+                {
+                    print("Sum even:", x,y,z)
+                }
+                else:
+                {
+                    print("Sum odd:", x,y,z)
+                }
+            }
+        }
+    }
+}
+
+def matching_test():
+{
+    # simple matching checks
+    for a,b in zip(range(1,6), range(1,6)):
+    {
+        if a == b:
+        {
+            print(a, "matches", b)
+        }
+        else:
+        {
+            print(a, "does not match", b)
+        }
+    }
+}
+
+def alpha_beta_gamma():
+{
+    # dict with small dicts
+    alpha = {"x":1,"y":2}
+    beta = {"x":3,"y":4}
+    gamma = {"x":5,"y":6}
+    for label,d in [("alpha",alpha),("beta",beta),("gamma",gamma)]:
+    {
+        print(label, d)
+        for k,v in d.items():
+        {
+            if v % 2 == 0:
+            {
+                print(label, k, "even", v)
+            }
+            else:
+            {
+                print(label, k, "odd", v)
+            }
+        }
+    }
+}
+
+def advanced_loops():
+{
+    for i in range(3):
+    {
+        for j in range(3):
+        {
+            for k in range(3):
+            {
+                print(f"Triple loop: {i}-{j}-{k}")
+                if (i+j+k) % 2 == 0:
+                {
+                    print("Even sum")
+                }
+                else:
+                {
+                    print("Odd sum")
+                }
+            }
+        }
+    }
+}
+
+def dictionary_nesting():
+{
+    data = {
+        "alpha": {"x": 1, "y": 2},
+        "beta": {"x": 3, "y": 4},
+        "gamma": {"x": 5, "y": 6}}
+    for key, val in data.items():
+    {
+        print(key, val)
+        for subkey, subval in val.items():
+        {
+            if subval % 2 == 0:
+            {
+                print(subkey, "even", subval)
+            }
+            else:
+            {
+                print(subkey, "odd", subval)
+            }
+        }
+    }
+}
+
+def mixed_control_structures():
+{
+    for n in range(1,6):
+    {
+        if n % 2 == 0:
+        {
+            print(f"Even number: {n}")
+        }
+        else:
+        {
+            print(f"Odd number: {n}")
+        }
+        counter = 0
+        while counter < n:
+        {
+            print(f"Counting {counter}")
+            counter += 1
+        }
+    }
+}
+
+def nested_conditionals(a,b):
+{
+    if a > 0:
+    {
+        if b > 0:
+        {
+            print("Both positive")
+        }
+        else:
+        {
+            print("A positive, B non-positive")
+        }
+    }
+    else:
+    {
+        if b > 0:
+        {
+            print("A non-positive, B positive")
+        }
+        else:
+        {
+            print("Both non-positive")
+        }
+    }
+}
+
+# Main test calls for lines 101-200
+advanced_loops()
+dictionary_nesting()
+mixed_control_structures()
+nested_conditionals(1,-1)
+nested_conditionals(-2,3)
+nested_conditionals(0,0)
+
+def complex_arithmetic():
+{
+    for i in range(1,5):
+    {
+        for j in range(1,5):
+        {
+            result = i**2 - j**2
+            if result % 2 == 0:
+            {
+                print(f"{i}^{2} - {j}^{2} = {result} (Even)")
+            }
+            else:
+            {
+                print(f"{i}^{2} - {j}^{2} = {result} (Odd)")
+            }
+        }
+    }
+}
+
+def nested_lists():
+{
+    matrix = [[x+y for y in range(3)] for x in range(3)]
+    for row_idx, row in enumerate(matrix):
+    {
+        for col_idx, val in enumerate(row):
+        {
+            if val % 2 == 0:
+            {
+                print(f"matrix[{row_idx}][{col_idx}] = {val} even")
+            }
+            else:
+            {
+                print(f"matrix[{row_idx}][{col_idx}] = {val} odd")
+            }
+        }
+    }
+}
+
+def mixed_structures():
+{
+    numbers = [1,2,3,4]
+    letters = ['a','b','c','d']
+    for n in numbers:
+    {
+        for l in letters:
+        {
+            if n % 2 == 0:
+            {
+                print(f"{l}{n} even number")
+            }
+            else:
+            {
+                print(f"{l}{n} odd number")
+            }
+            counter = 0
+            while counter < n:
+            {
+                print(f"counting {counter} in {l}{n}")
+                counter += 1
+            }
+        }
+    }
+}
+
+def recursive_like_sim():
+{
+    for x in range(3):
+    {
+        for y in range(3):
+        {
+            for z in range(2):
+            {
+                print(f"Triplet: {x},{y},{z}")
+                if (x+y+z) % 3 == 0:
+                {
+                    print("Sum divisible by 3")
+                }
+                else:
+                {
+                    print("Sum not divisible by 3")
+                }
+            }
+        }
+    }
+}
+
+def complex_dicts():
+{
+    data = {
+        "one": [1,2],
+        "two": [3,4],
+        "three": [5,6]}
+    for key, values in data.items():
+    {
+        for v in values:
+        {
+            if v % 2 == 0:
+            {
+                print(f"{key} even {v}")
+            }
+            else:
+            {
+                print(f"{key} odd {v}")
+            }
+        }
+    }
+}
+
+# Main test calls for lines 201-300
+complex_arithmetic()
+nested_lists()
+mixed_structures()
+recursive_like_sim()
+complex_dicts()
+
+def nested_conditionals():
+{
+    for i in range(1,5):
+    {
+        for j in range(1,5):
+        {
+            if i % 2 == 0:
+            {
+                if j % 2 == 0:
+                {
+                    print(f"{i},{j} both even")
+                }
+                else:
+                {
+                    print(f"{i},{j} i even, j odd")
+                }
+            }
+            else:
+            {
+                if j % 2 == 0:
+                {
+                    print(f"{i},{j} i odd, j even")
+                }
+                else:
+                {
+                    print(f"{i},{j} both odd")
+                }
+            }
+        }
+    }
+}
+
+def deep_loops():
+{
+    for a in range(2):
+    {
+        for b in range(2):
+        {
+            for c in range(2):
+            {
+                for d in range(2):
+                {
+                    print(f"Loop: {a},{b},{c},{d}")
+                    if (a+b+c+d) % 2 == 0:
+                    {
+                        print("Even sum")
+                    }
+                    else:
+                    {
+                        print("Odd sum")
+                    }
+                }
+            }
+        }
+    }
+}
+
+def list_dict_combo():
+{
+    items = [{"x":1,"y":2},{"x":3,"y":4},{"x":5,"y":6}]
+    for idx, item in enumerate(items):
+    {
+        for key, val in item.items():
+        {
+            if val % 2 == 0:
+            {
+                print(f"{idx} {key} even {val}")
+            }
+            else:
+            {
+                print(f"{idx} {key} odd {val}")
+            }
+        }
+    }
+}
+
+def while_for_mix():
+{
+    numbers = [1,2,3]
+    i = 0
+    while i < len(numbers):
+    {
+        n = numbers[i]
+        for j in range(3):
+        {
+            if (n+j) % 2 == 0:
+            {
+                print(f"{n}+{j} even")
+            }
+            else:
+            {
+                print(f"{n}+{j} odd")
+            }
+        }
+        i += 1
+    }
+}
+
+def combined_test_block():
+{
+    nested_conditionals()
+    deep_loops()
+    list_dict_combo()
+    while_for_mix()
+}
+
+# Main test calls for lines 301-400
+combined_test_block()
+
+def complex_combinations():
+{
+    data_sets = [
+        [1,2,3],
+        [4,5,6],
+        [7,8,9]
+    ]
+    for i, data in enumerate(data_sets):
+    {
+        for x in data:
+        {
+            for y in data:
+            {
+                for z in data:
+                {
+                    sum_xyz = x + y + z
+                    if sum_xyz % 2 == 0:
+                    {
+                        print(f"DataSet {i}: {x},{y},{z} sum even {sum_xyz}")
+                    }
+                    else:
+                    {
+                        print(f"DataSet {i}: {x},{y},{z} sum odd {sum_xyz}")
+                    }
+                }
+            }
+        }
+    }
+}
+
+def mixed_structures():
+{
+    letters = ["a","b","c"]
+    numbers = [1,2,3]
+    for l in letters:
+    {
+        for n in numbers:
+        {
+            if n % 2 == 0:
+            {
+                print(f"{l}-{n} even")
+            }
+            else:
+            {
+                print(f"{l}-{n} odd")
+            }
+        }
+    }
+}
+
+def recursive_like_sim():
+{
+    for i in range(3):
+    {
+        for j in range(3):
+        {
+            print(f"RecSim loop {i}-{j}")
+            for k in range(2):
+            {
+                print(f"RecSim nested {i}-{j}-{k}")
+            }
+        }
+    }
+}
+
+def final_test_suite():
+{
+    complex_combinations()
+    mixed_structures()
+    recursive_like_sim()
+}
+
+# Main test calls for lines 401-500
+final_test_suite()

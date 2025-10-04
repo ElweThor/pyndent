@@ -1,0 +1,57 @@
+def main():
+{
+ if True:
+  {
+    print("Starting main...")
+    data = [1,2,3,4]
+    for x in data:
+     {
+       if x % 2 == 0:
+        {
+          print("Even:", x)
+        }
+       else:
+        {
+           print("Odd:", x)
+        }
+     }
+    nested_func()
+  }
+}
+
+def nested_func():
+{
+  a = {"key1":1, "key2":2}
+  for k,v in a.items():
+   {
+      print(k,v)
+      if v > 1:
+       {
+         print("Value > 1")
+       }
+   }
+}
+
+def crazy_indent():
+{
+   for i in range(5):
+    {
+     for j in range(3):
+      {
+       if i==j:
+        {
+         print("i equals j:", i,j)
+        }
+       else:
+        {
+        print("i not equal j")
+        }
+      }
+    }
+}
+
+if __name__ == "__main__":
+{
+    main()
+    crazy_indent()
+}

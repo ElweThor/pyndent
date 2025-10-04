@@ -1,0 +1,193 @@
+def main():
+{
+    print("=== Starting chaos_1_200 test ===")
+    data = list(range(1,11))
+    for x in data:
+    {
+        if x % 2 == 0:
+        {
+            print("Even:", x)
+        }
+        else:
+        {
+            print("Odd:", x)
+        }
+    }
+    nested_func1()
+    nested_func2()
+    crazy_indent()
+}
+
+def nested_func1():
+{
+    a = {"keyA": [1,2], "keyB":[3,4], "keyC":[5,6]}
+    for k,v in a.items():
+    {
+        print(k,v)
+        for i in v:
+        {
+            if i % 2 == 0:
+            {
+                print(k,"even",i)
+            }
+            else:
+            {
+                print(k,"odd",i)
+            }
+        }
+    }
+    extra_nested1()
+}
+
+def nested_func2():
+{
+    for i in range(3):
+    {
+        for j in range(3):
+        {
+            if i==j:
+            {
+                print("i equals j:", i,j)
+            }
+            else:
+            {
+                print("i not equal j")
+            }
+        }
+    }
+    extra_nested2()
+}
+
+def crazy_indent():
+{
+    for i in range(5):
+    {
+        for j in range(4):
+        {
+            for k in range(3):
+            {
+                if i+j+k % 2 == 0:
+                {
+                    print("Sum even:", i,j,k)
+                }
+                else:
+                {
+                    print("Sum odd:", i,j,k)
+                }
+            }
+        }
+    }
+}
+
+def mad_loop():
+{
+    s = [1,2,3,4,5]
+    d = {"one":1,"two":2,"three":3,"four":4}
+    for i in s:
+    {
+        for key,value in d.items():
+        {
+            if i==value:
+            {
+                print(key,"matches",i)
+            }
+            else:
+            {
+                print(key,"does not match",i)
+            }
+        }
+    }
+}
+
+def extra_nested1():
+{
+    lst = [[1,2],[3,4],[5,6]]
+    for sub in lst:
+    {
+        for n in sub:
+        {
+            if n>3:
+            {
+                print("Big:", n)
+            }
+            else:
+            {
+                print("Small:", n)
+            }
+        }
+    }
+}
+
+def extra_nested2():
+{
+    for i in range(2):
+    {
+        for j in range(2):
+        {
+            for k in range(2):
+            {
+                if (i+j+k) % 2 == 0:
+                {
+                    print("Nested even:", i,j,k)
+                }
+                else:
+                {
+                    print("Nested odd:", i,j,k)
+                }
+            }
+        }
+    }
+}
+
+def crazy_dicts():
+{
+    d = {"alpha":{"x":1,"y":2},"beta":{"x":3,"y":4},"gamma":{"x":5,"y":6}}
+    for k1,v1 in d.items():
+    {
+        print(k1,v1)
+        for k2,v2 in v1.items():
+        {
+            if v2%2==0:
+            {
+                print(k1,k2,"even",v2)
+            }
+            else:
+            {
+                print(k1,k2,"odd",v2)
+            }
+        }
+    }
+}
+
+def complex_loops():
+{
+    for i in range(3):
+    {
+        for j in range(3):
+        {
+            for k in range(3):
+            {
+                for l in range(2):
+                {
+                    if (i+j+k+l)%2==0:
+                    {
+                        print("Complex even:", i,j,k,l)
+                    }
+                    else:
+                    {
+                        print("Complex odd:", i,j,k,l)
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Main entry
+if __name__ == "__main__":
+{
+    main()
+    mad_loop()
+    crazy_dicts()
+    complex_loops()
+}

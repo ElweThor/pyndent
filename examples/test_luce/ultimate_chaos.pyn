@@ -1,0 +1,14 @@
+def ultimate_chaos():
+{
+    print("""{
+    }""")  # Stringa multi-riga con delimitatori
+    for i in range(2):
+    {
+        if i == 0:
+        {
+            print("Zero")
+        }
+    }
+    print("Done")
+}
+ultimate_chaos()

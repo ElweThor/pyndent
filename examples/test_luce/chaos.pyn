@@ -1,0 +1,14 @@
+def chaos():
+{
+    print("{")  # Stringa ambigua
+    # {
+    if True:  # Indentazione sbagliata
+    {
+        for i in range(3):
+        {
+            print(f"Loop {i}")
+        }
+        print("Fuori?")  # Indentazione volutamente errata
+    }
+}
+chaos()

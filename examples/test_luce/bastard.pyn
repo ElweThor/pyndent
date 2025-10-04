@@ -1,0 +1,12 @@
+def tricky():
+{
+    print("Stringa con {braces} inside")  # Stringa che potrebbe confondere
+    # Commento con { qui
+    if True:
+    {
+        print("Nested")
+    }
+    x = 1  # Indentazione sbagliata
+}
+
+tricky()
