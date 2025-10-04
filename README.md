@@ -30,6 +30,7 @@ def example():
         print("Hello from nested block!")
     }
 }
+```
 
 **Output (`demo.py`):**
 ```python
@@ -40,6 +41,7 @@ def example():
         print("Hello from nested block!")
     #}
 #}
+```
 
 **Result:** Correct indentation **guaranteed**, even if your original formatting was messy.
 
