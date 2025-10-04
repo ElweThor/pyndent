@@ -22,6 +22,7 @@ python pyndent.py -e examples/demo.pyn
 Python's strict indentation can cause frustrating bugs. Pyndent lets you write:
 
 **Input (`demo.pyn`):**
+```python # pyndent
 def example():
 {
     if True:
@@ -31,6 +32,7 @@ def example():
 }
 
 **Output (`demo.py`):**
+```python
 def example():
 #{
     if True:
