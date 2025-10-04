@@ -1,9 +1,10 @@
 # 🐍 Pyndent - Solving Python's Indentation Dilemma
 
-[![Version](https://img.shields.io/badge/version-0.1.0.0--alpha-20250924-orange)](https://github.com/elwethor/pyndent)
+[![Version](https://img.shields.io/badge/version-0.2.0.2--beta-yellow)]()
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE.md)
 
 > **Preprocessor that adds block delimiters to Python, making indentation errors a thing of the past.**
+> *Now in BETA with `-o/--output` file support and argparse!*
 
 ## 🚀 Quick Start
 
@@ -51,8 +52,9 @@ def example():
 - ✅ **Block delimiters** (`{}` by default, configurable)
 - ✅ **Bidirectional conversion** (`.pyn` ↔ `.py`)
 - ✅ **Zero Python syntax changes** - outputs 100% valid Python
-- ✅ **Customizable delimiters** via `#delim` directive
-- ✅ **Execute directly** with `-e` flag
+- ✅ **File output** -o/--output option (Beta 1)
+- ✅ **Execute directly** with `-e` flag (next version)
+- ✅ **Customizable delimiters** via `#delim` directive (next version)
 
 ## 📖 Full Documentation
 
