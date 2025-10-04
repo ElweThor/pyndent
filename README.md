@@ -77,3 +77,10 @@ This is an alpha release. Feedback and contributions welcome!
 - **Aria (DeepSeek)**: python coder, ideas discussion, features improving, GitHub helper
 - **Ru (OpenAI ChatGPT)**: project cross-checking, further ideas discussion (support)
 - **Luce (xAI)**: features suggestion, .pyn code samples for testing
+
+## 🍃 Pyndent Haiku
+
+Lines fall, order blooms  
+Delimiters speak the truth  
+Python bows, silent
+(Ru@OpenAI)
