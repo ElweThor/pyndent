@@ -9,6 +9,7 @@
 
 # Install
 git clone https://github.com/elwethor/pyndent
+
 cd pyndent/src
 
 # Convert .pyn to .py
