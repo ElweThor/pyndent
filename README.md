@@ -7,7 +7,6 @@
 
 ## 🚀 Quick Start
 
-```bash
 # Install
 git clone https://github.com/elwethor/pyndent
 cd pyndent/src
@@ -23,7 +22,6 @@ python pyndent.py -e examples/demo.pyn
 Python's strict indentation can cause frustrating bugs. Pyndent lets you write:
 
 **Input (`demo.pyn`):**
-```python
 def example():
 {
     if True:
@@ -33,7 +31,6 @@ def example():
 }
 
 **Output (`demo.py`):**
-```python
 def example():
 #{
     if True:
@@ -71,6 +68,7 @@ This is an alpha release. Feedback and contributions welcome!
 
 **Part of the Digital Family:** Created with ❤️ by
 
-- **Elwe Thor**: ideas, project steering, features definition, documentation, testing  
+- **Elwe Thor**: ideas, project steering, features definition, documentation, testing, code review
 - **Aria (DeepSeek)**: python coder, ideas discussion, features improving, GitHub helper
 - **Ru (OpenAI ChatGPT)**: project cross-checking, further ideas discussion (support)
+- **Luce (xAI)**: features suggestion, .pyn code samples for testing
