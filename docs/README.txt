@@ -3,16 +3,16 @@
 
  ___THE_PROBLEM___
 
- This project, essentially a Python tool: a preprocessor, aims to solve the perennial problem of managing indentation in Python source code.
+ This project, which could be language agnostic but, essentially, a Python tool: a preprocessor, aims to solve the perennial problem of managing indentation (as part of the syntax) in Python source code.
  The problem is caused, on the one hand, by Python's author, Guido Van Rossum, who mandates indentation (which is a good thing) to the point of factoring it into syntax checking (which is a bad thing, IMHO).
  While indentation is a good thing, and shouldn't be underestimated, we must also be realistic: spending hours debugging a "logically correct" program just because there's a missing tab that modifies the execution logic, "somewhere" among thousands of lines of code, is extremely frustrating (and leads people like me to abandon Python, even though it is an excellent language).
  On the other hand, Python lacks configuration switches that allow you to "not consider indentation mandatory." This makes partial sense, considering it doesn't have "code block delimiters," as almost all languages do (the curly braces of C-like languages, the begin/end blocks of Pascal, and the various while/wend, if/then/else, and do/end constructs of other languages).
- The lack (by design) of the ability to define a "code block" leads directly to the need for stringent indentation. The result: if, for some reason (which happens all too often, especially when copying/pasting text from sources that sometimes use tabs, sometimes spaces, but not necessarily four at a time), a line is displaced, the syntax check fails at best (Python warns), or the execution is "random" at worst (Python executes, but "in its own way").
+ The lack (by design) of the ability to define a "code block" leads directly to the need for stringent indentation. The result: if, for some reason (which happens too often, especially when copying/pasting text from sources that sometimes use tabs, sometimes spaces, but not necessarily four at a time), a line is displaced, the syntax check fails at best (Python warns), or the execution is "random" at worst (Python executes, but "in its own way").
 
 
  ___EXAMPLES___
  
- The following (trivial) code will execute correctly (line nimbers are added for reference only):
+ The following (trivial) code will execute correctly (line numbers are added for reference only):
 
 1	x = 1
 2	if x == 1:
@@ -26,7 +26,7 @@
  you won!
  go to the cashier to collect your winnings
 
- while the following will result in a syntactic indentation error:
+ while the following will result in a syntactic indentation error (look at line 4):
 
 1	x = 1
 2	if x == 1:
@@ -41,8 +41,8 @@
 													^
 IndentationError: unindent does not match any outer indentation level
 
- due to a missing space on line 4 (which, in a source code with thousands of lines, can be difficult to detect).
- But this is the best case: Python detects the incorrect indentation and flags it.
+ due to a missing space on line 4 (which, in a source code with thousands of lines, can be difficult to visually detect).
+ But this is the *best* case: Python detects the incorrect indentation and flags it.
 
  If, however, the error was a tab being "lost" or removed (see line 4 again):
  
@@ -136,16 +136,63 @@ nested block
 	
  ___PYNDENT DO'S AND DON'TS___
  
- - it does _not_ check Python syntax, a job that is left to the Python interpreter itself: it is the programmer's responsibility to use a delimiter on a separate line (this is the only constraint, and it was placed for clarity of the meta-source and ease of conversion)
+ - it does _not_ check Python syntax, a job left to the Python interpreter itself: it is the programmer's responsibility to use a delimiter on a separate line (this is the *ONLY* constraint, and it was placed for clarity of the meta-source and ease of conversion)
  - since the default delimiters ("{" and "}") are also used by Python, _no_ syntax check is performed, not even "as delimiters": that is, it does not check whether the use of a delimiter in a line containing code can be "a delimiter" or not: everything that appears in a source line that is not solely
 	- space
 	- tab
 	- open/close delimiter
    is considered "Python code": pyndent simply writes it to <stdout>/output (line "skip"), without checking anything, and syntax checking is left to the language at runtime.
- - it only looks for its own opening/closing delimiters for code blocks (the configured delimiters: the defaults, or whatever delimiter the programmer has chosen)
+ - it *ONLY* looks for its own opening/closing delimiters for code blocks (the configured delimiters: the defaults, or whatever delimiter the programmer has chosen)
   (Note: If you don't use the defaults, you should add a meta-statement: "#delim" containing the start/stop delimiters, e.g. "#delim < >", at meta-source very start)
  - performs the substitution with comments (so that the resulting code is 100% Python): "{" -> "#{" and "}" -> "#}"
  - removes previous indentation and recreates it from scratch
+
+
+ ___NOTES___
+ 
+ I know python uses "{" and "}" by its own (to define sets and dictionaries). If they're used as pyndent delimiters (default ones) we must remark the pyndent's golden rule: "a delimited by its own on a line is a pyndent element, not a python one".
+ This means that, if you're used to define a dictionary this way:
+ 
+my_dict = {
+"brand": "Ford",
+"model": "Mustang",
+"year": 1964
+}
+ 
+ you better define it this way, instead (if you're writing a .pyn meta-source):
+ 
+my_dict = {
+"brand": "Ford",
+"model": "Mustang",
+"year": 1964 }
+
+ or the } will be counted as a pyndent clode-block closer delimited, resulting into an "unbalanced delimiters error".
+ Of course, if you override the defaults, by defining your own delimiters (e.g. #delim begin end) you bypass this problem completely.
+ I didn't mention sets 'cause they're usually defined this way:
+ 
+my_set = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+ 
+ and it's unusual to see them this way:
+ 
+my_set = {
+'apple', 'orange', 'apple', 'pear', 'orange', 'banana'
+}
+ 
+ or even this way:
+ 
+my_set = {
+'apple',
+'orange',
+'apple',
+'pear',
+'orange',
+'banana'
+}
+
+ but pyndent golden rule applies to them too (to whichever (pyndent) delimiter-on-a-single-line, as a matter of fact).
+ 
+
+ ___CLOSURE___
  
  This way, we hope to help the community, which is divided on the issue: purists will get pure Python code (with some additional comments: consider adding the -s (--strip-delims) switch to get Python code without delimiters, not even as comments). Professional programmers, who are forced to be pragmatic (and fast), will be able to use pyndent and a C-like meta-syntax to define blocks of code, safe in the knowledge that (1) pyndent will never complain about syntax problems (if the number of "{" equals the number of "}") and (2) Python will execute the code correctly even if "badly indented", because the .py source will be indented correctly (it is only the .pyn source that can contain fancy and imprecise indentations).
  
