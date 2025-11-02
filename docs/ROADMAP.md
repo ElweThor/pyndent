@@ -2,13 +2,13 @@
 
 ## Ideal Timeline:
 
-### Phase 0 (Alpha - COMPLETED):
+### Phase 0 (Alpha - `#000000` COMPLETED):
 - [x] Working code
 - [x] Complete documentation
 - [x] Basic testing
 - **Scope:** Personal use/testing
 
-### Phase 1 (Beta 0.1 - CURRENT):
+### Phase 1 (Beta 0.1 - `#00ff00` CURRENT):
 - [x] `-o` --output file
 - [ ] `-e` --execute
 - [ ] `-x` --execute-output (combo)
@@ -28,6 +28,6 @@
 
 ### General Tasks:
 - [x] Public GitHub repository
-- [\] Formatted documentation
-- [?] PyPI package (OPTIONAL/possible)
+- [ ] Formatted documentation
+- [ ] PyPI package (OPTIONAL/possible)
 - **Scope:** Steps not tied to a specific phase
