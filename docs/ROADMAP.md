@@ -2,16 +2,20 @@
 
 ## Ideal Timeline:
 
-### Phase 0 (Alpha - `#000000` COMPLETED):
+```diff
+### Phase 0 (Alpha - COMPLETED):
 - [x] Working code
 - [x] Complete documentation
 - [x] Basic testing
 - **Scope:** Personal use/testing
+```
 
-### Phase 1 (Beta 0.1 - `#00ff00` CURRENT):
-- [x] `-o` --output file
-- [ ] `-e` --execute
-- [ ] `-x` --execute-output (combo)
+```diff
+### Phase 1 (Beta 0.1 - CURRENT):
++ [x] `-o` --output file
++ [ ] `-e` --execute
++ [ ] `-x` --execute-output (combo)
+```
 
 ### Phase 2 (Beta 0.2):
 - [ ] `-v` --verbose
