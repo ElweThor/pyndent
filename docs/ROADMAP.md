@@ -22,7 +22,12 @@
 - [ ] `#delim` directive
 
 ### Release 1.0:
-- PyPI package
-- Public GitHub repository
-- Formatted documentation
+- [ ] further testing
+- [ ] GitHub repository refining
 - **Scope:** General community
+
+### General Tasks:
+- [x] Public GitHub repository
+- [\] Formatted documentation
+- [?] PyPI package (OPTIONAL/possible)
+- **Scope:** Steps not tied to a specific phase
