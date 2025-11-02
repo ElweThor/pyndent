@@ -50,11 +50,11 @@
 ```  
 
  results:
-
+```python
     print('go to the cashier to collect your winnings')  
 													^  
 IndentationError: unindent does not match any outer indentation level
-
+```  
  due to a _missing space_ on line `4` (which, in a source code with _thousands of lines_, can be difficult to visually detect).  
  But this is the **best** case: Python _detects_ the incorrect indentation and _flags it_.
 
@@ -95,8 +95,9 @@ IndentationError: unindent does not match any outer indentation level
  ## The Cure
  
  To (try to) _work around_ this problem, I decided to "_add_" two **code delimiters** to the standard Python source code: by default, the delimiters are the C ones, the curly braces "`{`" and "`}`" (we'll see later if/how to make them configurable: have a look at the [ROADMAP](ROADMAP.md)).  
- Since _**I have no intention to modify the language source**_ (fork), I thought a _meta-program_, written by using delimiters, should be **pre-processed** before being executed by the Python language: **Pyndent** is that _pre-processor_.  
- The logic is as follows:
+ Since _**I have no intention to modify the language source**_ (fork), I thought a _meta-program_, written by using delimiters, should be **pre-processed** before being executed by the Python language: **Pyndent** is that _pre-processor_.
+ 
+ The logic works as follows:
 
  1. Write a _meta-program_ <ins>using Python syntax</ins>, as always (each line must be, syntactically, **pure Python code**, barring errors, of course).
  2. When you want to start a _**code block**_, insert a "_start delimiter_" (i.e., "`{`", unless otherwise configured) on a **separate line** (i.e., the line can contain _**only**_ `spaces`, `tabs`, or _**one**_ of the two _delimiter characters_).
@@ -111,7 +112,7 @@ IndentationError: unindent does not match any outer indentation level
 	- line by line, it will **replace** each _opening delimiter_ with a comment (i.e., "`{`" -> "`#{`") so that the <ins>Python syntax remains pure</ins> (i.e., without delimiters), but only (_exclusively_) on lines whose **only characters** are: `space`, `tab`, or `block opening or closing delimiter`, **<ins>nothing else</ins>**
 	- will **remove** any _pre-existing indentation_ (i.e., `spaces` and/or `tabs`) by _**reconstructing** it from scratch_, thanks to the open/closed block counter
 	- will also **replace** the _block closing delimiters_ "`}`" with the "`#}`" sequence
-	- by default, if the "_reindentation_" was successful, it will write a _\<filename\>.**py**_ source (this is <ins>Python executable</ins>, with correct indentation)
+	- by default, if the "_reindentation_" was successful, it will write Python source code to console's **\<stdout\>** stream (this is <ins>Python executable</ins>, with correct indentation), or a _\<filename\>.**py**_ file, if you used the `-o`/`--output` switch
 	- _optional_: by passing the `-e` (`--execute`) switch, you can _launch the Python interpreter_, passing it the newly preprocessed code (which, hopefully, will also be correctly indented, or _it will fail_ if the count of the delimiters is **odd** between _open_ and _closed_ delimiters).
 
 
@@ -122,10 +123,10 @@ IndentationError: unindent does not match any outer indentation level
 ```python
 def example():
 {
-    if True:
-    {
-      print("nested block")
-    }
+	if True:
+	{
+	print("nested block")
+	}
 }
 
 example() 
@@ -187,7 +188,8 @@ _my_dict = {
 "year": 1964 `}`_
 
  or the `}` will be counted as a _**Pyndent clode-block closer** delimiter_, resulting into an "_unbalanced delimiters error_".  
- Of course, if you override the defaults, by defining your own delimiters (e.g. **#delim `begin` `end`**) you _bypass this problem completely_.  
+ Of course, if you override the defaults, by defining your own delimiters (e.g. **#delim `begin` `end`**) you _bypass this problem completely_... maybe falling into other problems too, as we don't force you to use predefined delimiters: it's **up to you** not to use Python's _**reserved words**_ as delimiters.  
+
  I didn't mention **sets** 'cause they're usually defined this way:
  
 _my_set = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}_
@@ -215,7 +217,7 @@ _my_set = {
  ## Closure
  
  This way, we hope to _**help the community**_, which is divided on the issue: _purists_ will get _**pure Python code**_ (with some additional comments: consider adding the `-s` (`--strip-delims`) switch to get Python code without delimiters, not even as comments, out of a Pyndent meta-source).  
- _Professional programmers_, who are forced to be _pragmatic_ (and _fast_), will be able to use Pyndent and a _C-like [meta-syntax](meta-syntax.md)_ to define **code blocks**, _safe_ in the knowledge that (**`1`**) Pyndent will _never complain about indentation-driven syntax problems_ (if the **number** of "`{`" equals the number of "`}`") and (**`2`**) Python will _execute the code correctly_ even if "_badly indented_", because the **.py** source _will be indented correctly_ (it is only the **.pyn** _meta-source_ that _can contain fancy and imprecise indentations_).
+ _Professional programmers_, who are forced to be _pragmatic_ (and _fast_), will be able to use Pyndent and a _C-like [meta-syntax](meta-syntax.md)_ to define **code blocks**, _safe_ in the knowledge that **`1`** Pyndent will _never complain about indentation-driven syntax problems_ (if the **number** of "`{`" equals the number of "`}`") and **`2`** Python will _execute the code correctly_ even if "_badly indented_", because the **.py** source _will be indented correctly_ (it is only the **.pyn** _meta-source_ that _can contain fancy and imprecise indentations_).
  
  Community aside, my **personal interest** would be to _be able to use Python **without having to worry** about errors generated by statement **placement**_ (`not in 2025, please!`), which is why I've never seriously used (and therefore never learned deeply) this excellent language.
  
