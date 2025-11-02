@@ -130,13 +130,13 @@ example()
  **-o --outfile**: asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>. \<filename\> is optional: if not given, the meta-source one is used
 
 `pyndent -o source.py meta.pyn`  
-> will read meta.pyn and write source.py file, instead of just output the processed results to \<stdout\>  
+&emsp; will read meta.pyn and write source.py file, instead of just output the processed results to \<stdout\>  
 `pyndent meta.pyn -o source.py`  
-> the same, with more "natural" syntax: input first, then output file as last  
+&emsp; the same, with more "natural" syntax: input first, then output file as last  
 `pyndent -o meta.pyn`  
-> will read meta.pyn and write meta.py file: \<metasource\> filename is taken from meta.pyn input  
+&emsp; will read meta.pyn and write meta.py file: \<metasource\> filename is taken from meta.pyn input  
 `pyndent meta.pyn -o`  
-> the same, even if _less intuitive_ but it works too  
+&emsp; the same, even if _less intuitive_ but it works too  
  
  **-e --execute**: tells Pyndent to launch Python, passing it the processed Python code (from file or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0). By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used)
  
