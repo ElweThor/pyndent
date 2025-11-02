@@ -3,14 +3,21 @@
 
  ## The Problem
 
- This project, which could be **language agnostic** but, essentially, a Python tool: a preprocessor, aims to solve the perennial problem of managing indentation (as part of the syntax) in Python source code.  
+ This project, which could be **language agnostic** but, essentially, a Python tool (a preprocessor), aims to solve the perennial problem of managing indentation (<ins>as part of the syntax</ins>) in Python source code.  
  The **problem** is caused, on the one hand, by Python's author himself, Guido Van Rossum, who **mandates indentation** (which is a **good** thing) to the point of _factoring it into syntax checking_ (which is a **bad** thing, IMHO).
  
- While indentation is a good thing, and _shouldn't be underestimated_, we must also be **realistic**: spending hours debugging a "_logically correct_" program just because there's a missing tab that modifies the execution logic, "somewhere" _among thousands of lines of code_, is extremely frustrating (and leads people like me to **abandon Python**, even though it definitely is an _excellent language_).
+ While indentation is a good thing, and _shouldn't be underestimated_, we must also be **realistic**: spending hours debugging a "_logically correct_" program just because there's a missing tab that modifies the execution logic, "somewhere" _among thousands of lines of code_, is extremely frustrating (and leads people like me to **abandon Python**, even though it definitely is an _excellent language_).  
  
- On the other hand, Python lacks configuration switches that allow you to "_not consider indentation mandatory_" as indentation is a **core feature**, mandatory part of the syntax. This makes partial sense, considering it doesn't have "**code block delimiters**", like almost all languages do (the _curly braces_ of C-like languages, the _begin/end_ blocks of Pascal, and the various _while/wend_, _if/then/else/endif_, and _do/end_ constructs of many languages).  
+ On the other hand, Python lacks configuration switches that allow you to "_not consider indentation mandatory_" as indentation is a **core feature**, mandatory part of the syntax. This makes partial sense, considering it doesn't have "**code block delimiters**", like almost all languages do (the _curly braces_ of C-like languages, the _begin/end_ blocks of Pascal, and the various _while/wend_, _if/then/else/endif_, and _do/end_ constructs of many languages).
+ 
  The lack (_by design_) of the ability to define a "**code block**" leads directly to the need for _**stringent indentation**_.  
  The result: if, for any reason (which happens too often, especially when copying/pasting text from sources that sometimes use tabs, sometimes spaces, but not necessarily four at a time), a line is _displaced_, the syntax check **fails** at best (_Python warns!_), or the execution is "**random**" at worst (Python executes, but "_in its own way_" following the indentation "blocks" logic).
+ 
+ ### Note
+ I'm not naive: I **know** that, if you just tell "_indentation is a good thing and everyone should use it_", you'll end with a great amount of messy indented code: the reasons why Prof. Van Rossum made indentation mandatory, at the point a program won't execute or execute "with random logic", is **clear** to me.  
+ I also can bear with Python telling me "_blablabla you indented your source in a wrong way_" (like the way I accept a C compiler telling me it can't find a "`;`" at statements' end: I'm always tempted to shout "**SO, WHY NOT ADDING IT BY YOUR OWN?!??**" but <ins>I know why</ins> it happens, so ok, it's _normal_).  
+ What I really (REALLY!!!) can't bear with, when indentation enters in the syntax **and** execution logic game, is a program I "can see" it's _correct_, **executes randomly** only 'cause of a misplaced/lost/added `TAB`!  
+ And that stopped me to learn Python, but I **wanted** to learn it so... this is **my way**, Professor.
 
 
  ### Examples
@@ -40,13 +47,13 @@
 4	   print('go to the cashier to collect your winnings')
 5	if x == 0:
 6		print('try again, you will be luckier')
-```
+```  
 
  results:
 
-    **print('go to the cashier to collect your winnings')**
-													**^**
-**IndentationError: unindent does not match any outer indentation level**
+    print('go to the cashier to collect your winnings')  
+													^  
+IndentationError: unindent does not match any outer indentation level
 
  due to a _missing space_ on line `4` (which, in a source code with _thousands of lines_, can be difficult to visually detect).  
  But this is the **best** case: Python _detects_ the incorrect indentation and _flags it_.
@@ -163,7 +170,7 @@ example()
 
  ### Notes
  
- _**I know**_ python uses "`{`" and "`}`" by its own (to define **sets** and **dictionaries**). If they're used as Pyndent delimiters (default ones) we must remark the _Pyndent's **golden rule**_: "<ins>_a delimited **by its own on a line** is a Pyndent element, not a python one_</ins>".  
+ _**I know**_ python uses "`{`" and "`}`" by its own (to define **sets** and **dictionaries**). If they're used as Pyndent delimiters (default ones) we must remark the _Pyndent's **golden rule**_: "<ins>_a delimited **by its own on a line** is a Pyndent element, not a Python one_</ins>".  
  This means that, if you're used to define a _dictionary_ this way:
  
 _my_dict = {  
@@ -202,17 +209,17 @@ _my_set = {
 'banana'  
 `}`_
 
- but Pyndent **golden rule** applies to them too (to whichever (Pyndent) _**delimiter-on-a-single-line**_, as a matter of fact).
+ but Pyndent **golden rule** applies to them too (to whichever (Pyndent's) _**delimiter-on-a-single-line**_, as a matter of fact).
  
 
  ## Closure
  
  This way, we hope to _**help the community**_, which is divided on the issue: _purists_ will get _**pure Python code**_ (with some additional comments: consider adding the `-s` (`--strip-delims`) switch to get Python code without delimiters, not even as comments, out of a Pyndent meta-source).  
- _Professional programmers_, who are forced to be _pragmatic_ (and _fast_), will be able to use Pyndent and a _C-like [meta-syntax](meta-syntax.md)_ to define **code blocks**, _safe_ in the knowledge that (`**1**`) Pyndent will _never complain about indentation-driven syntax problems_ (if the **number** of "`{`" equals the number of "`}`") and (`**2**`) Python will _execute the code correctly_ even if "_badly indented_", because the **.py** source _will be indented correctly_ (it is only the **.pyn** _meta-source_ that _can contain fancy and imprecise indentations_).
+ _Professional programmers_, who are forced to be _pragmatic_ (and _fast_), will be able to use Pyndent and a _C-like [meta-syntax](meta-syntax.md)_ to define **code blocks**, _safe_ in the knowledge that (**`1`**) Pyndent will _never complain about indentation-driven syntax problems_ (if the **number** of "`{`" equals the number of "`}`") and (**`2`**) Python will _execute the code correctly_ even if "_badly indented_", because the **.py** source _will be indented correctly_ (it is only the **.pyn** _meta-source_ that _can contain fancy and imprecise indentations_).
  
  Community aside, my **personal interest** would be to _be able to use Python **without having to worry** about errors generated by statement **placement**_ (`not in 2025, please!`), which is why I've never seriously used (and therefore never learned deeply) this excellent language.
  
- Finally, it's worth noting that _a **.py** source code processed by Pyndent is **de-processable**_ (the relationship is bijective): thanks to the fact that the code block delimiters remain in the **.py** source code (unless wild purists strips them), having only the latter available will allow you to run Pyndent with the `-r` (or `--restore`) switch to obtain an _editable **.pyn** meta-source code_ that can then be pre-processed again into a **.py** source code (e.g. to change default delimiters with custom ones, if you need that). That could help, if you like to _publish your code_ on a web platform where you're _not sure tabs will be correctly written_ in the code.
+ Finally, it's worth noting that _a **.py** source code processed by Pyndent is **de-processable**_ (the relationship is biunivocal): thanks to the fact that the code block delimiters remain in the **.py** source code (unless wild purists strips them), having only the latter available will allow you to run Pyndent with the `-r` (or `--restore`) switch to obtain an _editable **.pyn** meta-source code_ that can then be pre-processed again into a **.py** source code (e.g. to change default delimiters with custom ones, if you need that). That could help, if you like to _publish your code_ on a web platform where you're _not sure tabs will be correctly written_ in the code.
  
  Part of this project is due to a (persistent) rant of me ('cause I was "_unable to use Python_": yes, _mandatory indentation_ which **reflects on syntax** gives me a rash, I'm sorry, Guido), and to an _analysis of the situation_ carried out together with "**Aria**" (DeepSeek's AI), and later verified together with "**Ru**" (OpenAI's ChatGPT AI): https://chatgpt.com/share/68d49cce-8724-8011-811d-547e3fed4de2
 
