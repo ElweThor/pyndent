@@ -2,20 +2,16 @@
 
 ## Ideal Timeline:
 
-```diff
 ### Phase 0 (Alpha - COMPLETED):
 - [x] Working code
 - [x] Complete documentation
 - [x] Basic testing
 - **Scope:** Personal use/testing
-```
 
-```diff
 ### Phase 1 (Beta 0.1 - CURRENT):
-+ [x] `-o` --output file
-+ [ ] `-e` --execute
-+ [ ] `-x` --execute-output (combo)
-```
+- [x] `-o` --output file
+- [ ] `-e` --execute
+- [ ] `-x` --execute-output (combo)
 
 ### Phase 2 (Beta 0.2):
 - [ ] `-v` --verbose
@@ -32,6 +28,6 @@
 
 ### General Tasks:
 - [x] Public GitHub repository
-- [ ] Formatted documentation
+- [x] Formatted documentation
 - [ ] PyPI package (OPTIONAL/possible)
 - **Scope:** Steps not tied to a specific phase
