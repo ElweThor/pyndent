@@ -147,7 +147,7 @@ example()
 `pyndent -e meta.pyn -o source.py`  
 &emsp; will produce a **source.py** file, then launch **Python source.py** to execute it  
 `pyndent -e meta.pyn -o`  
-&emsp; the same, but will produce **meta**source.py file, then launch **Python meta.py** to execute it  
+&emsp; the same, but will produce **meta**.py file, then launch **Python meta.py** to execute it  
 
  ### -x --execute-output
  _combo_ switch implying `-e` and `-o`
@@ -163,24 +163,24 @@ example()
 `pyndent -s meta.pyn`  
 &emsp; will write the resulting Python code to \<stdout\> without Pyndent elements  
 `pyndent -s -o meta.pyn`  
-&emsp; the same, but the resulting code will be written into **source.py** file  
+&emsp; the same, but the resulting code will be written into **meta.py** file  
 
  ### -r --restore
- asks Pyndent to **reverse-process** a Python .py source into a Pyndent .pyn meta-source, restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones.  
- If you need to `--restore` a _pure Python source_ (or even a Pyndent `--strip` one), which totally lacks Pyndent elements (even commented), you _could_ give a `#delim start_delimiter stop_delimiter` directive too, inline or into Python source code (starting from _**2nd line** or below_), if you want to override the defaults.
+ asks Pyndent to **reverse-process** (de-process) a Python .py source into a Pyndent meta-source, restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones (a .pyn file will result if you'll use `-o` switch).  
+ If you need to `--restore` a _pure Python source_ (or even a Pyndent `--strip` one), which <ins>totally lacks Pyndent elements</ins> (even commented), you _could_ give a `#delim start_delimiter stop_delimiter` directive too, inline or into Python source code (starting from _**2nd line** or below_), if you want to override the defaults.
  
 `pyndent -r source.py`  
-&emsp; will write a .pyn meta-source, assuming there are code-block delimiters, commented in the source.py code, wether or not they're default ones (if they're different by default ones, a `#delim` directive will be searched in a second scan): delimiters will be read directly from the source and restored. If any delimiter will be found nor a `#delim` directive, Pyndent re-process source.py by using "`{`" and "`}`" defaults like if it found "`#{`" and "`#}`". Process output will go to \<stdout\> by default, unless `-o` switch will be used.  
+&emsp; will write a Pyndent meta-source to \<stdout\>, honoring the inline `#delim` if given, then seasrching for an embedded `#delim` directive in the source file, if lacking the inline one, then falling back to defaults if no directive is found (precedence rule: inline -> embedded -> defaults).  
 `pyndent -r #delim < > source.py`  
-&emsp; the same, but Pyndent assumes there are no pre-existing (commented) delimiters to restore (or just skip existing ones, leaving them commented out): it will add the given delimiters instead.  
+&emsp; the same, but Pyndent assumes there are no pre-existing (commented) delimiters to restore (just skipping existing ones, leaving them commented out): it will add the given delimiters instead.  
 
  ### -v --v1 --verbose --v2
- will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (e.g. --v1 = INFO, --v2 = DEBUG), as well as the produced Python code to \<stdout\> (unless `-o` switch is given).
+ will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (e.g. --v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given).
 
 `pyndent -v meta.pyn`  
 &emsp; will read meta.pyn, write processed code to \<stdout\>, and **INFO** level messages to \<stderr\>  
 `pyndent --v1 meta.pyn`  
-&emsp; the same: `-v`, `--v1`, and `--verbose` are all aliases for **INFO** messages  
+&emsp; the same: `-v`, `--v1`, and `--verbose` are all _aliases_ for **INFO** messages level  
 `pyndent -v -o source.py meta.pyn`  
 &emsp; will read meta.pyn and write source.py file, and **INFO** level messages to \<stderr\>  
 `pyndent -v meta.pyn -o source.py`  
