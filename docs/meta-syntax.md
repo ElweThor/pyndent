@@ -70,7 +70,7 @@ def example():
 
  ## Hashbang management
  
- In Pyndent meta-sources you may need, like in every other source, to use the hashbang (`#!`) to engage pyndent, instead of explicitly calling it externally. So, you're going to have a first meta-source line like that, in your Pyndent .pyn file:
+ In Pyndent meta-sources you may need, like in every other source, to use the hashbang (`#!`) to engage Pyndent, instead of explicitly calling it externally. So, you're going to have a first meta-source line like that, in your Pyndent .pyn file:
  
 ```python
 #!/usr/bin/pyndent <options> <filename>
@@ -127,7 +127,8 @@ example()
  By default, Pyndent reads a meta-source (\<filename\>**.pyn**) and writes a full-Python source to \<stdout\>, nothing else: it only _rewrite indentation_ from scratch.  
  As it can be customized and asked for different tasks, you can use the following switches too:
 
- **-o --outfile**: asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>. \<filename\> is optional: if not given, the meta-source one is used
+ ### -o --outfile
+ asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>. \<filename\> is optional: if not given, the meta-source one is used
 
 `pyndent -o source.py meta.pyn`  
 &emsp; will read meta.pyn and write source.py file, instead of just output the processed results to \<stdout\>  
