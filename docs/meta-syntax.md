@@ -122,7 +122,22 @@ example()
  This way, if anyone will need to `--restore` .py code to the original meta-code, Pyndent will be able to read its own **original hashbang** (if present, it will re-swap it with Python's one), the **directives** (`#delim` in our case) are untouched and don't need to be "restored", all **delimiters** are still there, even commented (`#{{`, `#}}`) and can be easily brought back: `{{`, `}}` (also considering `#delim` contents, if in doubt).
 
 
- ## Command Switches
+ ## Syntax scheme
+ 
+ **pyndent [option]... \<meta\>.pyn [\<source\>.py]  
+ pyndent [option]... \<source_file\>.py [\<meta\>.pyn]**  
+ 
+ If no option is given, Pyndent default behavior is to read a meta-source .pyn file, translate it into a re-indented Python source code writing it to \<stdout\>. In this case a meta-source .pyn file is a mandatory argument.  
+ 
+ Options are:  
+ **-o --outfile  
+ -e --execute  
+ -x --execute-output  
+ -s --strip  
+ -r --restore  
+ -v --verbose --v1 --v2**
+
+ ## Options (switches) in detail
  
  By default, Pyndent reads a meta-source (\<filename\>**.pyn**) and writes a full-Python source to \<stdout\>, nothing else: it only _rewrite indentation_ from scratch.  
  As it can be customized and asked for different tasks, you can use the following switches too:
