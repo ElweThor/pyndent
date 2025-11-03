@@ -168,29 +168,29 @@ example()
  _combo_ switch implying `-e` and `-o`
  
 `pyndent -x meta.pyn`  
-&emsp; will be internally translated into `pyndent -e -o meta.pyn`, resulting in **meta.py* file on disk, then Python interpreter executing it  
+&emsp; will be internally translated into `pyndent -e -o meta.pyn`, resulting in **meta.py** file on disk, then Python interpreter executing it  
 `pyndent -x source.py meta.pyn`  
-&emsp; will be internally translated into `pyndent -e -o source.py meta.pyn`, resulting in **source.py** file on disk, then Python interpreter executing it  
+&emsp; will be internally translated into `pyndent -e -o source.py meta.pyn`, resulting in **source.py** file written to disk, then Python interpreter is called to execute the created file  
  
  ### -s --strip
  tells Pyndent to _**strip** the delimiters away_ from the final Python code (AKA avoid to write them out at all), as well as every Pyndent element (like `#delim` or hashbang swapping), producing <ins>**100% pure Python source**</ins> without any Pyndent meta-source element into.
 
 `pyndent -s meta.pyn`  
-&emsp; will write the resulting Python code to \<stdout\> without Pyndent elements  
+&emsp; will write the resulting Python code to \<stdout\> without any of the Pyndent elements  
 `pyndent -s -o meta.pyn`  
 &emsp; the same, but the resulting code will be written into **meta.py** file  
 
  ### -r --restore
- asks Pyndent to **reverse-process** (de-process) a Python .py source into a Pyndent meta-source, restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones (a .pyn file will result if you'll use `-o` switch).  
- If you need to `--restore` a _pure Python source_ (or even a Pyndent `--strip` one), which <ins>totally lacks Pyndent elements</ins> (even commented), you _could_ give a `#delim start_delimiter stop_delimiter` directive too, inline or into Python source code (starting from _**2nd line** or below_), if you want to override the defaults.
+ asks Pyndent to **reverse-process** (de-process) a Python .py source into a Pyndent meta-source, restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones (a .pyn file will be written, if using `-o` switch).  
+ If you need to `--restore` a _pure Python source_ (or even a Pyndent `--strip` one), which <ins>totally lacks Pyndent elements</ins> (even commented), you _could_ give a `#delim <start_delimiter> <stop_delimiter>` directive too, **inline** or into Python source code (starting from _**2nd line** or below_), if you want to override the defaults.
  
 `pyndent -r source.py`  
 &emsp; will write a Pyndent meta-source to \<stdout\>, honoring the inline `#delim` if given, then seasrching for an embedded `#delim` directive in the source file, if lacking the inline one, then falling back to defaults if no directive is found (precedence rule: inline -> embedded -> defaults).  
-`pyndent -r #delim < > source.py`  
+`pyndent -r #delim {{ }} source.py`  
 &emsp; the same, but Pyndent assumes there are no pre-existing (commented) delimiters to restore (just skipping existing ones, leaving them commented out): it will add the given delimiters instead.  
 
  ### -v --v1 --verbose --v2
- will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (e.g. --v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given).
+ will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where --v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given).
 
 `pyndent -v meta.pyn`  
 &emsp; will read meta.pyn, write processed code to \<stdout\>, and **INFO** level messages to \<stderr\>  
@@ -207,7 +207,7 @@ example()
  ## Obsoletes
  
  ### -d --dryrun
- asks Pyndent to simulate the reindentation process, also doing all the needed checks, showing the results but not writing the output .py file
+ asks Pyndent to simulate the reindentation process, also doing all the needed checks, showing the results to \<stdout\>, not writing the output .py file
  
 `pyndent -d meta.pyn`  
 &emsp; will write the results to \<stdout\> but won't write to file  
