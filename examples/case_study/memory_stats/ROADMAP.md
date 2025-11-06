@@ -21,7 +21,7 @@
 - -f --force &emsp;&emsp;&emsp;&emsp; forces the tool to overwrite a stats report if one with the same name is found on disk already and -o switch is used  
 
 ### JSON management
-- -j --validate-json &emsp;&emsp; check the input JSON file, to see if it's wrong somewhere, preventing stats extraction  
+- -j --validate-json &emsp; check the input JSON file, to see if it's wrong somewhere, preventing stats extraction  
 - -r --repair-json &emsp; try to auto-fix the JSON  
 
 ### Utility
