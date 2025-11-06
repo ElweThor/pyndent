@@ -26,5 +26,5 @@
 
 ### Utility
 - -v --verbose &emsp;&emsp;	tell us how things are working (like a log, to <stderr>)  
-- -h --help	&emsp;&emsp;&emsp; -h gives simple usage, while --help gives extended help on syntax and parameters  
+- -h --help	&emsp;&emsp;&emsp;&nbsp; -h gives simple usage, while --help gives extended help on syntax and parameters  
 - -V --version &emsp;&emsp;	shows current version  
