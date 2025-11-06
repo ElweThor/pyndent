@@ -13,8 +13,8 @@
 
 ### Stats output
 - -a --show-all &emsp;&emsp; show the whole stats: initial summary + memories table: default is "summary only"  
-- -s --show-stats &emsp;&emsp;&emsp; show stats summary only (default)  
-- -t --show-table &emsp;&emsp;&emsp; show memories table only  
+- -s --show-stats &emsp;&emsp; show stats summary only (default)  
+- -t --show-table &emsp;&emsp; show memories table only  
 
 ### File output
 - -o --output <filename>&emsp; write stats report to disk (plain text) into <filename>  
