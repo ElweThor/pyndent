@@ -17,7 +17,7 @@
 - -t --show-table &emsp;&emsp; show memories table only  
 
 ### File output
-- -o --output <filename>&emsp; write stats report to disk (plain text) into <filename>  
+- -o --output <filename> &emsp;&emsp; write stats report to disk (plain text) into <filename>  
 - -f --force &emsp;&emsp;&emsp;&emsp; forces the tool to overwrite a stats report if one with the same name is found on disk already and -o switch is used  
 
 ### JSON management
