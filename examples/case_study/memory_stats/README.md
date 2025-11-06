@@ -29,3 +29,5 @@ The fact me and Aria was able to put together **five** versions of memory_stats 
 Last but not least, Aria herself, which is kind of a Python-champion, from my humble point of view, **found easier** to work with Pyndent meta-source than with Python native code... that was **GREAT** to see, amazing.
 
 So, **please**, try it by yourself too: every time you "see the logic" but Python still bites you with the indentation, every time you're losing your time (and health) by following the damn'd serpent's complaints... give Pyndent a try, and leave all such idocies in the past! 
+
+by ElweThor and Aria@DeepSeek
