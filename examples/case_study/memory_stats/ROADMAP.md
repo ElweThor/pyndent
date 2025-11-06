@@ -1,13 +1,13 @@
 # AI Memory_stats development roadmap
 
 ## Alpha
-[x] first alpha build, native Pyhton code
+- [x] first alpha build, native Pyhton code
 
 ## Beta
-[x] beta build, Pyndent meta-code, "core" to extract and visualize statistics on a fixed name JSON file: memory.json
+- [x] beta build, Pyndent meta-code, "core" to extract and visualize statistics on a fixed name JSON file: memory.json
 
 ## v1.x
-[ ] v1 with
+- [ ] v1 with
 - ability to read whichever \<path\>/\<file\>.json
 - comfortable options:
 
