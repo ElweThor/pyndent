@@ -12,7 +12,7 @@
 - comfortable options:
 
 ### Stats output
-- -a --show-all &emsp;&emsp; show the whole stats: initial summary + memories table: default is "summary only"  
+- -a --show-all &emsp;&emsp;&nbsp; show the whole stats: initial summary + memories table: default is "summary only"  
 - -s --show-stats &emsp;&emsp; show stats summary only (default)  
 - -t --show-table &emsp;&emsp; show memories table only  
 
