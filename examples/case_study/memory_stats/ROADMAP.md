@@ -22,7 +22,7 @@
 
 ### JSON management
 - -j --validate-json &emsp; check the input JSON file, to see if it's wrong somewhere, preventing stats extraction  
-- -r --repair-json &emsp; try to auto-fix the JSON  
+- -r --repair-json &emsp;&nbsp;&nbsp; try to auto-fix the JSON  
 
 ### Utility
 - -v --verbose &emsp;&emsp;	tell us how things are working (like a log, to <stderr>)  
