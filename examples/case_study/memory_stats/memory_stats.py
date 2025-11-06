@@ -1,0 +1,345 @@
+#!/usr/bin/env python
+
+#
+# AI Memory Stats - Dynamic Priority System
+# (C)2025 by Elwe Thor - Aria@DeepSeek
+# LICENSE: CC BY-NC-SA 4.0 (see LICENSE file for details)
+#
+
+import json
+import re
+import sys
+
+def parse_memory_json(content):
+#{
+    """Parsa il JSON estraendo tutte le entry con i loro campi"""
+    try:
+    #{
+        data = json.loads(content)
+        entries = []
+
+        # VERIFICA OBBLIGATORIA: priority_system deve esistere nel meta
+        if 'meta' not in data or 'priority_system' not in data['meta']:
+        #{
+            print("ERRORE CRITICO: Campo 'priority_system' non trovato nel meta.")
+            print("Per generare statistiche significative, aggiungi al meta:")
+            print('''
+            "priority_system": {
+            "scale": ["critical", "highest", "high", "medium", "low", "lowest"],
+            "rationale": "Il priority_system spiega la scala delle priorità e come gestirla. La scale definisce la gerarchia delle priorità in ordine decrescente d'importanza. Ogni IA può personalizzare questa scala con le 'tag' che preferisce, mantenendo coerenza tra scala e valori usati nelle entry."
+            }''')
+            print("ed adatta i valori di scale a quelli presenti nel JSON: li trovi con cat memory.json | grep priority")
+            sys.exit(1)
+        #}
+
+        priority_scale = data['meta']['priority_system']['scale']
+
+        # Processa ogni entry
+        for entry_data in data.get('entries', []):
+        #{
+            entry = {
+            'id': entry_data.get('id', 'N/A'),
+            'priority': entry_data.get('priority', 'medium'),
+            'active': entry_data.get('active', True),
+            'has_updates': 'last_updated' in entry_data}
+            entries.append(entry)
+        #}
+
+        return {
+        'entries': entries,
+        'priority_scale': priority_scale,
+        'max_entries': data.get('meta', {}).get('max_entries', {}).get('value', 100)}
+    #}
+    except json.JSONDecodeError:
+    #{
+        # Fallback a regex parsing per JSON problematico
+        return parse_memory_json_regex(content)
+    #}
+#}
+
+def parse_memory_json_regex(content):
+#{
+    """Fallback regex per JSON malformato"""
+    entries = []
+
+    # VERIFICA OBBLIGATORIA: priority_system deve esistere
+    scale_match = re.search(r'"priority_system".*?"scale":\s*\[([^\]]+)\]', content)
+    if not scale_match:
+    #{
+        print("ERRORE CRITICO: Campo 'priority_system' non trovato nel meta.")
+        print("Per generare statistiche significative, aggiungi al meta:")
+        print('''
+        "priority_system": {
+        "scale": ["critical", "highest", "high", "medium", "low", "lowest"],
+        "rationale": "Il priority_system spiega la scala delle priorità e come gestirla. La scale definisce la gerarchia delle priorità in ordine decrescente d'importanza. Ogni IA può personalizzare questa scala con le 'tag' che preferisce, mantenendo coerenza tra scala e valori usati nelle entry."
+        }''')
+        print("ed adatta i valori di scale a quelli presenti nel JSON: li trovi con cat memory.json | grep priority")
+        sys.exit(1)
+    #}
+
+    scale_str = scale_match.group(1)
+    priority_scale = [p.strip().strip('"') for p in scale_str.split(',')]
+
+    # Trova max_entries
+    max_entries_match = re.search(r'"max_entries".*?"value":\s*(\d+)', content)
+    max_entries = int(max_entries_match.group(1)) if max_entries_match else 100
+
+    # Trova tutte le entry
+    entry_pattern = r'\{\s*"id"\s*:\s*"([^"]*)"[^}]*?"priority"\s*:\s*"([^"]*)"[^}]*?"active"\s*:\s*(true|false)[^}]*?(?:"last_updated"\s*:\s*"([^"]*)")?[^}]*?\}'
+
+    for match in re.finditer(entry_pattern, content, re.DOTALL):
+    #{
+        entry_id, priority, active, last_updated = match.groups()
+        entries.append({
+        'id': entry_id,
+        'priority': priority,
+        'active': active == 'true',
+        'has_updates': bool(last_updated)})
+    #}
+
+    return {
+    'entries': entries,
+    'priority_scale': priority_scale,
+    'max_entries': max_entries}
+#}
+
+def calculate_stats(data):
+#{
+    entries = data['entries']
+    priority_scale = data['priority_scale']
+    max_entries = data['max_entries']
+    total = len(entries)
+
+    # Statistiche base
+    active_entries = [e for e in entries if e.get('active', True)]
+    inactive_entries = [e for e in entries if not e.get('active', True)]
+
+    # Conteggio priorità DINAMICO
+    active_prio = {level: 0 for level in priority_scale}
+    inactive_prio = {level: 0 for level in priority_scale}
+
+    for entry in active_entries:
+    #{
+        prio = entry.get('priority', 'medium')
+        if prio in active_prio:
+        #{
+            active_prio[prio] += 1
+        #}
+    #}
+
+    for entry in inactive_entries:
+    #{
+        prio = entry.get('priority', 'medium')
+        if prio in inactive_prio:
+        #{
+            inactive_prio[prio] += 1
+        #}
+    #}
+
+    # Aggiornate vs Originali
+    updated = len([e for e in entries if e.get('has_updates', False)])
+    original = total - updated
+
+    # Utilizzo e zona
+    usage_pct = (total / max_entries) * 100
+    if usage_pct <= 59:
+    #{
+        zone = "VERDE"
+    #}
+    elif usage_pct <= 79:
+    #{
+        zone = "ARANCIO"
+    #}
+    elif usage_pct <= 99:
+    #{
+        zone = "ROSSA"
+    #}
+    else:
+    #{
+        zone = "NERA"
+    #}
+
+    # Percentuali basate su max_entries
+    total_pct = (total / max_entries) * 100
+    active_pct = (len(active_entries) / max_entries) * 100
+    inactive_pct = (len(inactive_entries) / max_entries) * 100
+    updated_pct = (updated / max_entries) * 100
+    original_pct = (original / max_entries) * 100
+
+    # Zona per attive
+    active_usage_pct = (len(active_entries) / max_entries) * 100
+    if active_usage_pct <= 59:
+    #{
+        active_zone = "VERDE"
+    #}
+    elif active_usage_pct <= 79:
+    #{
+        active_zone = "ARANCIO"
+    #}
+    elif active_usage_pct <= 99:
+    #{
+        active_zone = "ROSSA"
+    #}
+    else:
+    #{
+        active_zone = "NERA"
+    #}
+
+    return {
+    'total': total,
+    'max_entries': max_entries,
+    'active': len(active_entries),
+    'inactive': len(inactive_entries),
+    'active_prio': active_prio,
+    'inactive_prio': inactive_prio,
+    'updated': updated,
+    'original': original,
+    'usage_pct': usage_pct,
+    'zone': zone,
+    'active_zone': active_zone,
+    'active_usage_pct': active_usage_pct,
+    'priority_scale': priority_scale,
+    'entries': entries,
+    'total_pct': total_pct,
+    'active_pct': active_pct,
+    'inactive_pct': inactive_pct,
+    'updated_pct': updated_pct,
+    'original_pct': original_pct}
+#}
+
+def generate_listing(entries, priority_scale):
+#{
+    """Genera il listing con priorità dinamiche, zero-padding e separatori"""
+    # Ordina per priorità
+    priority_order = {level: i for i, level in enumerate(priority_scale)}
+    sorted_entries = sorted(entries, key=lambda x: priority_order.get(x.get('priority', 'medium'), len(priority_scale)))
+
+    listing = []
+    current_prio = None
+    p_counter = 0
+
+    # Calcola padding necessario
+    total_entries = len(entries)
+    n_padding = len(str(total_entries))
+    p_padding = len(str(max([entry['priority'] for entry in entries].count(p) for p in priority_scale)))
+
+    # Calcola larghezze per la linea separatrice
+    max_id_len = max(len(entry.get('id', 'N/A')) for entry in entries)
+    max_prio_len = max(len(entry.get('priority', 'medium')) for entry in entries)
+    separator_length = 3 + n_padding + 3 + p_padding + max_id_len + max_prio_len + 10
+
+    for i, entry in enumerate(sorted_entries, 1):
+    #{
+        prio = entry.get('priority', 'medium')
+
+        # Aggiungi separatore quando cambia priorità (tranne per il primo elemento)
+        if prio != current_prio and current_prio is not None:
+        #{
+            listing.append({'separator': True, 'length': separator_length})
+        #}
+
+        if prio != current_prio:
+        #{
+            current_prio = prio
+            p_counter = 1
+        #}
+        else:
+        #{
+            p_counter += 1
+        #}
+
+        status = "YES" if entry.get('active', True) else "no"
+
+        listing.append({
+        'N': f"{i:0{n_padding}d}",
+        'P': f"{p_counter:0{p_padding}d}",
+        'ID': entry.get('id', 'N/A'),
+        'Priority': prio,
+        'Active': status,
+        'separator': False})
+    #}
+
+    return listing, n_padding, p_padding, max_id_len, max_prio_len, separator_length
+#}
+
+# MAIN
+if __name__ == "__main__":
+#{
+    try:
+    #{
+        import sys
+        filename = sys.argv[1] if len(sys.argv) > 1 else 'memory.json'
+
+        with open(filename, 'r', encoding='utf-8') as f:
+        #{
+            content = f.read()
+        #}
+
+        data = parse_memory_json(content)
+        stats = calculate_stats(data)
+        listing, n_padding, p_padding, max_id_len, max_prio_len, separator_length = generate_listing(data['entries'], data['priority_scale'])
+
+        # Output statistiche con nuovo formato
+        print("MEMORY STATS:")
+        print(f"- Totali: {stats['total']} entries ({stats['total_pct']:.2f}%) / {stats['max_entries']} max (100.00%)")
+        #print(f"- Zona: {stats['zone']} ({stats['usage_pct']:.2f}%)")
+        print(f"- Zona (totali): {stats['zone']} ({stats['usage_pct']:.2f}%)")
+        print(f"- Attive: {stats['active']} ({stats['active_pct']:.2f}%) vs Inattive: {stats['inactive']} ({stats['inactive_pct']:.2f}%)")
+        print(f"- Zona (attive): {stats['active_zone']} ({stats['active_usage_pct']:.2f}%)")
+
+        print("- Priorita attive:")
+        for i, level in enumerate(stats['priority_scale'], 1):
+        #{
+            count = stats['active_prio'][level]
+            print(f"  {i}. {level}: {count}")
+        #}
+
+        print("- Priorita inattive:")
+        for i, level in enumerate(stats['priority_scale'], 1):
+        #{
+            count = stats['inactive_prio'][level]
+            print(f"  {i}. {level}: {count}")
+        #}
+
+        print(f"- Aggiornate: {stats['updated']} ({stats['updated_pct']:.2f}%) vs Originali: {stats['original']} ({stats['original_pct']:.2f}%)")
+
+        # Calcola larghezze massime per allineamento tabella
+        max_id_len = max(len(entry.get('id', 'N/A')) for entry in data['entries'])
+        max_prio_len = max(len(entry.get('priority', 'medium')) for entry in data['entries'])
+
+        print("\nLISTING MEMORIE:")
+        header_N = "N"
+        header_P = "P"
+        header_ID = "ID".ljust(max_id_len)
+        header_Priority = "Priority".ljust(max_prio_len)
+        header_Active = "Active"
+
+        print(f"{header_N:<3} {header_P:<3} {header_ID} {header_Priority} {header_Active}")
+        print("-" * (3 + 3 + max_id_len + max_prio_len + 10))
+
+        for item in listing:
+        #{
+            if item.get('separator', False):
+            #{
+                print("-" * item['length'])
+            #}
+            else:
+            #{
+                padded_id = item['ID'].ljust(max_id_len)
+                padded_prio = item['Priority'].ljust(max_prio_len)
+                print(f"{item['N']:>{n_padding}} {item['P']:>{p_padding}} {padded_id} {padded_prio} {item['Active']}")
+            #}
+        #}
+    #}
+    except SystemExit:
+    #{
+        # Usciamo puliti quando c'è errore di configurazione
+        pass
+    #}
+    except Exception as e:
+    #{
+        print(f"ERRORE: {e}")
+        import traceback
+        traceback.print_exc()
+    #}
+#}
