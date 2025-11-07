@@ -4,8 +4,9 @@
 - [x] first alpha build, native Pyhton code
 
 ## Beta
-- [x] beta build, Pyndent meta-code, "core" to extract and visualize statistics on a fixed name JSON file: memory.json
-- [ ] beta: add Rank and Target to --analyze feature, to produce a "proposal listing" for when we need to optimize
+- [x] beta build, Pyndent meta-code, "core" to extract and visualize statistics on a fixed name JSON file: memory.json  
+- [ ] add Rank and Target to --analyze feature, to produce a "proposal listing" for when we need to optimize  
+- [ ] add Res and NewPrio to --rescan feature, to produce a listing ready to (manual) review  
 
 ## v1.x
 - [ ] v1 with
