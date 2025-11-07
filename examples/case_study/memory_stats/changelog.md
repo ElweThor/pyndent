@@ -1,3 +1,6 @@
+## 2025-11-07 - v0.2.3.8 (Beta)
+.8 `!` **ET/AR**: parser fix: memories without priority won't receive "medium" default more: default is now "missing", to immediately see them in the report  
+
 ## 2025-11-05 - v0.2.2.7 (Beta)
 .7 `+` **ET/AR**: stats double metrics: 1st metric (green/orange/red) on totals, 2nd metric on active memories only  
 .6 `*` **ET/AR**: stats display fixed: priority table have different priorities separated, for better display  
