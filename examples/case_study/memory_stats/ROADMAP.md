@@ -5,10 +5,10 @@
 
 ## Beta
 - [x] beta build, Pyndent meta-code, "core" to extract and visualize statistics on a fixed name JSON file: memory.json
+- [ ] beta: add Rank and Target to --analyze feature, to produce a "proposal listing" for when we need to optimize
 
 ## v1.x
 - [ ] v1 with
-- [ ] beta: add Rank and Target to --analyze feature, to produce a "proposal listing" for when we need to optimize
 - [ ] ability to read whichever \<path\>/\<file\>.json
 - [ ] comfortable options:
 
