@@ -16,6 +16,8 @@
 - [ ] -s --show-all-stats &emsp;&emsp;&nbsp;&nbsp;&nbsp; show the whole stats: initial summary + memories table: default is "summary only"  
 - [ ] -t --show-table &emsp;&emsp; show memories table only  
 
+| done | Option | Description |
+|------|--------|-------------|
 |- [ ]| -s --show-all-stats | show the whole stats: initial summary + memories table: default is "summary only" |
 |- [ ]| -t --show-table | show memories table only |
 
