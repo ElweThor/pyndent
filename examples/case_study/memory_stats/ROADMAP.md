@@ -16,7 +16,8 @@
 |-------|----------|---------|-------------|
 | -s | --show-all-stats | Stats output | show the whole stats: initial summary + memories table: default is "summary only" |
 | -t | --show-table | Stats output | show memories table only |
-| -a | --analyze <priority> | Memory Analysis | executes a table re-scan, selecting <priority> only (or every memory if <priority> = ALL) to give a Rank to any single memory, promoting it for the optimization/prune: the higher the Rank, the more likely the memory will be optimized/pruned: 1 = high, N = low (see analyze_report for display details). The analysis report should contain Target column also, to see which memories fall into the target range and which ones don't. |
+| -a | --analyze \<priority\> | Memory Analysis | executes a table re-scan, selecting \<priority\> only (or every memory if \<priority\> = ALL) to give a Rank to any single memory, promoting it for the optimization/prune: the higher the Rank, the more likely the memory will be optimized/pruned: 1 = high, N = low (see analyze_report for display details). The analysis report should contain Target column also, to see which memories fall into the target range and which ones don't. |
+|    | --rescan <priority> | Re-evaluation, for the single \<priority\> or for the whole list (ALL), to promote/demote current priorities: preparatory to the next optimization (see rescan_report for display details) |
 | -o | --output \<filename\> | File output | write stats report to disk (plain text) into \<filename\> |
 | -f | --force | File output | forces the tool to overwrite a stats report if one with the same name is found on disk already and -o switch is used |
 | -j | --validate-json | JSON management| check the input JSON file, to see if it's wrong somewhere, preventing stats extraction |
