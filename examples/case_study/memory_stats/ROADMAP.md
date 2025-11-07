@@ -16,10 +16,10 @@
 - [ ] -s --show-all-stats &emsp;&emsp;&nbsp;&nbsp;&nbsp; show the whole stats: initial summary + memories table: default is "summary only"  
 - [ ] -t --show-table &emsp;&emsp; show memories table only  
 
-| done | Option | Description |
-|------|--------|-------------|
-|- [ ]| -s --show-all-stats | show the whole stats: initial summary + memories table: default is "summary only" |
-|- [ ]| -t --show-table | show memories table only |
+| Option | Description |
+|--------|-------------|
+- [ ] | -s --show-all-stats | show the whole stats: initial summary + memories table: default is "summary only" |
+- [ ] | -t --show-table | show memories table only |
 
 ### Memory Analysis
 - [ ] -a --analyze <priority> executes a table re-scan, selecting <priority> only (or every memory if <priority> = ALL) to give a Rank to any single memory, promoting it for the optimization/prune: the higher the Rank, the more likely the memory will be optimized/pruned: 1 = high, N = low (see analyze_report for display details). The analysis report should contain Target column also, to see which memories fall into the target range and which ones don't.
