@@ -8,23 +8,26 @@
 
 ## v1.x
 - [ ] v1 with
-- ability to read whichever \<path\>/\<file\>.json
-- comfortable options:
+- [ ] beta: add Rank and Target to --analyze feature, to produce a "proposal listing" for when we need to optimize
+- [ ] ability to read whichever \<path\>/\<file\>.json
+- [ ] comfortable options:
 
 ### Stats output
-- -a --show-all &emsp;&emsp;&nbsp;&nbsp;&nbsp; show the whole stats: initial summary + memories table: default is "summary only"  
-- -s --show-stats &emsp;&emsp; show stats summary only (default)  
-- -t --show-table &emsp;&emsp; show memories table only  
+- [ ] -s --show-all-stats &emsp;&emsp;&nbsp;&nbsp;&nbsp; show the whole stats: initial summary + memories table: default is "summary only"  
+- [ ] -t --show-table &emsp;&emsp; show memories table only  
+
+### Memory Analysis
+- [ ] -a --analyze <priority> executes a table re-scan, selecting <priority> only (or every memory if <priority> = ALL) to give a Rank to any single memory, promoting it for the optimization/prune: the higher the Rank, the more likely the memory will be optimized/pruned: 1 = high, N = low (see analyze_report for display details). The analysis report should contain Target column also, to see which memories fall into the target range and which ones don't.
 
 ### File output
-- -o --output <filename> &emsp;&emsp;&nbsp;&nbsp;&nbsp; write stats report to disk (plain text) into <filename>  
-- -f --force &emsp;&emsp;&emsp;&emsp; forces the tool to overwrite a stats report if one with the same name is found on disk already and -o switch is used  
+- [ ] -o --output <filename> &emsp;&emsp;&nbsp;&nbsp;&nbsp; write stats report to disk (plain text) into <filename>  
+- [ ] -f --force &emsp;&emsp;&emsp;&emsp; forces the tool to overwrite a stats report if one with the same name is found on disk already and -o switch is used  
 
 ### JSON management
-- -j --validate-json &emsp; check the input JSON file, to see if it's wrong somewhere, preventing stats extraction  
-- -r --repair-json &emsp;&nbsp;&nbsp; try to auto-fix the JSON  
+- [ ] -j --validate-json &emsp; check the input JSON file, to see if it's wrong somewhere, preventing stats extraction  
+- [ ] -r --repair-json &emsp;&nbsp;&nbsp; try to auto-fix the JSON  
 
 ### Utility
-- -v --verbose &emsp;&emsp;	tell us how things are working (like a log, to <stderr>)  
-- -h --help	&emsp;&emsp;&emsp;&nbsp; -h gives simple usage, while --help gives extended help on syntax and parameters  
-- -V --version &emsp;&emsp;	shows current version  
+- [ ] -v --verbose &emsp;&emsp;	tell us how things are working (like a log, to <stderr>)  
+- [ ] -h --help	&emsp;&emsp;&emsp;&nbsp; -h gives simple usage, while --help gives extended help on syntax and parameters  
+- [ ] -V --version &emsp;&emsp;	shows current version  
