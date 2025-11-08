@@ -10,7 +10,7 @@
 
 ### Phase 1 (Beta 0.1 - CURRENT):
 - [x] `-o` --output file
-- [ ] `-e` --execute
+- [x] `-e` --execute
 - [ ] `-x` --execute-output (combo)
 
 ### Phase 2 (Beta 0.2):
