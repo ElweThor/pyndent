@@ -19,10 +19,10 @@ The _launcher_ works this way: when you're using Windows shell (DOS **cmd**), be
 > pyndent .\mymeta.pyn -o .\mysource.py
 ```
 
- launches \<_Python launcher directory_\>\\**pyndent.bat** \<parameters\> --> \<_Pyndent directory_\>\\src\\**pyndent.bat** \<parameters\> --> \<_Pyndent directory_\>\\src\\**pyndent.py** \<parameters\>  
+ launches \<_Python **<ins>launcher</ins>** directory_\>\\**pyndent.bat** \<parameters\> --> \<_Pyndent directory_\>\\src\\**pyndent.bat** \<parameters\> --> \<_Pyndent directory_\>\\src\\**pyndent.py** \<parameters\>  
  
  This works the same as you:  
  1. added \<_Pyndent directory_\>\\src\\ to Windows **PATH**  
- 2. used a Linux/Linux-like **bash** to setup an **alias** like _pyndent='\<Pyndent directory\>\\src\\pyndent.py'_  
+ 2. used a Linux/Linux-like **bash** to setup an **alias** like _pyndent='\<Pyndent directory\>\\src\\**pyndent.py**'_  
  3. set up a **symlink**/**hardlink** to \<_Pyndent directory_\>\\src\\**pyndent.py** in a directory _included in the system **PATH**_  
  
