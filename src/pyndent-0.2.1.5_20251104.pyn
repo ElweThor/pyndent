@@ -6,7 +6,7 @@
 #
 """
 Pyndent - Python preprocessor with block delimiters
-Beta 1 v0.2.1.5 - 20251108
+Beta 1 v0.2.1.5 - 20251104
 """
 
 # errors management
@@ -19,7 +19,7 @@ import argparse
 import subprocess
 
 # Version info
-VERSION = "0.2.1.x"
+VERSION = "0.2.1.5"
 RELEASE = "Beta 1"
 BUILD_DATE = "20251104"
 LICENSE_INFO = "see LICENSE.md"
