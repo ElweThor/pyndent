@@ -6,11 +6,11 @@ Pyndent proves that powerful tools don't need thousands of lines of code.
 
 ### Line Count Evolution:
 
-| Version | Lines of Code | Features Added |
-|---------|---------------|----------------|
-| Alpha 0.1.0.0 | 40 | Core preprocessing, delimiter handling |
-| Beta 1 0.2.0.4 | 75 | CLI with argparse, auto-naming, error handling |
-| Beta 1 0.2.1.5 | 84 | -e/--exec/--execute |
+| Stage | Version | Lines of Code | Features Added |
+|:------|--------:|--------------:|:---------------|
+| Alpha | 0.1.0.0 | 40 | Core preprocessing, delimiter handling |
+| Beta 1 | 0.2.0.4 | 75 | CLI with argparse, auto-naming, error handling |
+| Beta 1 | 0.2.1.5 | 84 | -e/--exec/--execute |
 
 ### Why It Matters:
 
