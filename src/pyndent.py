@@ -5,64 +5,41 @@
 # LICENSE: CC BY-NC-SA 4.0 (see LICENSE file for details)
 #
 """
-Pyndent - Python preprocessor with block delimiters
-Beta 1 v0.2.1.5 - 20251108
+Pyndent - Python preprocessor with code-block delimiters
 """
 
-# errors management
 import sys
-# file/datasets management
 import os
-# args/help management
 import argparse
-# python execute
 import subprocess
 
 # Version info
-VERSION = "0.2.1.x"
-RELEASE = "Beta 1"
-BUILD_DATE = "20251104"
-LICENSE_INFO = "see LICENSE.md"
+VER = "0.2.2.10"
+REL = "Beta 1"
+BUILD = "20251108"
+LIC = "see LICENSE.md"
+DESC = "Pyndent - Python preprocessor with code-block delimiters"
 
 def pyndent_process(source_lines):
 #{
-    """
-    Process .pyn source lines into properly indented Python code
-    """
-    indent_level = 0
     output_lines = []
-    delimiter_open = '{'
-    delimiter_close = '}'
-
-    for line_num, line in enumerate(source_lines, 1):
+    indent_level = 0
+    for line in source_lines:
     #{
-        stripped = line.strip()
-
-        # Handle opening delimiter
-        if stripped == delimiter_open:
+        stripped = line.lstrip()
+        if stripped.startswith('{'):
         #{
-            output_lines.append('    ' * indent_level + '#' + delimiter_open)
-            indent_level += 1
-            continue
+            output_lines.append(' ' * indent_level + '# ' + stripped)
+            indent_level += 4
         #}
-        # Handle closing delimiter
-        if stripped == delimiter_close:
+        elif stripped.startswith('}'):
         #{
-            if indent_level > 0:
-            #{
-                indent_level -= 1
-            #}
-            output_lines.append('    ' * indent_level + '#' + delimiter_close)
-            continue
-        #}
-        # Regular code line - reindent from scratch
-        if stripped:  # Non-empty line
-        #{
-            output_lines.append('    ' * indent_level + line.strip())
+            indent_level = max(0, indent_level - 4)
+            output_lines.append(' ' * indent_level + '# ' + stripped)
         #}
         else:
         #{
-            output_lines.append('')
+            output_lines.append(' ' * indent_level + line)
         #}
     #}
     return output_lines
@@ -70,104 +47,130 @@ def pyndent_process(source_lines):
 
 def main():
 #{
-    parser = argparse.ArgumentParser(
-    description='Pyndent - Python preprocessor with block delimiters',
-    epilog=f'Pyndent {VERSION} {RELEASE} ({BUILD_DATE}) - {LICENSE_INFO}')
-
+    parser = argparse.ArgumentParser(description=DESC, epilog=f'Pyndent {VER} {REL} ({BUILD}) - {LIC}')
     parser.add_argument('input_file', nargs='?', help='Input .pyn file to process')
-    parser.add_argument('-o', '--output', dest='output_file',
-    nargs='?', const='AUTO',  # here is the magic!
-    help='Output .py file (use without value for auto-name, default: stdout)')
-    parser.add_argument('-e', '--exec', '--execute',
-    action='store_true', dest='execute',
-    help='Execute the processed Python code immediately')
-    parser.add_argument('-V', '--version', action='version',
-    version=f'Pyndent {VERSION} {RELEASE} ({BUILD_DATE})')
+    parser.add_argument('-o', '--output', nargs='?', const=True, default=None, help='Output .py file (use without value for auto-name, default: stdout) (mutually exclusive with -x)')
+    parser.add_argument('-e', '--exec', '--execute', action='store_true', help='Execute the processed Python code immediately (mutually exclusive with -x)')
+    parser.add_argument('-x', '--execout', '--execute-output', nargs='?', const=True, metavar='OUTPUT_FILE', help='Auto-compile and execute (optional output filename, auto-generate if not provided)')
+    parser.add_argument('-f', '--force', action='store_true', help='Force overwrite existing output file')
+    parser.add_argument('-V', '--version', action='store_true', help='Show version and exit')
 
     args = parser.parse_args()
 
-    # If no input file is given, show mini-help and version info
+    if args.version:
+    #{
+        print(f"Pyndent {VER} {REL} ({BUILD}) - {LIC}")
+        return 0
+    #}
+
     if not args.input_file:
     #{
         parser.print_help()
-        sys.exit(1)
+        return 1
     #}
-    # Read input file
-    try:
-    #{
-        with open(args.input_file, 'r', encoding='utf-8') as f:
-        #{
-            input_lines = f.readlines()
-        #}
-    #}
-    except FileNotFoundError:
-    #{
-        print(f"Error: Input file '{args.input_file}' not found", file=sys.stderr)
-        sys.exit(1)
-    #}
-    except Exception as e:
-    #{
-        print(f"Error reading input file: {e}", file=sys.stderr)
-        sys.exit(1)
-    #}
-    # Process the code
-    try:
-    #{
-        output_lines = pyndent_process(input_lines)
-    #}
-    except Exception as e:
-    #{
-        print(f"Error processing file: {e}", file=sys.stderr)
-        sys.exit(1)
-    #}
-    # Write output
-    try:
-    #{
-        if args.output_file:
-        #{
-            # keep auto-generate logic
-            if args.output_file == 'AUTO':
-            #{
-                output_file = os.path.splitext(args.input_file)[0] + '.py'
-            #}
-            else:
-            #{
-                output_file = args.output_file
-            #}
-            with open(output_file, 'w', encoding='utf-8') as f:
-            #{
-                f.write('\n'.join(output_lines))
-            #}
-            print(f"Processed code written to: {output_file}", file=sys.stderr)
 
-            # 1: Execute with file
-            if args.execute:
-            #{
-                subprocess.run([sys.executable, output_file])  # <- USA output_file, non args.output_file!
-            #}
+    # Check mutual exclusivity: -x vs -e/-o
+    if args.execout is not None and (args.exec or args.output is not None):
+    #{
+        print("Error: -x and -e/-o options are mutually exclusive")
+        return 1
+    #}
+
+    input_file = args.input_file
+
+    if not os.path.exists(input_file):
+    #{
+        print(f"Error: Input file '{input_file}' not found.")
+        return 1
+    #}
+
+    with open(input_file, 'r') as f:
+    #{
+        input_lines = f.readlines()
+    #}
+
+    output_lines = pyndent_process(input_lines)
+
+    # Determine output_file
+    output_file = None
+    if args.execout is not None:
+    #{
+        # -x with optional output filename
+        if args.execout is True:
+        #{
+            # Auto-generate output filename
+            input_base = os.path.splitext(input_file)[0]
+            output_file = input_base + '.py'
         #}
         else:
         #{
-            # 2: Execute with stdout
-            if args.execute:
-            #{
-                subprocess.run([sys.executable], input='\n'.join(output_lines), text=True)
-            #}
-            else:
-            #{
-                # Default: stdout without execute
-                print('\n'.join(output_lines))
-            #}
+            # Use provided output filename
+            output_file = args.execout
         #}
     #}
-    except Exception as e:
+    elif args.output is not None:
     #{
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        if args.output is True:
+        #{
+            # -o without argument: auto-naming
+            input_base = os.path.splitext(input_file)[0]
+            output_file = input_base + '.py'
+        #}
+        else:
+        #{
+            # -o with argument
+            output_file = args.output
+        #}
     #}
+
+    # Check for -f if output_file is set
+    if output_file and os.path.exists(output_file) and not args.force:
+    #{
+        print(f"Error: Output file '{output_file}' already exists. Use -f to overwrite.")
+        return 1
+    #}
+
+    # Write to file or stdout
+    if output_file:
+    #{
+        with open(output_file, 'w') as f:
+        #{
+            f.writelines(output_lines)
+        #}
+        print(f"Processed code written to: {output_file}")
+    #}
+    else:
+    #{
+        for line in output_lines:
+        #{
+            print(line, end='')
+        #}
+    #}
+
+    # Execution logic
+    if args.execout is not None:
+    #{
+        # -x always executes the output file
+        subprocess.run([sys.executable, output_file])
+    #}
+    elif args.exec:
+    #{
+        # -e executes from file if output_file exists, otherwise from stdin
+        if output_file:
+        #{
+            subprocess.run([sys.executable, output_file])
+        #}
+        else:
+        #{
+            code = ''.join(output_lines)
+            subprocess.run([sys.executable], input=code, text=True)
+        #}
+    #}
+
+    return 0
 #}
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 #{
-    main()
+    sys.exit(main())
 #}

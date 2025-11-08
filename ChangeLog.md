@@ -1,10 +1,18 @@
 # Changelog
 
-[![Beta](https://img.shields.io/badge/version-0.2.1.5--beta-yellow)]()
+[![Beta](https://img.shields.io/badge/version-0.2.2.10--beta-yellow)]()
 [![Status](https://img.shields.io/badge/status-beta-yellow)]()
 
-## 2025-11-08 - v0.2.2.x (Beta 1)
-- .6 `+` **ET+AR**: -x/--exec-out/--execute-output: -e + -o combo, same as: pyndent \<input\>.pyn -o \<input\>.py && python \<input\>.py (\<meta\>.py name is auto-generated)
+## 2025-11-08 - v0.2.2.10 (Beta 1)
+- .10 `*` **ET+AR**: Auto-naming output file for `-x` if no explicit output filename is given
+- .9 `*` **ET+AR**: Improved help text for clarity, about mutual exclusive options
+- .8 `+` **ET+AR**: Mutual exclusivity control between `-x` and `-e`/`-o`: if they're specified together, error exit
+- .7 `+` **ET+AR**: `-f/--force` (force overwrite) 
+- .6 `+` **ET+AR**: `-x/--execout/--execute-output` combo (output write + execute), same as: pyndent \<input\>.pyn -o \<input\>.py && python \<input\>.py (\<meta\>.py name is auto-generated)
+
+**Patchlevel suggerito:** `0.2.2.5` (5 modifiche principali)
+
+
 
 ## 2025-11-04 - v0.2.1.5 (Beta 1)
 - .5 `+` **ET+AR**: -e/--exec/--execute: after pre-processing, auto-launch Python to execute the produced code: from \<stdout\> if no -o option was in use, from \<output\>.py if Pyndent was asked to write a source file
