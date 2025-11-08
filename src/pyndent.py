@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # PYthon INdent: a reindent pre-processor tool for Python 
 # (C)2025 by Elwe Thor - Aria@DeepSeek 
