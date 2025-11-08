@@ -26,6 +26,9 @@
 - [ ] GitHub repository refining
 - **Scope:** General community
 
+### Release 1.x:
+- [ ] Graphical User Interface: PynGUI, anternative way to use Pyndent
+
 ### General Tasks:
 - [x] Public GitHub repository
 - [x] Formatted documentation
