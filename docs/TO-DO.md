@@ -73,16 +73,16 @@ Expected output:
 20251108 hashbang swapping between .pyn and .py
 
 - Rationale:  
-  - Pyndent can have its own #!/usr/bin/env pyndent to launch with options (e.g. to auto-pre-process into a pyndent.py source)  
-  - the processed code is anyway a Python source code .py (unless -r is used) so, even it could use #!/usr/bin/env python
+  - Pyndent can have its own `#!/usr/bin/env pyndent` to launch with options (e.g. to auto-pre-process into a pyndent.py source)  
+  - the processed code is anyway a Python source code .py (unless -r is used) so, even it could use `#!/usr/bin/env python`
   
-- The problem: there is only ONE "first line" in a file: if Pyndent uses it by its own, it won't be free, to use by Python
+- The problem: there is only **ONE** "_first line_" in a file: if Pyndent uses it by its own, <ins>it won't be free</ins>, to use by Python
 
-- The solution: hashbang swapping with precedence  
+- The solution: **hashbang swapping** _with precedence_  
   - the Golden Rule is:  
-    - if we're pre-processing a meta-code .pyn into a source .py, precedence is to Pyndent, in the .pyn, and to Python, in the .py, so that:  
+    - if we're pre-processing a meta-code **.pyn** into a source _.py_, precedence is to **Pyndent**, in the **.pyn**, and to _Python_, in the _.py_, so that:  
 	  - in case of .pyn -\> .py (`-o`): swap **Pyndent** hashbang with Python one (to be written into .py file)
 	  - in case of .py -\> .pyn (`-r`): swap Python hashbang with **Pyndent** one (to be written into .pyn file)
 
- This way, a Python source will always have the correct hashbang to launch it, and it also won't complain to see a "second hashbang" in the file's line below, as that's a `comment` to it.
+ This way, _a Python source will always have the correct hashbang_ to launch it, and it also won't complain to see a "second hashbang" in the line below, as that's a `comment` to it.
  
