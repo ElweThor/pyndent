@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+
+#
+# DEMO: Sieve of Eratosthenes
+#
+# format: Pyndent meta-source
+#
+# - info: process with Pyndent (https://github.com/ElweThor/pyndent)
+#		to show the executable source, to run it, to write a Python
+#		source
+#
+# - see a Pyhton compliant source:
+# pyndent passgen.pyn
+#
+# - direct execution:
+# pyndent passgen.pyn -e
+# NOTE: this is an interactive program:
+#		 use -o and run the .py code (see below)
+#		 or use -x, instead of -e
+#
+# - write working Python executable source:
+# pyndent passgen.pyn -o
+#
+# ref: https://www.geeksforgeeks.org/python/create-a-random-password-generator-using-python/
+#
+
+import string
+import random
+
+# Getting password length
+length = int(input("Enter password length: "))
+
+print('''Choose character set for password from these : 
+         1. Digits
+         2. Letters
+         3. Special characters
+         4. Exit''')
+
+characterList = ""
+
+# Getting character set for password
+while(True):
+{
+    choice = int(input("Pick a number "))
+    if(choice == 1):
+    {
+        # Adding letters to possible characters
+        characterList += string.ascii_letters
+	}
+    elif(choice == 2):
+    {
+        # Adding digits to possible characters
+        characterList += string.digits
+	}
+    elif(choice == 3):
+    {
+        # Adding special characters to possible
+        # characters
+        characterList += string.punctuation
+	}
+    elif(choice == 4):
+	{
+        break
+	}
+    else:
+	{
+        print("Please pick a valid option!")
+	}
+}
+
+password = []
+
+for i in range(length):
+{  
+    # Picking a random character from our 
+    # character list
+    randomchar = random.choice(characterList)
+    
+    # appending a random character to password
+    password.append(randomchar)
+}
+
+# printing password as a string
+print("The random password is " + "".join(password))
