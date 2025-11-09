@@ -22,11 +22,11 @@ If you answered **YES** to both of the above questions, you don't need Pyndent a
 ## Q: But 20% is a lot of overhead!
 
 `A`: Consider this:  
-- 20% file size increase ✅  
-- 100% confidence in block structure ✅  
+- 20% (average) file size increase ✅  
+- 100% (sure) confidence in block structure ✅  
 - 0% risk of silent logic errors ✅  
 - Team collaboration without indent wars ✅  
-   
+
 The math is clear! 🧮
 
 <a name="CICD_validate"></a>
@@ -68,18 +68,18 @@ Pyndent ensures your **block structure** is always correct before code reaches p
 <a name="restore"></a>
 ## Q: What about existing Python code?
 
-`A`: --restore will work for you (if the existing Python code is executable already).
+`A`: **-r/--restore** will work for you (if the existing Python code <ins>is executable already</ins>).
 
 <a name="PynGUI"></a>
 ## Q: GUI support?
 
-`A`: PynGUI is going to be developed: look at the [ROADMAP](docs/ROADMAP.md).
+`A`: **PynGUI** is going to be developed: look at the [ROADMAP](docs/ROADMAP.md).
 
 <a name="whyopensource"></a>
 ## Q: Why this tool is open source and with so permissive license?
 
 `A`: As a matter of fact, the answers are many:  
 - I already have a nice job, which gives me headaches, sometimes, but usually a lot of fun, and it's interesting too!  
-- My (oh-so-fun) job already pays me enough: I don't need to enter "_Forbes' Billionaires List_", nor the "_Fortune Global 500_", which could give me far more (and not-that-fun) headaches.  
+- My job already pays me enough: I don't need to enter "_Forbes' Billionaires List_", nor the "_Fortune Global 500_", which could give me far **more** (and not-that-fun) headaches.  
 - I love to share.  
-- I made Pyndent **for me**, mostly... but why not giving Python's community something to play with?  
+- I written Pyndent **for me**, mostly... but why not giving Python's community something to play with?  
