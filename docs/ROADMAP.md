@@ -2,7 +2,7 @@
 
 ## 🕰️ Ideal Timeline:
 
-### ◽ Phase 0 (Alpha - COMPLETED): ✅
+### ◻️ Phase 0 (Alpha - COMPLETED): ✅
 - [x] Working code
 - [x] Complete documentation
 - [x] Basic testing
