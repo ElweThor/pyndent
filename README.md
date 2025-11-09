@@ -7,6 +7,9 @@
 
  *Now in BETA 2 with argparse options: see [ROADMAP](docs/ROADMAP.md) to know what's implemented already*
 
+ Don't you like the idea of converting a generalized rant into a pleasant and efficient coding experience?  
+ <ins>I did</ins>: I wanted to better learn Python, after leaving it 20 years ago, without the hassle of being biten too much by the serpent, only 'cause of **indentation**.
+
 # 🚀 Quick Start
 
 ## 📦 Install
