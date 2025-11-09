@@ -19,10 +19,6 @@
 - .7 `+` **ET+AR**: `-f/--force` (force overwrite) 
 - .6 `+` **ET+AR**: `-x/--execout/--execute-output` combo (output write + execute), same as: pyndent \<input\>.pyn -o \<input\>.py && python \<input\>.py (\<meta\>.py name is auto-generated)
 
-**Patchlevel suggerito:** `0.2.2.5` (5 modifiche principali)
-
-
-
 ## 2025-11-04 - v0.2.1.5 (Beta 1)
 - .5 `+` **ET+AR**: -e/--exec/--execute: after pre-processing, auto-launch Python to execute the produced code: from \<stdout\> if no -o option was in use, from \<output\>.py if Pyndent was asked to write a source file
 
