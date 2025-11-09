@@ -79,17 +79,17 @@ print()
 
 - ✅ **Block delimiters** (`{}` by default, configurable)
 - ✅ **Bidirectional conversion** (`.pyn` ↔ `.py`)
-- ✅ **Zero Python syntax changes** - outputs <ins>100% valid Python</ins>
-- ✅ **File output** -o/--output option (Beta 1)
-- ✅ **Execute directly** with `-e` option (Beta 1)
-- ✅ **Strip artifacts** with `-s` option (Beta 2) you can remove every non-Python elements
+- ✅ **<ins>Zero</ins> Python syntax changes** - outputs <ins>100% valid Python</ins>
+- ✅ **File output** `-o` option (Beta 1)
+- ✅ **Execute directly** `-e` option (Beta 1)
+- ✅ **Strip artifacts** `-s` option (Beta 2) you can remove every non-Python elements
 - 🔵 **Customizable delimiters** via `#delim` directive (coming)
-- 🔵 **Verbose processing** with `-v1`/`-v2` option (coming)
-- 🔵 **Restore pyndent meta-source** with `-r` option (coming)
+- 🔵 **Verbose processing** `-v1`/`-v2` options (coming)
+- 🔵 **Restore pyndent meta-source** `-r` option (coming)
 
 ## 📖 Full Documentation
 
-For detailed examples, technical deep-dive, and philosophical rationale, see the `docs/` folder.
+For detailed examples, [technical deep-dive](docs/meta-syntax.md), and [philosophical rationale](docs/PYNLOSOHPY.md), see the [docs/](docs/) folder.
 
 ## 🎯 Use Cases
 
