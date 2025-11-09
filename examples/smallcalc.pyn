@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# DEMO: Sieve of Eratosthenes
+# DEMO: Small Calculator demo
 #
 # format: Pyndent meta-source
 #
@@ -20,6 +20,8 @@
 #
 # - write working Python executable source:
 # pyndent smallcalc.pyn -o
+#
+# ref: https://www.programiz.com/python-programming/examples/calculator
 #
 
 # This function adds two numbers
