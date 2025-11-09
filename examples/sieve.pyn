@@ -18,6 +18,9 @@
 # - write working Python executable source:
 # pyndent sieve.pyn -o
 #
+# ref: https://www.geeksforgeeks.org/dsa/sieve-of-eratosthenes/
+#
+
 def sieve(n):
 {
     #Create a boolean list to track prime status of numbers

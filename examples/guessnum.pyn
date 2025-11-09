@@ -18,6 +18,8 @@
 # - write working Python executable source:
 # pyndent guessnum.pyn -o
 #
+# ref: https://amanxai.com/2022/06/29/number-guessing-game-using-python/
+#
 
 import random
 
