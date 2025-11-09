@@ -17,18 +17,18 @@ cd pyndent/src
 ### 👓 See Pyndent to Python conversion in action: 📵 no file output, just console 💻
 `python pyndent.py examples/demo.pyn`
 
-or
+or  
 `pyndent examples/demo.pyn`
 
-or
-`cd examples`
+or  
+`cd examples`  
 `pyndent demo.pyn`
 
-### Or execute the produced Python code directly (still no file output 📵)
-python pyndent.py -e examples/demo.pyn
+### Or execute the produced Python code directly (still no file output 📵)  
+`python pyndent.py -e examples/demo.pyn`
 
-or
-`cd examples`
+or  
+`cd examples`  
 `pyndent -e demo.pyn`
 
 ## 💡 Which Problem Does It Solve?
