@@ -13,9 +13,9 @@
 - [x] `-e` --exec --execute
 - [x] `-x` --execout --execute-output (combo)
 
-### Phase 2 (Beta 0.2): 🔵
+### Phase 2 (Beta 0.2 DEVELOPING): 🏗️
+- [x] `-s` --strip-delimiters
 - [ ] `-v` --verbose
-- [ ] `-s` --strip-delimiters
 
 ### Phase 3 (Beta 0.3): 🔵
 - [ ] `-r` --restore (more complex)

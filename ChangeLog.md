@@ -1,7 +1,16 @@
 # Changelog
 
-[![Beta](https://img.shields.io/badge/version-0.2.2.10--beta-yellow)]()
+[![Beta](https://img.shields.io/badge/version-0.2.4.15--beta-yellow)]()
 [![Status](https://img.shields.io/badge/status-beta-yellow)]()
+
+## 2025-11-09 - v0.2.4.15 (Beta 2)
+- .15 `*` **ET+AR**: delimiters are no more hardcoded (only defaults are)
+- .14 `!` **ET+AR**: fixed delimiters parsing: pyndent was considering starting spaces/tabs only but Golden Rule tells "every"
+- .13 `+` **ET+AR**: -s/--strip/--strip-delims removes every Pyndent meta-code (commented) element from the Python source
+
+## 2025-11-08 - v0.2.3.12 (Beta 1)
+- .12 `*` **ET+AR**: -h show a short help (usage), --help: show a full help
+- .11 `!` **ET+AR**: pyndent was showing a processed code printout even when `-e`, `-o` or `-x` was given: by default it should show the code when no option is given
 
 ## 2025-11-08 - v0.2.2.10 (Beta 1)
 - .10 `*` **ET+AR**: Auto-naming output file for `-x` if no explicit output filename is given
