@@ -9,6 +9,8 @@
 
 - _**note**_: always check the [ROADMAP](docs/ROADMAP.md), to see if a feature is available already.
 
+---
+
 <a name="plus20pct"></a>
 ## Q: Why should I agree to inflate by a 20% average my Python code?
 
