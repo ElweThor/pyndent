@@ -14,7 +14,7 @@
 <a name="plus20pct"></a>
 ## Q: Why should I agree to inflate by a 20% average my Python code?
 
-`A`: That's the _wrong question_: the **real** one is: _do you agree to have 'randomic execution', in a large program made by thousand of code lines, just 'cause a tab is missing "somewhere" **but** with Python agreeing to execute your code without alerting you?_  
+That's the _wrong question_: the **real** one is: _do you agree to have 'randomic execution', in a large program made by thousand of code lines, just 'cause a tab is missing "somewhere" **but** with Python agreeing to execute your code without alerting you?_  
 In other terms: _do you like to <ins>lose hours</ins> (or days), debugging ALL the program's logic again, only 'cause a single line moved 4 characters to the left?_  
 _(consider even code you found in the internet, or written for you by an AI)_
 
@@ -24,7 +24,7 @@ If you answered **YES** to both of the above questions, you don't need Pyndent a
 <a name="overhead"></a>
 ## Q: But 20% is a lot of overhead!
 
-`A`: Consider this:  
+Consider this:  
 - 20% (average) file size increase ✅  
 - 100% (sure) confidence in block structure ✅  
 - 0% risk of silent logic errors ✅  
@@ -35,7 +35,7 @@ The math is clear! 🧮
 <a name="CICD_validate"></a>
 ## Q: Can I use Pyndent in CI/CD pipelines?
 
-`A`: Absolutely! Pyndent is perfect for CI/CD environments. You can:
+Absolutely! Pyndent is perfect for CI/CD environments. You can:
 
 - Validate structure before deployment:
 
@@ -71,17 +71,17 @@ Pyndent ensures your **block structure** is always correct before code reaches p
 <a name="restore"></a>
 ## Q: What about existing Python code?
 
-`A`: **-r/--restore** will work for you (if the existing Python code <ins>is executable already</ins>).
+**-r/--restore** will work for you (if the existing Python code <ins>is executable already</ins>).
 
 <a name="PynGUI"></a>
 ## Q: GUI support?
 
-`A`: **PynGUI** is going to be developed: look at the [ROADMAP](docs/ROADMAP.md).
+**PynGUI** is going to be developed: look at the [ROADMAP](docs/ROADMAP.md).
 
 <a name="whyopensource"></a>
 ## Q: Why this tool is open source and with so permissive license?
 
-`A`: As a matter of fact, the answers are many:  
+As a matter of fact, the answers are many:  
 - I already have a nice job, which gives me headaches, sometimes, but usually a lot of fun, and it's interesting too!  
 - My job already pays me enough: I don't need to enter "_Forbes' Billionaires List_", nor the "_Fortune Global 500_", which could give me far **more** (and not-that-fun) headaches.  
 - I love to share.  
