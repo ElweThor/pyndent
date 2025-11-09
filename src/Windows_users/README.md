@@ -1,4 +1,4 @@
-# Windows users
+# 🪟 Windows users
 
  As Windows lacks **aliases**, as well as real **symlinks**/**hardlinks** (and I already checked this behavior <ins>can't</ins> be carried out by Windows' **links**), to be able to _launch Pyndent wherever you are_ in your filesystem you have some alternatives:
  

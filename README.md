@@ -5,26 +5,37 @@
 
 > **Preprocessor that adds block delimiters to Python, making indentation errors a thing of the past.**
 
-> *Now in BETA 2 with argparse options: see (ROADMAP)[docs/ROADMAP.md] to know what's implemented already*
+ *Now in BETA 2 with argparse options: see (ROADMAP)[docs/ROADMAP.md] to know what's implemented already*
 
-## 🚀 Quick Start
+# 🚀 Quick Start
 
-# Install
+## 📦 Install
 git clone https://github.com/elwethor/pyndent
 
 cd pyndent/src
 
-# Convert .pyn to .py
-python pyndent.py examples/demo.pyn
+### 👓 See Pyndent to Python conversion in action: 📵 no file output, just console 💻
+`python pyndent.py examples/demo.pyn`
 
-# Or execute directly
+or
+`pyndent examples/demo.pyn`
+
+or
+`cd examples`
+`pyndent demo.pyn`
+
+### Or execute the produced Python code directly (still no file output 📵)
 python pyndent.py -e examples/demo.pyn
 
-## 💡 What Problem Does It Solve?
+or
+`cd examples`
+`pyndent -e demo.pyn`
 
-Python's strict indentation can cause frustrating bugs. Pyndent lets you write:
+## 💡 Which Problem Does It Solve?
 
-**Input (`demo.pyn`):**
+Python's <ins>strict</ins> indentation can cause frustrating bugs. Pyndent lets you write:
+
+**Input (`examples/demo.pyn`):**
 ```python # pyndent
 n = 10
 a = 0
@@ -42,7 +53,7 @@ while count <= n:
 print()
 ```
 
-**Output (`demo.py`):**
+**Output (`examples/demo.py`):**
 ```python
 n = 10
 a = 0
