@@ -1,11 +1,11 @@
 # 🐍 Pyndent - Solving Python's Indentation Dilemma
 
-[![Version](https://img.shields.io/badge/version-0.2.0.4--beta-yellow)]()
+[![Version](https://img.shields.io/badge/version-0.2.5.16--beta-yellow)]()
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE.md)
 
 > **Preprocessor that adds block delimiters to Python, making indentation errors a thing of the past.**
 
-> *Now in BETA 1 with -V/--version, -h/--help, `-o/--output` file support and argparse!*
+> *Now in BETA 2 with argparse options: see (ROADMAP)[docs/ROADMAP.md] to know what's implemented already*
 
 ## 🚀 Quick Start
 
@@ -26,36 +26,54 @@ Python's strict indentation can cause frustrating bugs. Pyndent lets you write:
 
 **Input (`demo.pyn`):**
 ```python # pyndent
-def example():
-{
-    if True:
-    {
-        print("Hello from nested block!")
-    }
+n = 10
+a = 0
+b = 1
+next = b  
+count = 1
+
+while count <= n:
+ {
+    print(next, end=" ")
+   count += 1
+  a, b = b, next
+ next = a + b
 }
+print()
 ```
 
 **Output (`demo.py`):**
 ```python
-def example():
+n = 10
+a = 0
+b = 1
+next = b  
+count = 1
+
+while count <= n:
 #{
-    if True:
-    #{
-        print("Hello from nested block!")
-    #}
+    print(next, end=" ")
+    count += 1
+    a, b = b, next
+    next = a + b
 #}
+print()
 ```
 
-**Result:** Correct indentation **guaranteed**, even if your original formatting was messy.
+**Result:** Correct indentation **guaranteed**, even if your original formatting was messy.  
+ (_ad hoc messy, this time, for demo purposes_)
 
 ## 🛠️ Features
 
 - ✅ **Block delimiters** (`{}` by default, configurable)
 - ✅ **Bidirectional conversion** (`.pyn` ↔ `.py`)
-- ✅ **Zero Python syntax changes** - outputs 100% valid Python
+- ✅ **Zero Python syntax changes** - outputs <ins>100% valid Python</ins>
 - ✅ **File output** -o/--output option (Beta 1)
-- ✅ **Execute directly** with `-e` flag (next version)
-- ✅ **Customizable delimiters** via `#delim` directive (next version)
+- ✅ **Execute directly** with `-e` option (Beta 1)
+- ✅ **Strip artifacts** with `-s` option (Beta 2) you can remove every non-Python elements
+- 🔵 **Customizable delimiters** via `#delim` directive (coming)
+- 🔵 **Verbose processing** with `-v1`/`-v2` option (coming)
+- 🔵 **Restore pyndent meta-source** with `-r` option (coming)
 
 ## 📖 Full Documentation
 
@@ -70,7 +88,7 @@ For detailed examples, technical deep-dive, and philosophical rationale, see the
 
 ## 🤝 Contributing
 
-This is an alpha release. Feedback and contributions welcome!
+This is an beta 2 release. Feedback and contributions welcome!
 
 ---
 
