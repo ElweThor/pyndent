@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+
+#
+# DEMO: Rock Paper Scissors small game
+#
+# format: Pyndent meta-source
+#
+# - info: process with Pyndent (https://github.com/ElweThor/pyndent)
+#		to show the executable source, to run it, to write a Python
+#		source
+#
+# - see a Pyhton compliant source:
+# pyndent rock_paper_scissors.pyn
+#
+# - direct execution:
+# pyndent rock_paper_scissors.pyn -e
+# NOTE: this is an interactive program:
+#		 use -o and run the .py code (see below)
+#		 or use -x, instead of -e
+#
+# - write working Python executable source:
+# pyndent rock_paper_scissors.pyn -o
+#
+# ref: https://www.codingal.com/coding-for-kids/blog/rock-paper-scissors-game-in-python/
+#
+
+import random
+
+options = ["Rock", "Paper", "Scissors"]
+user_choice = input("Choose Rock, Paper, or Scissors: ")
+computer_choice = random.choice(options)
+
+print("You chose: ", user_choice)
+
+print("Computer chose: ", computer_choice)
+
+if user_choice == computer_choice:
+{
+    print("It's a tie!")
+}
+elif user_choice == "Rock" and computer_choice == "Scissors":
+{
+    print("You win!")
+}
+elif user_choice == "Paper" and computer_choice == "Rock":
+{
+    print("You win!")
+}
+elif user_choice == "Scissors" and computer_choice == "Paper":
+{
+      print("You win!")
+}
+else:
+{
+  print("Computer wins!")
+}
