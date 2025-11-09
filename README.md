@@ -33,7 +33,8 @@ or
 
 ## 💡 Which Problem Does It Solve?
 
-Python's <ins>strict</ins> indentation can cause frustrating bugs. Pyndent lets you write:
+Python's <ins>strict</ins> indentation can cause frustration when you need speed.  
+Pyndent lets you write:
 
 **Input (`examples/demo.pyn`):**
 ```python # pyndent
