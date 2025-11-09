@@ -5,7 +5,7 @@
 
 > **Preprocessor that adds block delimiters to Python, making indentation errors a thing of the past.**
 
- *Now in BETA 2 with argparse options: see (ROADMAP)[docs/ROADMAP.md] to know what's implemented already*
+ *Now in BETA 2 with argparse options: see [ROADMAP](docs/ROADMAP.md) to know what's implemented already*
 
 # 🚀 Quick Start
 
