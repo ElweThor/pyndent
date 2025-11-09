@@ -5,6 +5,7 @@
 - Q: [Can I use Pyndent in CI/CD pipelines?](#CICD_validate)
 - Q: [What about existing Python code?](#restore)
 - Q: [GUI support?](#PynGUI)
+- Q: [Why this tool is open source and with so permissive license?](#whyopensource)
 
 - _**note**_: always check the [ROADMAP](docs/ROADMAP.md), to see if a feature is available already.
 
@@ -73,3 +74,12 @@ Pyndent ensures your **block structure** is always correct before code reaches p
 ## Q: GUI support?
 
 `A`: PynGUI is going to be developed: look at the [ROADMAP](docs/ROADMAP.md).
+
+<a name="whyopensource"></a>
+## Q: Why this tool is open source and with so permissive license?
+
+`A`: As a matter of fact, the answers are many:  
+- I already have a nice job, which gives me headaches, sometimes, but usually a lot of fun, and it's interesting too!  
+- My (oh-so-fun) job already pays me enough: I don't need to enter "_Forbes' Billionaires List_", nor the "_Fortune Global 500_", which could give me far more (and not-that-fun) headaches.  
+- I love to share.  
+- I made Pyndent **for me**, mostly... but why not giving Python's community something to play with?  
