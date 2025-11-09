@@ -7,7 +7,7 @@
 - Q: [GUI support?](#PynGUI)
 - Q: [Why this tool is open source and with so permissive license?](#whyopensource)
 
-- _**note**_: always check the [ROADMAP](docs/ROADMAP.md), to see if a feature is available already.
+- _**note**_: always check the [ROADMAP](ROADMAP.md), to see if a feature is available already.
 
 ---
 
@@ -76,7 +76,7 @@ Pyndent ensures your **block structure** is always correct before code reaches p
 <a name="PynGUI"></a>
 ## Q: GUI support?
 
-**PynGUI** is going to be developed: look at the [ROADMAP](docs/ROADMAP.md).
+**PynGUI** is going to be developed: look at the [ROADMAP](ROADMAP.md).
 
 <a name="whyopensource"></a>
 ## Q: Why this tool is open source and with so permissive license?
