@@ -14,11 +14,12 @@
 <a name="plus20pct"></a>
 ## Q: Why should I agree to inflate by a 20% average my Python code?
 
-`A`: That's the _wrong question_: the **real** one is: _do you agree to have 'randomic execution', in a large program made by thousand of code lines, just 'cause a tab is missing **and** with Python agreeing to execute your code?_  
-In other terms: _do you like to lose hours (or days), debugging ALL the program's logic again, only 'cause a single line moved 4 characters to the left?_  
+`A`: That's the _wrong question_: the **real** one is: _do you agree to have 'randomic execution', in a large program made by thousand of code lines, just 'cause a tab is missing "somewhere" **but** with Python agreeing to execute your code without alerting you?_  
+In other terms: _do you like to <ins>lose hours</ins> (or days), debugging ALL the program's logic again, only 'cause a single line moved 4 characters to the left?_  
+_(consider even code you found in the internet, or written for you by an AI)_
 
 If you answered **YES** to both of the above questions, you don't need Pyndent at all.  
-(_but, maybe, your boss would like to know how you pass your days_ 😉)
+(_but, maybe, your boss would like to know how you pass your days_ 😉 ...pynmail @yourboss "_ehy Boss, did you know that...?_" 😁)
 
 <a name="overhead"></a>
 ## Q: But 20% is a lot of overhead!
