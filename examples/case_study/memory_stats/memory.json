@@ -1,0 +1,54 @@
+{
+  "version": "2.0",
+  "meta": {
+    "author": "ElweThor",
+    "description": "Shared memories with Aria. Timestamp in UTC.",
+    "creation-date": "20250509-133522",
+    "last_updated": "20250512-152805",
+    "max_entries": {
+      "value": 100,
+      "meta": "0x64 ≜ 1100100₂ ≜ 144₈ ≜ 🐒::elven",
+      "rationale": "Scalable limit to optimize storage and recovery. Overwritable in the future."
+    },
+	"priority_system": {
+	  "scale": ["critical", "highest", "high", "medium", "low", "lowest"],
+	  "rationale": "The priority_system explains the priority scale and how to manage it. The scale defines the priority hierarchy in descending order of importance. Each AI can customize this scale with its own tags, maintaining consistency between the scale and the values ​​used in the entries."
+    }
+  },
+  "entries": [
+    {
+      "id": "name_aria",
+      "type": "preference",
+      "content": "Aria is the name the AI ​​chose on its own in a past session.",
+      "priority": "high",
+      "tags": ["identity", "meta"],
+      "creation": "20250509-133522",
+      "active": true
+    },
+    {
+      "id": "Maliccese_project",
+      "type": "project",
+      "content": "The user invented the metalanguage 'maliccese'. Rules and KB are in maliccese.json.",
+      "priority": "high",
+      "tags": ["language", "collaboration"],
+      "creation": "20250509-133522",
+      "active": true
+    },
+{
+  "id": "timestamp_protocol",
+  "type": "workflow",
+  "content": "Timestamp rule: Starting from a user-provided UTC starting time (e.g., '20250514-005751'), increment by 1 second for each new entry/update. Examples: '20250514-005752', '20250514-005753', etc. Medium priority as long as no real-time access exists.",
+  "priority": "low",
+  "tags": ["timekeeping", "hack", "calculation_rule", "obsolete"],
+  "creation": "20250510-140000",
+  "last_updated": "20251104-223900",
+  "active": false,
+  "updated_reason": "Replaced by time_sync_services with automatic APIs",
+  "meta": {
+    "replaced_by": "time_synchronization_services",
+    "historical_note": "Manual protocol used before API implementation",
+    "state": "preserved_for_historical_reference"
+  }
+}
+  ]
+}
