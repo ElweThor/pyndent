@@ -128,6 +128,20 @@ example()
  pyndent [option]... \<source_file\>.py [\<meta\>.pyn]**  
  
  If no option is given, Pyndent default behavior is to read a meta-source .pyn file, translate it into a re-indented Python source code writing it to \<stdout\>. In this case a meta-source .pyn file is a mandatory argument.  
+
+ Options are:  
+ | Simple | Extended | Description |
+ |:-------|:---------|:------------|
+ | -o | --outfile | asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>. \<filename\> is optional: if not given, the meta-source one is used |
+ | -e | --exec | tells Pyndent to launch Python, passing it the processed Python code (from \<file\>.py or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0). By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used) |
+ | | --execute | |
+ | -x | --execout | _combo_ switch implying `-e` and `-o` (`-x` and `-e`/`-o` are mutually exclusive)|
+ | | --execute-output | |
+ | -s | --strip | tells Pyndent to _**strip** the delimiters away_ from the final Python code (AKA avoid to write them out at all), as well as every Pyndent element (like `#delim` or hashbang swapping), producing <ins>**100% pure Python source**</ins> without any Pyndent meta-source element into. |
+ | -r | --restore | asks Pyndent to **reverse-process** (de-process) a Python .py source into a Pyndent meta-source, restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones (a .pyn file will be written, if using `-o` switch). |
+ | -v | --verbose | will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where --v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given). |
+ | | --v1 | |
+ | | --v2 | |
  
  **-o --outfile  
  -e --execute  
