@@ -132,27 +132,38 @@ example()
  Options are:  
  | Simple | Extended | Description |
  |:-------|:---------|:------------|
- | -o | --outfile | asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>. \<filename\> is optional: if not given, the meta-source one is used |
- | -e | --exec<br>--execute | tells Pyndent to launch Python, passing it the processed Python code (from \<file\>.py or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0). By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used) |
+ | -o | --outfile | asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>.<br>\<filename\> is optional: if not given, the meta-source one is used |
+ | -e | --exec<br>--execute | tells Pyndent to launch Python, passing it the processed Python code (from \<file\>.py or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0).<br>By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used) |
  | -x | --execout<br>--execute-output | _combo_ switch implying `-e` and `-o` (`-x` and `-e`/`-o` are mutually exclusive)|
  | -s | --strip | tells Pyndent to _**strip** the delimiters away_ from the final Python code (AKA avoid to write them out at all), as well as every Pyndent element (like `#delim` or hashbang swapping), producing <ins>**100% pure Python source**</ins> without any Pyndent meta-source element into. |
  | -r | --restore | asks Pyndent to **reverse-process** (de-process) a Python .py source into a Pyndent meta-source, restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones (a .pyn file will be written, if using `-o` switch). |
  | -v | --verbose<br>--v1<br>--v2 | will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where --v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given). |
+ _note: always check the [ROADMAP](ROADMAP.md) to see which options are available already._
  
- **-o --outfile  
- -e --execute  
- -x --execute-output  
- -s --strip  
- -r --restore  
- -v --verbose --v1 --v2**
-
  ## Options (switches) in detail
  
  By default, Pyndent reads a meta-source (\<filename\>**.pyn**) and writes a full-Python source to \<stdout\>, nothing else: it only _rewrite indentation_ from scratch.  
- As it can be customized and asked for different tasks, you can use the following switches too:
+ As it can be customized to perform different tasks, you can use the following switches too:
 
- ### -o --outfile
+ ### `-o` `--outfile`
  asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>. \<filename\> is optional: if not given, the meta-source one is used
+
+<table style="border: none; border-collapse: collapse;">
+<tr style="background: transparent;">
+<td style="border: none; padding: 10px;">Dato A</td>
+<td style="border: none; padding: 10px;">Dato B</td>
+</tr>
+</table>
+<table style="border: none; border-collapse: collapse;">
+<tr style="background: transparent;">
+<td style="border: none; padding: 10px;">`pyndent -o source.py meta.pyn`</td>
+<td style="border: none; padding: 10px;">will read meta.pyn and write source.py file, instead of just output the processed results to \<stdout\></td>
+</tr>
+<tr style="background: transparent;">
+<td style="border: none; padding: 10px;">`pyndent meta.pyn -o source.py`</td>
+<td style="border: none; padding: 10px;">the same, with more "natural" syntax: input first, then output file as last</td>
+</tr>
+</table>
 
 `pyndent -o source.py meta.pyn`  
 &emsp; will read meta.pyn and write source.py file, instead of just output the processed results to \<stdout\>  
@@ -163,7 +174,7 @@ example()
 `pyndent meta.pyn -o`  
 &emsp; the same, even if _less intuitive_ but it works too  
  
- ### -e --execute
+ ### `-e` `--execute`
  tells Pyndent to launch Python, passing it the processed Python code (from file or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0). By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used)
  
 `pyndent -e meta.pyn`  
@@ -173,7 +184,7 @@ example()
 `pyndent -e meta.pyn -o`  
 &emsp; the same, but will produce **meta**.py file, then launch **Python meta.py** to execute it  
 
- ### -x --execute-output
+ ### `-x` `--execute-output`
  _combo_ switch implying `-e` and `-o`
  
 `pyndent -x meta.pyn`  
