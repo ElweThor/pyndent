@@ -129,7 +129,6 @@ example()
  
  If no option is given, Pyndent default behavior is to read a meta-source .pyn file, translate it into a re-indented Python source code writing it to \<stdout\>. In this case a meta-source .pyn file is a mandatory argument.  
  
- Options are:  
  **-o --outfile  
  -e --execute  
  -x --execute-output  

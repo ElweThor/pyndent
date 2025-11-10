@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+
+#
+# DEMO: fibonacci series
+#
+# format: Pyndent meta-source
+#
+# - info: process with Pyndent (https://github.com/ElweThor/pyndent)
+#		to show the executable source, to run it, to write a Python
+#		source
+#
+# - see a Pyhton compliant source:
+# pyndent demo.pyn
+#
+# - direct execution:
+# pyndent demo.pyn -e
+#
+# - write working Python executable source:
+# pyndent demo.pyn -o
+#
+
+n = 10
+a = 0
+b = 1
+next = b  
+count = 1
+
+while count <= n:
+ {
+    print(next, end=" ")
+   count += 1
+  a, b = b, next
+ next = a + b
+}
+print()

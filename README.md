@@ -1,65 +1,98 @@
 # 🐍 Pyndent - Solving Python's Indentation Dilemma
 
-[![Version](https://img.shields.io/badge/version-0.2.0.4--beta-yellow)]()
+[![Version](https://img.shields.io/badge/version-0.2.5.16--beta-yellow)]()
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE.md)
 
 > **Preprocessor that adds block delimiters to Python, making indentation errors a thing of the past.**
 
-> *Now in BETA 1 with -V/--version, -h/--help, `-o/--output` file support and argparse!*
+ *Now in BETA 2 with argparse options: see [ROADMAP](docs/ROADMAP.md) to know what's implemented already*
 
-## 🚀 Quick Start
+ Don't you like the idea of converting a generalized rant into a pleasant and efficient coding experience?  
+ <ins>I did</ins>: I wanted to better learn Python, after leaving it 20 years ago, without the hassle of being biten too much by the serpent, only 'cause of **indentation**.
 
-# Install
+# 🚀 Quick Start
+
+## 📦 Install
 git clone https://github.com/elwethor/pyndent
 
 cd pyndent/src
 
-# Convert .pyn to .py
-python pyndent.py examples/demo.pyn
+### 👓 See Pyndent to Python conversion in action: 📵 no file output, just console 💻
+`python pyndent.py examples/demo.pyn`
 
-# Or execute directly
-python pyndent.py -e examples/demo.pyn
+or  
+`pyndent examples/demo.pyn`
 
-## 💡 What Problem Does It Solve?
+or  
+`cd examples`  
+`pyndent demo.pyn`
 
-Python's strict indentation can cause frustrating bugs. Pyndent lets you write:
+### Or execute the produced Python code directly (still no file output 📵)  
+`python pyndent.py -e examples/demo.pyn`
 
-**Input (`demo.pyn`):**
+or  
+`cd examples`  
+`pyndent -e demo.pyn`
+
+## 💡 Which Problem Does It Solve?
+
+Python's <ins>strict</ins> indentation can cause frustration when you need speed.  
+Pyndent lets you write:
+
+**Input (`examples/demo.pyn`):**
 ```python # pyndent
-def example():
-{
-    if True:
-    {
-        print("Hello from nested block!")
-    }
+n = 10
+a = 0
+b = 1
+next = b  
+count = 1
+
+while count <= n:
+ {
+    print(next, end=" ")
+   count += 1
+  a, b = b, next
+ next = a + b
 }
+print()
 ```
 
-**Output (`demo.py`):**
+**Output (`examples/demo.py`):**
 ```python
-def example():
+n = 10
+a = 0
+b = 1
+next = b  
+count = 1
+
+while count <= n:
 #{
-    if True:
-    #{
-        print("Hello from nested block!")
-    #}
+    print(next, end=" ")
+    count += 1
+    a, b = b, next
+    next = a + b
 #}
+print()
 ```
 
-**Result:** Correct indentation **guaranteed**, even if your original formatting was messy.
+**Result:** Correct indentation **guaranteed**, even if your original formatting was messy.  
+ (_ad hoc messy, this time, for demo purposes_)
 
 ## 🛠️ Features
 
 - ✅ **Block delimiters** (`{}` by default, configurable)
 - ✅ **Bidirectional conversion** (`.pyn` ↔ `.py`)
-- ✅ **Zero Python syntax changes** - outputs 100% valid Python
-- ✅ **File output** -o/--output option (Beta 1)
-- ✅ **Execute directly** with `-e` flag (next version)
-- ✅ **Customizable delimiters** via `#delim` directive (next version)
+- ✅ **<ins>Zero</ins> Python syntax changes** - outputs <ins>100% valid Python</ins>
+- ✅ **File output** `-o` option (Beta 1)
+- ✅ **Execute directly** `-e` option (Beta 1)
+- ✅ **Strip artifacts** `-s` option (Beta 2) you can remove every non-Python elements
+- 🔵 **Customizable delimiters** via `#delim` directive (coming)
+- 🔵 **Verbose processing** `-v1`/`-v2` options (coming)
+- 🔵 **Restore pyndent meta-source** `-r` option (coming)
 
 ## 📖 Full Documentation
 
-For detailed examples, technical deep-dive, and philosophical rationale, see the `docs/` folder.
+For detailed examples, [technical deep-dive](docs/meta-syntax.md), and [philosophical rationale](docs/PYNLOSOHPY.md), see the [docs/](docs/) folder.
 
 ## 🎯 Use Cases
 
@@ -70,7 +103,7 @@ For detailed examples, technical deep-dive, and philosophical rationale, see the
 
 ## 🤝 Contributing
 
-This is an alpha release. Feedback and contributions welcome!
+This is an beta 2 release. Feedback and contributions welcome!
 
 ---
 
