@@ -14,6 +14,7 @@ Pyndent proves that powerful tools don't need thousands of lines of code.
 | Beta 1 | 0.2.2.10 | 83 | -x: -e/-o combo |
 | Beta 1 | 0.2.3.12 | 98 | display fix,  -h/--help |
 | Beta 2 | 0.2.4.15 | 104 | delims management fix,  -s/--strip |
+| Beta 2 | 0.2.5.16 | 104 | bugfix release |
 
 ### Why It Matters:
 
