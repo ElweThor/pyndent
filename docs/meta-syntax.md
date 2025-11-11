@@ -1,5 +1,5 @@
 
- # Meta Syntax:
+ # Meta Syntax
 
  - [Pre-Processor Directives](#preprocdir) ([examples](#preprocdirxamp))
  - [Hashbang management](#hashbang)
@@ -8,6 +8,8 @@
  - [Options in detail](#optdetails)
  - [Obsoletes](#obsol)
  - [Document History](#history)
+
+<br>
 
  ## Pre-Processor Directives<a name="preprocdir"></a>
  
@@ -49,6 +51,7 @@ print("example!")
 
  The rule is: when Pyndent will start **using** a delimiter (its own defaults or your custom ones) it won't accept to _change_ it later (it will emit a warning like "_**WARNING [mixed-delimiters]**: #delim directive used after first delimiter is used_"): <ins>midex-delimiters are **not** allowed</ins>.
 
+<br>
 
  ## Directives Examples<a name="preprocdirxamp"></a>
  
@@ -77,6 +80,8 @@ def example():
     >
 >
 ```
+
+<br>
 
  ## Hashbang management<a name="hashbang"></a>
  
@@ -131,6 +136,7 @@ example()
  Python won't complain, if finding the `#!/usr/bin/pyndent -o example.py` as **second** line: it will manage it as a _normal comment_. The result will be 100% Python code (with Pyndent source hashbang, directive(s), and (custom) delimiters **retained**).  
  This way, if anyone will need to `--restore` .py code to the original meta-code, Pyndent will be able to read its own **original hashbang** (if present, it will re-swap it with Python's one), the **directives** (`#delim` in our case) are untouched and don't need to be "restored", all **delimiters** are still there, even commented (`#{{`, `#}}`) and can be easily brought back: `{{`, `}}` (also considering `#delim` contents, if in doubt).
 
+<br>
 
  ## Syntax scheme<a name="syntax"></a>
  
@@ -153,6 +159,8 @@ example()
  
  If no option is given, Pyndent default behavior is to read a meta-source .pyn file, translate it into a re-indented Python source code writing it to \<stdout\>. In this case the meta-source .pyn file is a mandatory argument.  
 
+<br>
+
  ### Options are<a name="options"></a>
  
  | Simple | Extended | Description |
@@ -169,6 +177,8 @@ example()
  | -V | --version | shows the current Pyndent version |
  
  _note: always check the [ROADMAP](ROADMAP.md) to see which options are available already._
+
+<br>
  
  ## Options in detail<a name="optdetails"></a>
  
