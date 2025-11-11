@@ -207,11 +207,11 @@ example()
 `pyndent -x source.py meta.pyn`  
 - will be internally translated into `pyndent -e -o source.py meta.pyn`, resulting in **source.py** file written to disk, then Python interpreter is called to execute the created file  
 
-<!--|    |  -->
-|:---|  
+|    |
+|:---|
 | be warned that, despite obvious, `-x` and `-e`/`-o` options are **<ins>mutually exclusive</ins>**|
 
-> be warned that, despite obvious, `-x` and `-e`/`-o` options are **<ins>mutually exclusive</ins>**
+<!-- > be warned that, despite obvious, `-x` and `-e`/`-o` options are **<ins>mutually exclusive</ins>** -->
 
 <hr>
 
