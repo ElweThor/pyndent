@@ -1,5 +1,16 @@
 
- # Meta Syntax: Pre-Processor Directives
+ # Meta Syntax:
+
+ - [Pre-Processor Directives](#preprocdir) ([examples](#preprocdirxamp))
+ - [Hashbang management](#hashbang)
+ - [Syntax scheme](#syntax)
+ - [Options](#options)
+ - [Options in detail](#optdetails)
+ - [Obsoletes](#obsol)
+ - [Document History](#history)
+
+<a name="preprocdir"></a>
+ ## Pre-Processor Directives
  
  Pyndent code syntax is <ins>**100% pure Python**</ins>, as it must be. The _meta-syntax_, used by Pyndent pre-processor to rewrite the (Python) code indentation, uses a couple of "_**code-block delimiters**_" (by default C-like ones: "`{`" and "`}`", but they can be customized) and a few _**meta-statement**_ (AKA _pre-processor directives_):
  
@@ -40,6 +51,7 @@ print("example!")
  The rule is: when Pyndent will start **using** a delimiter (its own defaults or your custom ones) it won't accept to _change_ it later (it will emit a warning like "_**WARNING [mixed-delimiters]**: #delim directive used after first delimiter is used_"): <ins>midex-delimiters are **not** allowed</ins>.
 
 
+<a name="preprocdirxamp"></a>
  ## Directives Examples
  
  #delim example 1:
@@ -68,6 +80,7 @@ def example():
 >
 ```
 
+<a name="hashbang"></a>
  ## Hashbang management
  
  In Pyndent meta-sources you may need, like in every other source, to use the hashbang (`#!`) to engage Pyndent, instead of explicitly calling it externally. So, you're going to have a first meta-source line like that, in your Pyndent .pyn file:
@@ -122,6 +135,7 @@ example()
  This way, if anyone will need to `--restore` .py code to the original meta-code, Pyndent will be able to read its own **original hashbang** (if present, it will re-swap it with Python's one), the **directives** (`#delim` in our case) are untouched and don't need to be "restored", all **delimiters** are still there, even commented (`#{{`, `#}}`) and can be easily brought back: `{{`, `}}` (also considering `#delim` contents, if in doubt).
 
 
+<a name="syntax"></a>
  ## Syntax scheme
  
  **pyndent [option]... \<meta\>.pyn [\<source\>.py]**  
@@ -143,6 +157,7 @@ example()
  
  If no option is given, Pyndent default behavior is to read a meta-source .pyn file, translate it into a re-indented Python source code writing it to \<stdout\>. In this case the meta-source .pyn file is a mandatory argument.  
 
+<a name="options"></a>
  ### Options are:  
  
  | Simple | Extended | Description |
@@ -160,6 +175,7 @@ example()
  
  _note: always check the [ROADMAP](ROADMAP.md) to see which options are available already._
  
+<a name="optdetails"></a>
  ## Options in detail
  
  By default, Pyndent reads a meta-source (\<filename\>**.pyn**) and writes a full-Python source to \<stdout\>, nothing else: it only _rewrite indentation_ from scratch.  
@@ -289,6 +305,7 @@ example()
 - the same, but with more details: **INFO** and **DEBUG** level messages will be written to \<stderr\>  
 
 
+<a name="obsol"></a>
  ## Obsoletes
  
  ### -d --dryrun
@@ -300,6 +317,7 @@ example()
  <ins>no more needed as that's now Pyndent default behavior</ins>
 
 
+<a name="history"></a>
  ## Document History
  
  20250925 original  
