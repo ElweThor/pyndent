@@ -166,8 +166,10 @@ example()
  
 `pyndent -e meta.pyn`  
 - will produce a Python source stream to \<stdout\>, then launch Python which will read its \<stdin\> to execute it  
+
 `pyndent -e meta.pyn -o source.py`  
 - will produce a **source.py** file, then launch **Python source.py** to execute it  
+
 `pyndent -e meta.pyn -o`  
 - the same, but will produce **meta**.py file, then launch **Python meta.py** to execute it  
 
@@ -176,6 +178,7 @@ example()
  
 `pyndent -x meta.pyn`  
 - will be internally translated into `pyndent -e -o meta.pyn`, resulting in **meta.py** file on disk, then Python interpreter executing it  
+
 `pyndent -x source.py meta.pyn`  
 - will be internally translated into `pyndent -e -o source.py meta.pyn`, resulting in **source.py** file written to disk, then Python interpreter is called to execute the created file  
  
@@ -184,6 +187,7 @@ example()
 
 `pyndent -s meta.pyn`  
 - will write the resulting Python code to \<stdout\> without any of the Pyndent elements  
+
 `pyndent -s -o meta.pyn`  
 - the same, but the resulting code will be written into **meta.py** file  
 
@@ -193,6 +197,7 @@ example()
  
 `pyndent -r source.py`  
 - will write a Pyndent meta-source to \<stdout\>, honoring the inline `#delim` if given, then seasrching for an embedded `#delim` directive in the source file, if lacking the inline one, then falling back to defaults if no directive is found (precedence rule: inline -> embedded -> defaults).  
+
 `pyndent -r #delim {{ }} source.py`  
 - the same, but Pyndent assumes there are no pre-existing (commented) delimiters to restore (just skipping existing ones, leaving them commented out): it will add the given delimiters instead.  
 
@@ -201,12 +206,16 @@ example()
 
 `pyndent -v meta.pyn`  
 - will read meta.pyn, write processed code to \<stdout\>, and **INFO** level messages to \<stderr\>  
+
 `pyndent --v1 meta.pyn`  
 - the same: `-v`, `--v1`, and `--verbose` are all _aliases_ for **INFO** messages level  
+
 `pyndent -v -o source.py meta.pyn`  
 - will read meta.pyn and write source.py file, and **INFO** level messages to \<stderr\>  
+
 `pyndent -v meta.pyn -o source.py`  
 - the same, with more "natural" syntax  
+
 `pyndent --v2 -o source.py meta.pyn`  
 - the same, but with more details: **INFO** and **DEBUG** level messages will be written to \<stderr\>  
 
