@@ -240,7 +240,7 @@ _my_set = {
 
  _20250924 Elwe Thor_
 
-<hr>
+<hr>  
  ### Document History
  
  - 20250924 original (italian text)
