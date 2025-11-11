@@ -138,6 +138,7 @@ example()
  | -s | --strip | tells Pyndent to _**strip** the delimiters away_ from the final Python code (AKA avoid to write them out at all), as well as every Pyndent element (like `#delim` or hashbang swapping), producing <ins>**100% pure Python source**</ins> without any Pyndent meta-source element into. |
  | -r | --restore | asks Pyndent to **reverse-process** (de-process) a Python .py source into a Pyndent meta-source, restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones (a .pyn file will be written, if using `-o` switch). |
  | -v | --verbose<br>--v1<br>--v2 | will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where --v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given). |  
+ 
  _note: always check the [ROADMAP](ROADMAP.md) to see which options are available already._
  
  ## Options (switches) in detail
