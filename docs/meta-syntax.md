@@ -146,6 +146,8 @@ example()
  By default, Pyndent reads a meta-source (\<filename\>**.pyn**) and writes a full-Python source to \<stdout\>, nothing else: it only _rewrite indentation_ from scratch.  
  As it can be customized to perform different tasks, you can use the following switches too:
 
+<hr>
+
  ### `-o` `--outfile`
  asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>. \<filename\> is optional: if not given, the meta-source one is used
 
@@ -160,6 +162,8 @@ example()
 
 `pyndent meta.pyn -o`  
 - the same, even if _less intuitive_ but it works too  
+
+<hr>
  
  ### `-e` `--execute`
  tells Pyndent to launch Python, passing it the processed Python code (from file or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0). By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used)
@@ -173,6 +177,8 @@ example()
 `pyndent -e meta.pyn -o`  
 - the same, but will produce **meta**.py file, then launch **Python meta.py** to execute it  
 
+<hr>
+
  ### `-x` `--execute-output`
  _combo_ switch implying `-e` and `-o`
  
@@ -181,6 +187,8 @@ example()
 
 `pyndent -x source.py meta.pyn`  
 - will be internally translated into `pyndent -e -o source.py meta.pyn`, resulting in **source.py** file written to disk, then Python interpreter is called to execute the created file  
+
+<hr>
  
  ### -s --strip
  tells Pyndent to _**strip** the delimiters away_ from the final Python code (AKA avoid to write them out at all), as well as every Pyndent element (like `#delim` or hashbang swapping), producing <ins>**100% pure Python source**</ins> without any Pyndent meta-source element into.
@@ -191,6 +199,8 @@ example()
 `pyndent -s -o meta.pyn`  
 - the same, but the resulting code will be written into **meta.py** file  
 
+<hr>
+
  ### -r --restore
  asks Pyndent to **reverse-process** (de-process) a Python .py source into a Pyndent meta-source, restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones (a .pyn file will be written, if using `-o` switch).  
  If you need to `--restore` a _pure Python source_ (or even a Pyndent `--strip` one), which <ins>totally lacks Pyndent elements</ins> (even commented), you _could_ give a `#delim <start_delimiter> <stop_delimiter>` directive too, **inline** or into Python source code (starting from _**2nd line** or below_), if you want to override the defaults.
@@ -200,6 +210,8 @@ example()
 
 `pyndent -r #delim {{ }} source.py`  
 - the same, but Pyndent assumes there are no pre-existing (commented) delimiters to restore (just skipping existing ones, leaving them commented out): it will add the given delimiters instead.  
+
+<hr>
 
  ### -v --v1 --verbose --v2
  will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where --v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given).
