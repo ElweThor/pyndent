@@ -226,6 +226,7 @@ _my_set = {
  but Pyndent **golden rule** applies to them too (to whichever (Pyndent's) _**delimiter-on-a-single-line**_, as a matter of fact).
  
 <br>
+
  ## Closure<a name="closure"></a>
  
  This way, we hope to _**help the community**_, which is divided on the issue: _purists_ will get _**pure Python code**_ (with some additional comments: consider adding the `-s` (`--strip-delims`) switch to get Python code without delimiters, not even as comments, out of a Pyndent meta-source).  
@@ -239,7 +240,7 @@ _my_set = {
 
  _20250924 Elwe Thor_
 
-
+<hr>
  ### Document History
  
  - 20250924 original (italian text)
