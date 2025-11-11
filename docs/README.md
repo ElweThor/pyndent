@@ -165,6 +165,8 @@ example()
 
  and python **won't complain** 'cause, at the print() line, you didn't indent it as it wanted... 'cause _**Pyndent did it for you!**_
 
+ **note about the above examples**: they are obviously <ins>extremely trivial</ins>, to allow everyone to see **how** Pyndent works and **why**... but try wonder if your boss asked you the usual "solution _for yesterday_" (which is an everyday thing, in the real world) and you're trying your best to accomplish, by putting together your code, pieces of code found in the internet, nowadays even pieces given by AIs, thousand of code lines you mostly just hope they work (as, if you had the <ins>time</ins> to write the whole thing by your own, you indented and double-checked all far better), and <ins>the indentation is screwed</ins> a lot by the many different platforms in the net: I'm sure you'll agree with me that "losing" a few minutes to find every ":" (_def function():_, _for a in mylist:_, _if b == result:_, etc.) and including it into a simple couple of delimiters, then pre-process the whole thing to get executable Python code can be a value (to the very least you won't be fired!).
+
 <br>
 
  ## Pyndent Do's and Don'ts<a name="dodonts"></a>
