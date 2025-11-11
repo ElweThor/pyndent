@@ -7,7 +7,6 @@
  - [Options](#options)
  - [Options in detail](#optdetails)
  - [Obsoletes](#obsol)
- - [Document History](#history)
 
 <br>
 

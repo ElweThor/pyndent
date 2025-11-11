@@ -1,7 +1,15 @@
 
 # Pyndent: Solving Python's Indentation Dilemma
 
- ## The Problem
+ - [The Problem](#problem) ([examples](#problemxamp))
+ - [The Cure](#cure)
+ - [Pyndent example](#pynxamp)
+ - [Pyndent Do's and Don'ts](#dodonts)
+ - [Closure](#closure)
+
+<br>
+
+ ## The Problem<a name="problem"></a>
 
  This project, which could be **language agnostic** but, essentially, a Python tool (a preprocessor), aims to solve the perennial problem of managing indentation (<ins>as part of the syntax</ins>) in Python source code.  
  The **problem** is caused, on the one hand, by Python's author himself, Guido Van Rossum, who **mandates indentation** (which is a **good** thing) to the point of _factoring it into syntax checking_ (which is a **bad** thing, IMHO).
@@ -19,8 +27,9 @@
  What I really (REALLY!!!) can't bear with, when indentation enters in the syntax **and** execution logic game, is a program I "can see" it's _correct_, **executes randomly** only 'cause of a misplaced/lost/added `TAB`!  
  And that stopped me to learn Python, but I **wanted** to learn it so... this is **my way**, Professor.
 
+<br>
 
- ### Examples
+ ### Examples<a name="problemxamp"></a>
  
  The following (trivial) code will _execute correctly_ (line numbers are added _for reference only_):
  
@@ -91,8 +100,9 @@ IndentationError: unindent does not match any outer indentation level
 
  (thanks to I'm-always-right-Professor Van Rossum).
 
+<br>
 
- ## The Cure
+ ## The Cure<a name="cure"></a>
  
  To (try to) _work around_ this problem, I decided to "_add_" two **code delimiters** to the standard Python source code: by default, the delimiters are the C ones, the curly braces "`{`" and "`}`" (we'll see later if/how to make them configurable: have a look at the [ROADMAP](ROADMAP.md)).  
  Since _**I have no intention to modify the language source**_ (fork), I thought a _meta-program_, written by using delimiters, should be **pre-processed** before being executed by the Python language: **Pyndent** is that _pre-processor_.
@@ -115,8 +125,9 @@ IndentationError: unindent does not match any outer indentation level
 	- by default, if the "_reindentation_" was successful, it will write Python source code to console's **\<stdout\>** stream (this is <ins>Python executable</ins>, with correct indentation), or a _\<filename\>.**py**_ file, if you used the `-o`/`--output` switch
 	- _optional_: by passing the `-e` (`--execute`) switch, you can _launch the Python interpreter_, passing it the newly preprocessed code (which, hopefully, will also be correctly indented, or _it will fail_ if the count of the delimiters is **odd** between _open_ and _closed_ delimiters).
 
+<br>
 
- ## Pyndent_Example
+ ## Pyndent Example<a name="pynxamp"></a>
  
  With Pyndent you can write an example.pyn meta-source like this:
 
@@ -154,8 +165,9 @@ example()
 
  and python **won't complain** 'cause, at the print() line, you didn't indent it as it wanted... 'cause _**Pyndent did it for you!**_
 
-	
- ## Pyndent Do's and Don'ts
+<br>
+
+ ## Pyndent Do's and Don'ts<a name="dodonts"></a>
  
  - it does <ins>**not** _check Python syntax_</ins>, a job left to the Python interpreter itself: it is the _programmer's responsibility_ to **use a delimiter on a separate line** (this is the **ONLY** Pyndent requirement, and it was placed for meta-source clarity and ease of conversion)  
  - since the default delimiters ("`{`" and "`}`") are also _used by Python_, _**no** syntax check is performed_, not even "_as delimiters_": that is, it does not check whether the use of a delimiter in a line containing code can be "_a delimiter_" or not: everything that appears in a source line that is **not** solely
@@ -213,8 +225,8 @@ _my_set = {
 
  but Pyndent **golden rule** applies to them too (to whichever (Pyndent's) _**delimiter-on-a-single-line**_, as a matter of fact).
  
-
- ## Closure
+<br>
+ ## Closure<a name="closure"></a>
  
  This way, we hope to _**help the community**_, which is divided on the issue: _purists_ will get _**pure Python code**_ (with some additional comments: consider adding the `-s` (`--strip-delims`) switch to get Python code without delimiters, not even as comments, out of a Pyndent meta-source).  
  _Professional programmers_, who are forced to be _pragmatic_ (and _fast_), will be able to use Pyndent and a _C-like [meta-syntax](meta-syntax.md)_ to define **code blocks**, _safe_ in the knowledge that **`1`** Pyndent will _never complain about indentation-driven syntax problems_ (if the **number** of "`{`" equals the number of "`}`") and **`2`** Python will _execute the code correctly_ even if "_badly indented_", because the **.py** source _will be indented correctly_ (it is only the **.pyn** _meta-source_ that _can contain fancy and imprecise indentations_).
