@@ -125,19 +125,32 @@ example()
  ## Syntax scheme
  
  **pyndent [option]... \<meta\>.pyn [\<source\>.py]  
- pyndent [option]... \<source_file\>.py [\<meta\>.pyn]**  
+ for [options]: [-o][-e][-x][-s][-f][-i][-v]  
+ pyndent \<source\>.py [option]... [\<meta\>.pyn]  
+ for [options]: [-r][-f][-i][-v]  
+ pyndent [option]... 
+ for [options]: [-h][-V]**  
+
+<!-- pyndent \<meta\>.pyn [-o [-f] \<source\>.py] [-s][-v]  
+					  [-e]  
+					  [-x] [-f] \<source\>.py] [-s][-v]  
+ pyndent \<source\>.pyn [-r][-o [-f] \<meta\>.py] -->
  
  If no option is given, Pyndent default behavior is to read a meta-source .pyn file, translate it into a re-indented Python source code writing it to \<stdout\>. In this case a meta-source .pyn file is a mandatory argument.  
 
  Options are:  
  | Simple | Extended | Description |
  |:-------|:---------|:------------|
+ | -e | --exec<br>--execute | tells Pyndent to launch Python, to _execute_ the processed code (from \<file\>.py or \<stdout\>), if the pre-processing ended correctly (RC = 0).<br>By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used) |
  | -o | --outfile | asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>.<br>\<filename\> is optional: if not given, the meta-source one is used |
- | -e | --exec<br>--execute | tells Pyndent to launch Python, passing it the processed Python code (from \<file\>.py or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0).<br>By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used) |
- | -x | --execout<br>--execute-output | _combo_ switch implying `-e` and `-o` (`-x` and `-e`/`-o` are mutually exclusive)|
- | -s | --strip | tells Pyndent to _**strip** the delimiters away_ from the final Python code (AKA avoid to write them out at all), as well as every Pyndent element (like `#delim` or hashbang swapping), producing <ins>**100% pure Python source**</ins> without any Pyndent meta-source element into. |
- | -r | --restore | asks Pyndent to **reverse-process** (de-process) a Python .py source into a Pyndent meta-source, restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones (a .pyn file will be written, if using `-o` switch). |
- | -v | --verbose<br>--v1<br>--v2 | will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where --v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given). |  
+ | -x | --execout<br>--execute-output | _combo_ switch implying `-e` and `-o`: everything valid for `-e` and `-o` is valid for `-x` too<br>(`-x` and `-e`/`-o` are mutually exclusive) |
+ | -f | --force | allows to _silently overwrite_ the output file if already present: if not given and Pyndent finds the output file when going to write it, an **error** is emitted and the original target file is <ins>not overwritten</ins><br>**Force** is an option to `-o`, `-x` and `-r` |
+ | -i | --interactive | prompts to replace an output target file, if found, instead of exit in error |
+ | -s | --strip<br>--strip-delims | _**strips** the delimiters away_ from the final Python code (AKA avoid to write them out at all), as well as every Pyndent element (like `#delim` or hashbang swapping), producing <ins>**100% pure Python source**</ins> without any Pyndent meta-source element into. |
+ | -r | --restore | asks Pyndent to _restore_ (de-process) a meta-source from a Python .py source (mandatory), restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones<br>having Pyndent elements commented in the source .py file is not mandatory <ins>if the source correctly executes</ins> in Python<br>(a .pyn file will be written, if using `-o` switch)<br>(disables `-x` option) |
+ | -v | --verbose<br>--v1<br>--v2 | will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where -v/--v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given). |  
+ | -h | --help | shows simpler usage (`-h`) or full help (`--help`) |
+ | -V | --version | shows the current Pyndent version |
  
  _note: always check the [ROADMAP](ROADMAP.md) to see which options are available already._
  
@@ -145,6 +158,20 @@ example()
  
  By default, Pyndent reads a meta-source (\<filename\>**.pyn**) and writes a full-Python source to \<stdout\>, nothing else: it only _rewrite indentation_ from scratch.  
  As it can be customized to perform different tasks, you can use the following switches too:
+
+<hr>
+ 
+ ### `-e` `--execute`
+ tells Pyndent to launch Python, passing it the processed Python code (from file or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0). By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used)
+ 
+`pyndent -e meta.pyn`  
+- will produce a Python source stream to \<stdout\>, then launch Python which will read its \<stdin\> to execute it  
+
+`pyndent -e meta.pyn -o source.py`  
+- will produce a **source.py** file, then launch **Python source.py** to execute it  
+
+`pyndent -e meta.pyn -o`  
+- the same, but will produce **meta**.py file, then launch **Python meta.py** to execute it  
 
 <hr>
 
@@ -164,20 +191,6 @@ example()
 - the same, even if _less intuitive_ but it works too  
 
 <hr>
- 
- ### `-e` `--execute`
- tells Pyndent to launch Python, passing it the processed Python code (from file or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0). By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used)
- 
-`pyndent -e meta.pyn`  
-- will produce a Python source stream to \<stdout\>, then launch Python which will read its \<stdin\> to execute it  
-
-`pyndent -e meta.pyn -o source.py`  
-- will produce a **source.py** file, then launch **Python source.py** to execute it  
-
-`pyndent -e meta.pyn -o`  
-- the same, but will produce **meta**.py file, then launch **Python meta.py** to execute it  
-
-<hr>
 
  ### `-x` `--execute-output`
  _combo_ switch implying `-e` and `-o`
@@ -187,6 +200,38 @@ example()
 
 `pyndent -x source.py meta.pyn`  
 - will be internally translated into `pyndent -e -o source.py meta.pyn`, resulting in **source.py** file written to disk, then Python interpreter is called to execute the created file  
+
+<hr>
+
+ ### `-f` `--force`
+ asks Pyndent to overwrite the output without asking, if a target file is found
+
+`pyndent -o source.py meta.pyn` or `pyndent meta.pyn -o source.py`  
+- will exit in **error** if \<source\>.py is present already
+`pyndent -o source.py meta.pyn -f` or `pyndent meta.pyn -f -o source.py`  
+`pyndent -x source.py meta.pyn -f` or `pyndent meta.pyn -f -x source.py`  
+- will overwrite \<source\>.py if found
+
+`pyndent meta.pyn -o`  
+- will exit in **error** if \<meta\>.py is present already
+`pyndent meta.pyn -o -f`  
+`pyndent -x meta.pyn -f`  
+- will overwrite \<meta\>.py if found
+
+`pyndent -r source.py meta.pyn -f`  
+- will overwrite \<source\>.py if found
+
+`pyndent meta.pyn -r -f`  
+- will overwrite \<meta\>.py if found
+
+`pyndent meta.pyn -o source.py`  
+- the same, with more "natural" syntax: input first, then output file as last  
+
+`pyndent -o meta.pyn`  
+- will read meta.pyn and write meta.py file: \<metasource\> filename is taken from meta.pyn input  
+
+`pyndent meta.pyn -o`  
+- the same, even if _less intuitive_ but it works too  
 
 <hr>
  
