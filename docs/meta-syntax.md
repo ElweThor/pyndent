@@ -219,7 +219,7 @@ example()
  asks Pyndent to overwrite the output without asking, if a target file is found
 
 `pyndent -o source.py meta.pyn` or `pyndent meta.pyn -o source.py`  
-- will exit in **error** if \<source\>.py is present already
+- will exit in **error** if \<source\>.py is present already  
 `pyndent -o source.py meta.pyn -f` or `pyndent meta.pyn -f -o source.py`  
 `pyndent -x source.py meta.pyn -f` or `pyndent meta.pyn -f -x source.py`  
 - will overwrite \<source\>.py if found
