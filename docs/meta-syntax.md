@@ -124,12 +124,17 @@ example()
 
  ## Syntax scheme
  
- **pyndent [option]... \<meta\>.pyn [\<source\>.py]  
+ **pyndent [option]... \<meta\>.pyn [\<source\>.py]**  
  for [options]: [-o][-e][-x][-s][-f][-i][-v]  
- pyndent \<source\>.py [option]... [\<meta\>.pyn]  
+ 
+ **pyndent \<source\>.py [option]... [\<meta\>.pyn]**  
  for [options]: [-r][-f][-i][-v]  
- pyndent [option]... 
- for [options]: [-h][-V]**  
+ 
+ **pyndent [option]...**  
+ for [options]: [-h][-V]  
+
+ **pyndent**  
+ is equivalent to **pyndent -h**
 
 <!-- pyndent \<meta\>.pyn [-o [-f] \<source\>.py] [-s][-v]  
 					  [-e]  
