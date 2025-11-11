@@ -183,8 +183,7 @@ example()
 
 <hr>
  
- ### `-e` `--execute`
-<a name="optdet_e"></a>
+ ### `-e` `--execute`<a name="optdet_e"></a>
  tells Pyndent to launch Python, passing it the processed Python code (from file or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0). By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used)
  
 `pyndent -e meta.pyn`  
