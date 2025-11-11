@@ -149,35 +149,6 @@ example()
  ### `-o` `--outfile`
  asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>. \<filename\> is optional: if not given, the meta-source one is used
 
-
-<style>
-  table#noborders td {
-    border: none;
-  }
-</style>
-
-<table id="noborders">
-	<tbody>
-		<tr>
-			<td>Dato A</td>
-			<td>Dato B</td>
-		</tr>
-	</tbody>
-</table>
-
-<table id="noborders">
-	<tbody>
-		<tr>
-			<td>`pyndent -o source.py meta.pyn`</td>
-			<td>will read meta.pyn and write source.py file, instead of just output the processed results to <stdout></td>
-		</tr>
-		<tr>
-			<td>`pyndent meta.pyn -o source.py`</td>
-			<td>the same, with more "natural" syntax: input first, then output file as last</td>
-		<tr>
-	</tbody>
-</table>
-
 `pyndent -o source.py meta.pyn`  
 &emsp; will read meta.pyn and write source.py file, instead of just output the processed results to \<stdout\>  
 `pyndent meta.pyn -o source.py`  
