@@ -162,7 +162,7 @@ example()
  
  | Simple | Extended | Description |
  |:-------|:---------|:------------|
- | -e | --exec<br>--execute | tells Pyndent to launch Python, to _execute_ the processed code (from \<file\>.py or \<stdout\>), if the pre-processing ended correctly (RC = 0).<br>By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used) |
+ | [-e](#optdet_e) | --exec<br>--execute | tells Pyndent to launch Python, to _execute_ the processed code (from \<file\>.py or \<stdout\>), if the pre-processing ended correctly (RC = 0).<br>By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used) |
  | -o | --outfile | asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>.<br>\<filename\> is optional: if not given, the meta-source one is used |
  | -x | --execout<br>--execute-output | _combo_ switch implying `-e` and `-o`: everything valid for `-e` and `-o` is valid for `-x` too<br>(`-x` and `-e`/`-o` are of course <ins>mutually exclusive</ins>) |
  | -f | --force | allows to _silently overwrite_ the output file if already present: if not given and Pyndent finds the output file when going to write it, an **error** is emitted and the original target file is <ins>not overwritten</ins><br>**Force** is an option to `-o`, `-x` and `-r` |
@@ -184,6 +184,7 @@ example()
 <hr>
  
  ### `-e` `--execute`
+<a name="optdet_e"></a>
  tells Pyndent to launch Python, passing it the processed Python code (from file or \<stdout\>) to process, if the pre-processing ended correctly (RC = 0). By default, the code is written to \<stdout\>, so it's then read from \<stdin\> by Python (unless `-o` or `-x` are used)
  
 `pyndent -e meta.pyn`  
