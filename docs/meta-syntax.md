@@ -172,7 +172,7 @@ blockquote {
 <table style="border: none;">
 <tr style="border: none;">
 <td style="border-left: none; padding-left: 10px;">`pyndent -o source.py meta.pyn`</td>
-<td style="border-left: none; padding-left: 10px;">will read meta.pyn and write source.py file, instead of just output the processed results to \<stdout\></td>
+<td style="border-left: none; padding-left: 10px;">will read meta.pyn and write source.py file, instead of just output the processed results to <stdout></td>
 </tr>
 <tr style="background: transparent;">
 <td style="border-left: none; padding-left: 10px;">`pyndent meta.pyn -o source.py`</td>
