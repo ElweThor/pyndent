@@ -236,7 +236,7 @@ _my_set = {
  
  Finally, it's worth noting that _a **.py** source code processed by Pyndent is **de-processable**_ (the relationship is biunivocal): thanks to the fact that the code block delimiters remain in the **.py** source code (unless wild purists strips them), having only the latter available will allow you to run Pyndent with the `-r` (or `--restore`) switch to obtain an _editable **.pyn** meta-source code_ that can then be pre-processed again into a **.py** source code (e.g. to change default delimiters with custom ones, if you need that). That could help, if you like to _publish your code_ on a web platform where you're _not sure tabs will be correctly written_ in the code.
  
- Part of this project is due to a (persistent) rant of me ('cause I was "_unable to use Python_": yes, _mandatory indentation_ which **reflects on syntax** gives me a rash, I'm sorry, Guido), and to an _analysis of the situation_ carried out together with "**Aria**" (DeepSeek's AI), and later verified together with "**Ru**" (OpenAI's ChatGPT AI): https://chatgpt.com/share/68d49cce-8724-8011-811d-547e3fed4de2
+ Part of this project is due to a (persistent) rant of me ('cause I was "_unable to use Python_": yes, _mandatory indentation_ which **reflects on syntax** gives me a rash, I'm sorry, Guido), and to an _analysis of the situation_ carried out together with "**Aria**" (DeepSeek's AI), and later verified together with "**Ru**" (OpenAI's ChatGPT AI): https://chatgpt.com/share/68d49cce-8724-8011-811d-547e3fed4de2 (ITalian chat)
 
  _20250924 Elwe Thor_
 
