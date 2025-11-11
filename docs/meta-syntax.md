@@ -148,20 +148,34 @@ example()
  ### `-o` `--outfile`
  asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>. \<filename\> is optional: if not given, the meta-source one is used
 
-<table style="border: none; border-collapse: collapse;">
-<tr style="background: transparent;">
-<td style="border: none; padding: 10px;">Dato A</td>
-<td style="border: none; padding: 10px;">Dato B</td>
+
+<--style>
+table {
+    border-collapse: collapse;
+}
+table, th, td {
+   border: none;
+}
+blockquote {
+    border-left: none;
+    padding-left: 10px;
+}
+</style-->
+
+<table style="border: none;">
+<tr style="border: none;">
+<td style="border-left: none; padding-left: 10px;">Dato A</td>
+<td style="border-left: none; padding-left: 10px;">Dato B</td>
 </tr>
 </table>
-<table style="border: none; border-collapse: collapse;">
-<tr style="background: transparent;">
-<td style="border: none; padding: 10px;">`pyndent -o source.py meta.pyn`</td>
-<td style="border: none; padding: 10px;">will read meta.pyn and write source.py file, instead of just output the processed results to \<stdout\></td>
+<table style="border: none;">
+<tr style="border: none;">
+<td style="border-left: none; padding-left: 10px;">`pyndent -o source.py meta.pyn`</td>
+<td style="border-left: none; padding-left: 10px;">will read meta.pyn and write source.py file, instead of just output the processed results to \<stdout\></td>
 </tr>
 <tr style="background: transparent;">
-<td style="border: none; padding: 10px;">`pyndent meta.pyn -o source.py`</td>
-<td style="border: none; padding: 10px;">the same, with more "natural" syntax: input first, then output file as last</td>
+<td style="border-left: none; padding-left: 10px;">`pyndent meta.pyn -o source.py`</td>
+<td style="border-left: none; padding-left: 10px;">the same, with more "natural" syntax: input first, then output file as last</td>
 </tr>
 </table>
 
