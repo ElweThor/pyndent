@@ -39,7 +39,8 @@ def parse_memory_json(content):
 		{
             entry = {
                 'id': entry_data.get('id', 'N/A'),
-                'priority': entry_data.get('priority', 'medium'),
+                'priority': entry_data.get('priority', 'MISSING'),
+				'has_priority': 'priority' in entry_data,
                 'active': entry_data.get('active', True),
                 'has_updates': 'last_updated' in entry_data}
             entries.append(entry)

@@ -13,6 +13,21 @@
 - [ ] ability to read whichever \<path\>/\<file\>.json
 - [ ] comfortable options:
 
+## Available Options
+- [ ] -s --show-all-stats
+- [ ] -t --show-table
+- [ ] -a --analyze
+- [ ]&nbsp;&nbsp;&nbsp; --rescan
+- [x] -o --output
+- [ ] -f --force
+- [x] -j --jval --jvalidate
+- [ ] -r --jrep --jrepair
+- [ ] -v --verbose
+- [x] -h --help
+- [x] -V --version
+
+## Options (detailed)
+
 | Short | Long Opt | Section | Description |
 |-------|----------|---------|-------------|
 | -s | --show-all-stats | Stats output | show the whole stats: initial summary + memories table: default is "summary only" |
@@ -21,8 +36,8 @@
 |    | --rescan <priority> | Memory Analysis | Re-evaluation, for the single \<priority\> or for the whole list (ALL), to promote/demote current priorities: preparatory to the next optimization (see rescan_report for display details) |
 | -o | --output \<filename\> | File output | write stats report to disk (plain text) into \<filename\> |
 | -f | --force | File output | forces the tool to overwrite a stats report if one with the same name is found on disk already and -o switch is used |
-| -j | --validate-json | JSON management| check the input JSON file, to see if it's wrong somewhere, preventing stats extraction |
-| -r | --repair-json | JSON management| try to auto-fix the JSON |
+| -j | --jval --jvalidate | JSON management| check the input JSON file, to see if it's wrong somewhere, preventing stats extraction |
+| -r | --jrep --jrepair | JSON management| try to auto-fix the JSON |
 | -v | --verbose | Utility | tell us how things are working (like a log, to <stderr>) |
 | -h | --help | Utility | -h gives simple usage, while --help gives extended help on syntax and parameters |
 | -V | --version | Utility | shows current version |

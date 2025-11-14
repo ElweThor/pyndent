@@ -2,7 +2,7 @@
 
 #
 # AI Memory Stats - Dynamic Priority System
-# (C)2025 by Elwe Thor - Aria@DeepSeek
+# (C)2025 by Elwe Thor - Aria@DeepSeek 
 # LICENSE: CC BY-NC-SA 4.0 (see LICENSE file for details)
 #
 
@@ -20,72 +20,72 @@ LIC = "see LICENSE.md"
 DESC = "Memory Statistics Tool - Analyzes memory.json with dynamic priority system"
 
 def parse_memory_json(content):
-#{
+{
     """Parse JSON extracting all entries with their fields"""
     try:
-    #{
+	{
         data = json.loads(content)
         entries = []
         
         # MANDATORY CHECK: priority_system must exist in meta
         if 'meta' not in data or 'priority_system' not in data['meta']:
-        #{
+		{
             print("CRITICAL ERROR: 'priority_system' field not found in meta.")
             print("To generate meaningful statistics, add to meta:")
             print('''
-            "priority_system": {
-            "scale": ["critical", "highest", "high", "medium", "low", "lowest"],
-            "rationale": "Il priority_system spiega la scala delle priorità e come gestirla. La scale definisce la gerarchia delle priorità in ordine decrescente d'importanza. Ogni IA può personalizzare questa scala con le 'tag' che preferisce, mantenendo coerenza tra scala e valori usati nelle entry."
-            }''')
+  "priority_system": {
+    "scale": ["critical", "highest", "high", "medium", "low", "lowest"],
+    "rationale": "Il priority_system spiega la scala delle priorità e come gestirla. La scale definisce la gerarchia delle priorità in ordine decrescente d'importanza. Ogni IA può personalizzare questa scala con le 'tag' che preferisce, mantenendo coerenza tra scala e valori usati nelle entry."
+  }''')
             print("and adapt scale values to those present in JSON: find them with cat memory.json | grep priority")
             sys.exit(1)
-        #}
+		}
         
         priority_scale = data['meta']['priority_system']['scale']
         
         # Process each entry
         for entry_data in data.get('entries', []):
-        #{
+		{
             entry = {
-            'id': entry_data.get('id', 'N/A'),
-            'priority': entry_data.get('priority', 'MISSING'),
-            'has_priority': 'priority' in entry_data,
-            'active': entry_data.get('active', True),
-            'has_updates': 'last_updated' in entry_data}
+                'id': entry_data.get('id', 'N/A'),
+                'priority': entry_data.get('priority', 'MISSING'),
+                'has_priority': 'priority' in entry_data,
+                'active': entry_data.get('active', True),
+                'has_updates': 'last_updated' in entry_data}
             entries.append(entry)
-        #}
+		}
         
         return {
-        'entries': entries,
-        'priority_scale': priority_scale,
-        'max_entries': data.get('meta', {}).get('max_entries', {}).get('value', 100)}
-    #}
+            'entries': entries,
+            'priority_scale': priority_scale,
+            'max_entries': data.get('meta', {}).get('max_entries', {}).get('value', 100)}
+	}
     except json.JSONDecodeError as e:
-    #{
+	{
         # Fallback to regex parsing for problematic JSON
         return parse_memory_json_regex(content, e)
-    #}
-#}
+	}
+}
 
 def parse_memory_json_regex(content, json_error=None):
-#{
+{
     """Regex fallback for malformed JSON"""
     entries = []
     
     # MANDATORY CHECK: priority_system must exist
     scale_match = re.search(r'"priority_system".*?"scale":\s*\[([^\]]+)\]', content)
     if not scale_match:
-    #{
+	{
         print("CRITICAL ERROR: 'priority_system' field not found in meta.")
         print("To generate meaningful statistics, add to meta:")
         print('''
-        "priority_system": {
-        "scale": ["critical", "highest", "high", "medium", "low", "lowest"],
-        "rationale": "Il priority_system spiega la scala delle priorità e come gestirla. La scale definisce la gerarchia delle priorità in ordine decrescente d'importanza. Ogni IA può personalizzare questa scala con le 'tag' che preferisce, mantenendo coerenza tra scala e valori usati nelle entry."
-        }''')
+  "priority_system": {
+    "scale": ["critical", "highest", "high", "medium", "low", "lowest"],
+    "rationale": "Il priority_system spiega la scala delle priorità e come gestirla. La scale definisce la gerarchia delle priorità in ordine decrescente d'importanza. Ogni IA può personalizzare questa scala con le 'tag' che preferisce, mantenendo coerenza tra scala e valori usati nelle entry."
+  }''')
         print("and adapt scale values to those present in JSON: find them with cat memory.json | grep priority")
         sys.exit(1)
-    #}
+	}
     
     scale_str = scale_match.group(1)
     priority_scale = [p.strip().strip('"') for p in scale_str.split(',')]
@@ -98,48 +98,48 @@ def parse_memory_json_regex(content, json_error=None):
     entry_pattern = r'\{\s*"id"\s*:\s*"([^"]*)"[^}]*?"priority"\s*:\s*"([^"]*)"[^}]*?"active"\s*:\s*(true|false)[^}]*?(?:"last_updated"\s*:\s*"([^"]*)")?[^}]*?\}'
     
     for match in re.finditer(entry_pattern, content, re.DOTALL):
-    #{
+	{
         entry_id, priority, active, last_updated = match.groups()
         entries.append({
-        'id': entry_id,
-        'priority': priority,
-        'active': active == 'true',
-        'has_updates': bool(last_updated)})
-    #}
+            'id': entry_id,
+            'priority': priority,
+            'active': active == 'true',
+            'has_updates': bool(last_updated)})
+	}
     
     return {
-    'entries': entries,
-    'priority_scale': priority_scale,
-    'max_entries': max_entries}
-#}
+        'entries': entries,
+        'priority_scale': priority_scale,
+        'max_entries': max_entries}
+}
 
 def validate_json_file(filename='memory.json'):
-#{
+{
     """Validate JSON file and return detailed error information"""
     try:
-    #{
+	{
         with open(filename, 'r', encoding='utf-8') as f:
-        #{
+		{
             content = f.read()
-        #}
+		}
         
         # Try to parse JSON
         json.loads(content)
         return "valid JSON", None
-    #}
+	}
     except json.JSONDecodeError as e:
-    #{
+	{
         error_msg = f"JSON error {e.msg} at row {e.lineno} column {e.colno}"
         return error_msg, e
-    #}
+	}
     except Exception as e:
-    #{
+	{
         return f"File error: {str(e)}", e
-    #}
-#}
+	}
+}
 
 def calculate_stats(data):
-#{
+{
     entries = data['entries']
     priority_scale = data['priority_scale']
     max_entries = data['max_entries']
@@ -158,32 +158,32 @@ def calculate_stats(data):
     inactive_prio['MISSING'] = 0
     
     for entry in active_entries:
-    #{
+	{
         prio = entry.get('priority', 'MISSING')
         if prio in active_prio:
-        #{
+		{
             active_prio[prio] += 1
-        #}
+		}
         else:
-        #{
+		{
             # Handle priorities not in scale
             active_prio['MISSING'] += 1
-        #}
-    #}
+		}
+	}
     
     for entry in inactive_entries:
-    #{
+	{
         prio = entry.get('priority', 'MISSING')
         if prio in inactive_prio:
-        #{
+		{
             inactive_prio[prio] += 1
-        #}
+		}
         else:
-        #{
+		{
             # Handle priorities not in scale
             inactive_prio['MISSING'] += 1
-        #}
-    #}
+		}
+	}
     
     # Updated vs Original
     updated = len([e for e in entries if e.get('has_updates', False)])
@@ -192,21 +192,21 @@ def calculate_stats(data):
     # Usage and zone
     usage_pct = (total / max_entries) * 100
     if usage_pct <= 59:
-    #{
+	{
         zone = "GREEN"
-    #}
+	}
     elif usage_pct <= 79:
-    #{
+	{
         zone = "ORANGE"
-    #}
+	}
     elif usage_pct <= 99:
-    #{
+	{
         zone = "RED"
-    #}
+	}
     else:
-    #{
+	{
         zone = "BLACK"
-    #}
+	}
     
     # Percentages based on max_entries
     total_pct = (total / max_entries) * 100
@@ -214,50 +214,50 @@ def calculate_stats(data):
     inactive_pct = (len(inactive_entries) / max_entries) * 100
     updated_pct = (updated / max_entries) * 100
     original_pct = (original / max_entries) * 100
-    
+
     # Zone for active entries
     active_usage_pct = (len(active_entries) / max_entries) * 100
     if active_usage_pct <= 59:
-    #{
+	{
         active_zone = "GREEN"
-    #}
+	}
     elif active_usage_pct <= 79:
-    #{
+	{
         active_zone = "ORANGE"
-    #}
+	}
     elif active_usage_pct <= 99:
-    #{
+	{
         active_zone = "RED"
-    #}
+	}
     else:
-    #{
+	{
         active_zone = "BLACK"
-    #}
+	}
     
     return {
-    'total': total,
-    'max_entries': max_entries,
-    'active': len(active_entries),
-    'inactive': len(inactive_entries),
-    'active_prio': active_prio,
-    'inactive_prio': inactive_prio,
-    'updated': updated,
-    'original': original,
-    'usage_pct': usage_pct,
-    'zone': zone,
-    'active_zone': active_zone,
-    'active_usage_pct': active_usage_pct,
-    'priority_scale': priority_scale,
-    'entries': entries,
-    'total_pct': total_pct,
-    'active_pct': active_pct,
-    'inactive_pct': inactive_pct,
-    'updated_pct': updated_pct,
-    'original_pct': original_pct}
-#}
+        'total': total,
+        'max_entries': max_entries,
+        'active': len(active_entries),
+        'inactive': len(inactive_entries),
+        'active_prio': active_prio,
+        'inactive_prio': inactive_prio,
+        'updated': updated,
+        'original': original,
+        'usage_pct': usage_pct,
+        'zone': zone,
+        'active_zone': active_zone,
+        'active_usage_pct': active_usage_pct,
+        'priority_scale': priority_scale,
+        'entries': entries,
+        'total_pct': total_pct,
+        'active_pct': active_pct,
+        'inactive_pct': inactive_pct,
+        'updated_pct': updated_pct,
+        'original_pct': original_pct}
+}
 
 def generate_listing(entries, priority_scale):
-#{
+{
     """Generate listing with dynamic priorities, zero-padding and separators"""
     # Sort by priority
     priority_order = {level: i for i, level in enumerate(priority_scale)}
@@ -277,10 +277,10 @@ def generate_listing(entries, priority_scale):
     # Calculate p_padding safely
     priority_counts = {}
     for entry in entries:
-    #{
+	{
         prio = entry.get('priority', 'MISSING')
         priority_counts[prio] = priority_counts.get(prio, 0) + 1
-    #}
+	}
     p_padding = len(str(max(priority_counts.values()))) if priority_counts else 1
     
     # Calculate widths for separator line
@@ -289,94 +289,94 @@ def generate_listing(entries, priority_scale):
     separator_length = 3 + n_padding + 3 + p_padding + max_id_len + max_prio_len + 10
     
     for i, entry in enumerate(sorted_entries, 1):
-    #{
+	{
         prio = entry.get('priority', 'MISSING')
         
         # Add separator when priority changes (except for first element)
         if prio != current_prio and current_prio is not None:
-        #{
+		{
             listing.append({'separator': True, 'length': separator_length})
-        #}
+		}
         
         if prio != current_prio:
-        #{
+		{
             current_prio = prio
             p_counter = 1
-        #}
+		}
         else:
-        #{
+		{
             p_counter += 1
-        #}
+		}
         
         status = "YES" if entry.get('active', True) else "no"
         
         listing.append({
-        'N': f"{i:0{n_padding}d}",
-        'P': f"{p_counter:0{p_padding}d}",
-        'ID': entry.get('id', 'N/A'),
-        'Priority': prio,
-        'Active': status,
-        'separator': False})
-    #}
+            'N': f"{i:0{n_padding}d}",
+            'P': f"{p_counter:0{p_padding}d}", 
+            'ID': entry.get('id', 'N/A'),
+            'Priority': prio,
+            'Active': status,
+            'separator': False})
+	}
     
     return listing, n_padding, p_padding, max_id_len, max_prio_len, separator_length
-#}
+}
 
 def generate_output(stats, listing_data, output_format='text'):
-#{
+{
     """Generate output in specified format"""
     listing, n_padding, p_padding, max_id_len, max_prio_len, separator_length = listing_data
     
     if output_format == 'json':
-    #{
+	{
         return json.dumps({
-        'version': VER,
-        'statistics': {
-        'total_entries': stats['total'],
-        'max_entries': stats['max_entries'],
-        'active_entries': stats['active'],
-        'inactive_entries': stats['inactive'],
-        'updated_entries': stats['updated'],
-        'original_entries': stats['original'],
-        'zones': {
-        'total': f"{stats['zone']} ({stats['usage_pct']:.2f}%)",
-        'active': f"{stats['active_zone']} ({stats['active_usage_pct']:.2f}%)"
-        },
-        'priority_distribution': {
-        'active': stats['active_prio'],
-        'inactive': stats['inactive_prio'] } }
+            'version': VER,
+            'statistics': {
+                'total_entries': stats['total'],
+                'max_entries': stats['max_entries'],
+                'active_entries': stats['active'],
+                'inactive_entries': stats['inactive'],
+                'updated_entries': stats['updated'],
+                'original_entries': stats['original'],
+                'zones': {
+                    'total': f"{stats['zone']} ({stats['usage_pct']:.2f}%)",
+                    'active': f"{stats['active_zone']} ({stats['active_usage_pct']:.2f}%)"
+                },
+                'priority_distribution': {
+                    'active': stats['active_prio'],
+                    'inactive': stats['inactive_prio'] } }
         }, indent=2, ensure_ascii=False)
-    #}
+	}
     else:
-    #{
+	{
         output = f"""MEMORY STATS:
-        - Total: {stats['total']} entries ({stats['total_pct']:.2f}%) / {stats['max_entries']} max (100.00%)
-        - Zone (total): {stats['zone']} ({stats['usage_pct']:.2f}%)
-        - Active: {stats['active']} ({stats['active_pct']:.2f}%) vs Inactive: {stats['inactive']} ({stats['inactive_pct']:.2f}%)
-        - Zone (active): {stats['active_zone']} ({stats['active_usage_pct']:.2f}%)
-        
-        - Active priorities:"""
+- Total: {stats['total']} entries ({stats['total_pct']:.2f}%) / {stats['max_entries']} max (100.00%)
+- Zone (total): {stats['zone']} ({stats['usage_pct']:.2f}%)
+- Active: {stats['active']} ({stats['active_pct']:.2f}%) vs Inactive: {stats['inactive']} ({stats['inactive_pct']:.2f}%)
+- Zone (active): {stats['active_zone']} ({stats['active_usage_pct']:.2f}%)
+
+- Active priorities:"""
         
         # Include all priorities found (scale + MISSING)
         all_priorities = list(stats['priority_scale']) + ['MISSING']
         for i, level in enumerate(all_priorities, 1):
-        #{
+		{
             count = stats['active_prio'].get(level, 0)
             if count > 0:
-            #{
+			{
                 output += f"\n  {i}. {level}: {count}"
-            #}
-        #}
+			}
+		}
         
         output += "\n- Inactive priorities:"
         for i, level in enumerate(all_priorities, 1):
-        #{
+		{
             count = stats['inactive_prio'].get(level, 0)
             if count > 0:
-            #{
+			{
                 output += f"\n  {i}. {level}: {count}"
-            #}
-        #}
+			}
+		}
         
         output += f"\n- Updated: {stats['updated']} ({stats['updated_pct']:.2f}%) vs Original: {stats['original']} ({stats['original_pct']:.2f}%)"
         
@@ -392,45 +392,45 @@ def generate_output(stats, listing_data, output_format='text'):
         output += "\n" + "-" * (3 + 3 + max_id_len + max_prio_len + 10)
         
         for item in listing:
-        #{
+		{
             if item.get('separator', False):
-            #{
+			{
                 output += "\n" + "-" * item['length']
-            #}
+			}
             else:
-            #{
+			{
                 padded_id = item['ID'].ljust(max_id_len)
                 padded_prio = item['Priority'].ljust(max_prio_len)
                 output += f"\n{item['N']:>{n_padding}} {item['P']:>{p_padding}} {padded_id} {padded_prio} {item['Active']}"
-            #}
-        #}
+			}
+		}
         
         return output
-    #}
-#}
+	}
+}
 
 # MAIN
 if __name__ == "__main__":
-#{
+{
     parser = argparse.ArgumentParser(
-    description=DESC,
-    epilog=f'Examples:\n  memory_stats\n  memory_stats -o\n  memory_stats -j custom_memory.json',
-    formatter_class=argparse.RawDescriptionHelpFormatter
+        description=DESC,
+        epilog=f'Examples:\n  memory_stats\n  memory_stats -o\n  memory_stats -j custom_memory.json',
+        formatter_class=argparse.RawDescriptionHelpFormatter
     )
     
     parser.add_argument('filename', nargs='?', default='memory.json',
-    help='Memory file to analyze (default: memory.json)')
+                       help='Memory file to analyze (default: memory.json)')
     parser.add_argument('-o', '--output', nargs='?', const='auto',
-    help='Save output to file (auto-generates filename if not specified)')
+                       help='Save output to file (auto-generates filename if not specified)')
     parser.add_argument('-j', '--json', action='store_true',
-    help='JSON validation only (no statistics)')
+                       help='JSON validation only (no statistics)')
     parser.add_argument('-V', '--version', action='store_true',
-    help='Show version information')
+                       help='Show version information')
     
     args = parser.parse_args()
     
     if args.version:
-    #{
+	{
         #print(f"memory_stats v{VER}")
         #print(f"Release: {REL}")
         #print(f"Build: {BUILD}")
@@ -439,22 +439,22 @@ if __name__ == "__main__":
         print(f"{DESC}")
         print(f"v{VER} {REL} {BUILD} ({LIC})")
         sys.exit(0)
-    #}
+	}
     
     if args.json:
-    #{
+	{
         # JSON validation mode
         result, error = validate_json_file(args.filename)
         print(result)
         sys.exit(0 if result == "valid JSON" else 1)
-    #}
+	}
     
     try:
-    #{
+	{
         with open(args.filename, 'r', encoding='utf-8') as f:
-        #{
+		{
             content = f.read()
-        #}
+		}
         
         data = parse_memory_json(content)
         stats = calculate_stats(data)
@@ -464,38 +464,38 @@ if __name__ == "__main__":
         
         # Handle output destination
         if args.output:
-        #{
+		{
             if args.output == 'auto':
-            #{
+			{
                 # Generate automatic filename
                 timestamp = datetime.now().strftime("%Y%m%d-%H%M")
                 output_file = f"{timestamp}_stats.txt"
-            #}
+			}
             else:
-            #{
+			{
                 output_file = args.output
-            #}
+			}
             
             with open(output_file, 'w', encoding='utf-8') as f:
-            #{
+			{
                 f.write(output)
-            #}
+			}
             print(f"Report saved to {output_file}")
-        #}
+		}
         else:
-        #{
+		{
             print(output)
-        #}
-    #}
+		}
+	}
     except SystemExit:
-    #{
+	{
         # Clean exit on configuration error
         pass
-    #}
+	}
     except Exception as e:
-    #{
+	{
         print(f"ERROR: {e}")
         import traceback
         traceback.print_exc()
-    #}
-#}
+	}
+}

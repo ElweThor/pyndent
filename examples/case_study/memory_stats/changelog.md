@@ -1,3 +1,9 @@
+## 2025-11-14 - v0.2.4.12 (Beta)
+.12 `+` **ET/AR**: -o/--output option: output to file, with automatic filename (format: yyyymmdd-hhmm_stats.txt) if not explicitly given
+.11 `+` **ET/AR**: -j/-json option: JSON validation
+.10 `+` **ET/AR**: -h/--help option: help
+.9 `+` **ET/AR**: -V/--version option: versioning
+
 ## 2025-11-07 - v0.2.3.8 (Beta)
 .8 `!` **ET/AR**: parser fix: memories without priority won't receive "medium" default more: default is now "missing", to immediately see them in the report  
 
