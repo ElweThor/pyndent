@@ -18,6 +18,7 @@ That was the point where we thought: "_why in the world **not** using Pyndent, t
 
 In less than a few minutes, starting from an impossible-to-execute memory_stats-0.1.1.1_20251105.py, I added Pyndent's **code-blocks delimiters** (still default ones: the C-like `{` and `}`) obtaining a Pyndent meta-source: memory_stats-0.1.1.1_20251105.pyn  
 Then, it was just a matter of _passing it into Pyndent_ (`pyndent memory_stats-0.1.1.1_20251105.pyn -o memory_stats.py`) to obtain a perfectly executable Python code: that saved me <ins>hours of headaches</ins> and, even more, ensured our code was "<ins>logically correct</ins>" too: Pyndent re-indent it, so that "logic blocks" execute _as they should_, not with the original (_possibly wrong_) indentation: that's a **GREAT value**, for us: to **focus on the logic**, leaving all those fake “tabbing problems” behind, being sure such "problems" will be automatically handled by Pyndent.  
+(which, by the way, it's _**exactly the same**_ many of you do too, by using an IDE so, please, don't blame **me** if I prefer my little Pyndent (as I'm not using an IDE) uh)
 
 ```bash
 pyndent memory_stats-0.1.1.1_20251105.pyn -o memory_stats.py
