@@ -16,6 +16,8 @@ Pyndent proves that powerful tools don't need thousands of lines of code.
 | Beta2 | 0.2.4.15 | 104 | 5.431 B (8 KB) | 5.815 B (8 KB) | delims management fix,  -s/--strip |
 | Beta2 | 0.2.5.16 | 104 | 6.529 B (8 KB) | 7.064 B (8 KB) | bugfix release |
 
+_(note: the reason why, most of the times .pyn meta-source disk usage is smaller than the processed .py one is due to the fact it uses `TABs`, while the final .py code uses `spaces`: by default, 1 `TAB` = 4 `spaces`)_
+
 ### Why It Matters:
 
 - **Readable**: Every developer can understand the entire codebase in minutes
