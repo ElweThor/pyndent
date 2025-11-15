@@ -1,7 +1,10 @@
 # Changelog
 
-[![Beta](https://img.shields.io/badge/version-0.2.5.16--beta-yellow)]()
+[![Beta](https://img.shields.io/badge/version-0.2.6.17--beta-yellow)]()
 [![Status](https://img.shields.io/badge/status-beta-yellow)]()
+
+## 2025-11-15 - v0.2.6.17 (Beta 2)
+- .17 `*` **ET**: return codes standardized: OK = 0, warning = 1, error > 1 (default 2)
 
 ## 2025-11-09 - v0.2.5.16 (Beta 2)
 - .16 `!` **ET**: fixed delimiters and content parsing: we was correctly working at delimiters, but not rebuilding normal code indentation as well (added some comments in the code too)
