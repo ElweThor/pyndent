@@ -92,7 +92,7 @@ print()
 
 ## 📖 Full Documentation
 
-For detailed examples, [technical deep-dive](docs/meta-syntax.md), and [philosophical rationale](docs/PYNLOSOHPY.md), see the [docs/](docs/) folder.
+For detailed examples, [technical deep-dive](docs/meta-syntax.md), and [philosophical rationale](docs/PYNLOSOPHY.md), see the [docs/](docs/) folder.
 
 ## 🎯 Use Cases
 
