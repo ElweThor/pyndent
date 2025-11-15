@@ -9,7 +9,7 @@ Pyndent proves that powerful tools don't need thousands of lines of code.
 | Stage | Version | Code lines | .pyn Disk space | .py Disk space (stripped) | Features Added |
 |:------|--------:|-----------:|----------------:|--------------------------:|:---------------|
 | Alpha | 0.1.0.0 | 40 | | 1.815 B (4 KB) | Core preprocessing, default delimiters handling |
-| Beta1 | 0.2.0.4 | 75 | | 3.748 B (4 KB) | CLI with argparse, auto-naming, error handling, -h, -V, -o |
+| Beta1 | 0.2.0.4 | 75 | | 3.748 B (4 KB) | auto-naming, error handling, -h, -V, -o |
 | Beta1 | 0.2.1.5 | 84 | 4.339 B (8 KB) | 4.213 B (8 KB)  | -e: process-and-execute |
 | Beta1 | 0.2.2.10 | 83 | 4.234 B (8 KB) | 4.501 B (8 KB) | -x: -e/-o combo |
 | Beta1 | 0.2.3.12 | 98 | 5.953 B (8 KB) | 5.431 B (8 KB) | display fix,  -h/--help |
