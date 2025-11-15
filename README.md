@@ -99,7 +99,7 @@ To be honest: even Pyndent can't... but it gives you a way to <ins>explicitly de
 The simplest thing we can tell about it is: **it works**. 🦾  
 
 Pyndent isn't an editor nor an IDE: it relies on your own ones: using a 3.5 GB full fledged suite or just Nano (or Notepad++ like I do) is totally up to you.  
-It only adds less than 8 KB on your disk space usage (I mean the raw `pyndent.py` tool, which is the only object one you really need), look at these [stats](docs/STATs.md).
+It only adds less than 8 KB on your disk space usage (I mean the raw `pyndent.py` tool, which is the only object one you really need), look at these [stats](docs/STATS.md).
 
 <br>  
 
