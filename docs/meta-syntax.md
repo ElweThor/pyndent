@@ -160,7 +160,7 @@ example()
 
 <br>
 
- ### Options are<a name="options"></a>
+ ### Options: released and planned<a name="options"></a>
  
  | Simple | Extended | Description |
  |:-------|:---------|:------------|
