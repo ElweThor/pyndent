@@ -168,12 +168,12 @@ example()
  | [-o](#optdet_o) | [--outfile](#optdet_o) | asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>.<br>\<filename\> is optional: if not given, the meta-source one is used |
  | [-x](#optdet_x) | [--execout<br>--execute-output](#optdet_x) | _combo_ switch implying `-e` and `-o`: everything valid for `-e` and `-o` is valid for `-x` too<br>(`-x` and `-e`/`-o` are of course <ins>mutually exclusive</ins>) |
  | [-f](#optdet_f) | [--force](#optdet_f) | allows to _silently overwrite_ the output file if already present: if not given and Pyndent finds the output file when going to write it, an **error** is emitted and the original target file is <ins>not overwritten</ins><br>**Force** is an option to `-o`, `-x` and `-r` |
- | [-q](#optdet_q) | [--quiet](#optdet_q) | Suppress any output to <stdout> **only** (file output remains, if requested) |
+ | [-q](#optdet_q) | [--quiet](#optdet_q) | Suppress any output to \<stdout\> **only** (file output remains, if requested) |
  | [-i](#optdet_i) | [--interactive](#optdet_i) | _prompts_ to replace an output target file, if found, instead of exit in error |
  | [-s](#optdet_s) | [--strip<br>--strip-delims](#optdet_s) | _**strips** the delimiters away_ from the final Python code (AKA avoid to write them out at all), as well as every Pyndent element (like `#delim` or hashbang swapping), producing <ins>**100% pure Python source**</ins> without any Pyndent meta-source element into. |
  | [-r](#optdet_r) | [--restore](#optdet_r) | asks Pyndent to _restore_ (de-process) a meta-source from a Python .py source (mandatory), restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones<br>having Pyndent elements commented in the source .py file is not mandatory <ins>if the source correctly executes</ins> in Python<br>(a .pyn file will be written, if using `-o` switch)<br>(disables `-e` and `-x` option) |
  | [-v](#optdet_v) | [--verbose](#optdet_v) | will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where `-v`/`--verbose` = **INFO**, `-vv` = **DEBUG**, `-vvv` = **TRACE**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given). |
- | | [--vl<br>--verblog<br>--verbose-logfile](#optdet_vl) | Write a <logfile>.log for verbose option (use without value for auto-name, default output to <stderr> if this option is not given) |
+ | | [--vl<br>--verblog<br>--verbose-logfile](#optdet_vl) | Write a <logfile>.log for verbose option (use without value for auto-name, default output to \<stderr\> if this option is not given) |
  | | [--vp<br>--verbpfx<br>--verbose-prefix](#optdet_vp) 0..3 | Timestamp prefix for verbose logfile: 0=no prefix (overwrite any existing logfile), 1=YYYYMMDD, 2=YYYYMMDD-HHMM, 3=YYYYMMDD-HHMMSS |
  | [-h](#optdet_h) | [--help](#optdet_h) | shows simpler usage (`-h`) or full help (`--help`) |
  | [-V](#optdet_V) | [--version](#optdet_V) | shows the current Pyndent version |
@@ -268,10 +268,10 @@ example()
 - the same, even if _less intuitive_ but it works too  
 
 <hr> 
- | [-q](#optdet_q) | [--quiet](#optdet_q) | Suppress any output to <stdout> **only** (file output remains, if requested) |
+ | [-q](#optdet_q) | [--quiet](#optdet_q) | Suppress any output to \<stdout\> **only** (file output remains, if requested) |
 
  ### -q --quiet<a name="optdet_q"></a>
- Suppress any output to <stdout> **only** (file output remains, if requested)
+ Suppress any output to \<stdout\> **only** (file output remains, if requested)
 
 `pyndent -q meta.pyn`  
 - will process meta.pyn file without any processing output to \<stdout\> (useful for scripts which needs the RC only or to **validate** the meta-source). If any error will arise, it will be shown, tho, and RC will be set accordingly.
@@ -325,7 +325,7 @@ example()
 <hr>
 
  ### --vl --verblog --verbose-logfile<a name="optdet_vl"></a>
- Write a <logfile>.log for verbose option (use without value for auto-name, default output to <stderr> if this option is not given)
+ Write a <logfile>.log for verbose option (use without value for auto-name, default output to \<stderr\> if this option is not given)
 
 `pyndent meta.pyn -v --vl`  
 - will read meta.pyn and write meta.log file with INFO level informations, the processed output will be sent to \<stdout\>  
