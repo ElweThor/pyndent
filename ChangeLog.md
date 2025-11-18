@@ -1,7 +1,18 @@
 # Changelog
 
-[![Beta](https://img.shields.io/badge/version-0.2.6.17--beta-yellow)]()
+[![Beta](https://img.shields.io/badge/version-0.2.8.24--beta-yellow)]()
 [![Status](https://img.shields.io/badge/status-beta-yellow)]()
+
+## 2025-11-17 - v0.2.8.24 (Beta 2)
+- .24 `+` **ET/AR**: -q/--quiet suppress any <stdout> output (but not file output)
+- .23 `+` **ET/AR**: --vp/--verbose-prefix [<prefix-level>] to have verbose logfile prefixed by date/time, depending on prefix-level (0..3): 0 = none, 1 = date, 2 = date/time short, 3 = date/time full
+- .22 `+` **ET/AR**: --vl/--verbose-logfile [<filename>.log] to log verbose informations on file (with logfile name auto-generation)
+
+## 2025-11-15 - v0.2.7.21 (Beta 2)
+- .21 `+` **ET**: added TRACE level messages to main procedures and functions
+- .20 `+` **ET**: added DEBUG level messages to main procedures
+- .19 `+` **ET**: added INFO level messages to main procedures
+- .18 `+` **ET/AR**: verbosity: INFO, DEBUG, TRACE levels
 
 ## 2025-11-15 - v0.2.6.17 (Beta 2)
 - .17 `*` **ET**: return codes standardized: OK = 0, warning = 1, error > 1 (default 2)

@@ -1,0 +1,292 @@
+#!/usr/bin/env python
+#
+# PYthon INdent: a reindent pre-processor tool for Python 
+# (C)2025 by Elwe Thor - Aria@DeepSeek 
+# LICENSE: CC BY-NC-SA 4.0 (see LICENSE file for details)
+#
+"""
+Pyndent - Python preprocessor with code-block delimiters
+"""
+
+import sys
+import os
+import argparse
+import subprocess
+from datetime import datetime
+
+# Version info
+VER = "0.2.7.21"
+REL = "Beta 2"
+BUILD = "20251115"
+LIC = "see LICENSE.md"
+DESC = "Pyndent - Python preprocessor with code-block delimiters"
+
+# Standard RCs
+RC_OK = 0											# correct exit
+RC_WARN = 1											# non-blocking error: execution continue
+RC_FATAL = 2										# fatal error: program stops
+
+# Logging constants
+INFO = 1											# 1st level: just what the tool does
+DEBUG = 2											# 2nd level: detail about how the tool works
+TRACE = 3											# 3rd level: details on involved variables, states and such
+M_INFO = "[I]"										# -v
+M_DEBUG = "[D]" 									# -vv
+M_TRACE = "[T]"										# -vvv
+LO1 = "->"											# LogObject #1 (def.) {
+LO2 = "<-"											# LogObject #2 (def.) }
+LO3 = "C "											# LogObject #3 whatever else
+
+def log_message(level, message, args):
+{
+    if args.verbose >= level:
+    {
+        prefixes = [M_INFO, M_DEBUG, M_TRACE]
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S.%f")
+        print(f"{timestamp} {prefixes[level-1]} {message}", file=sys.stderr)
+    }
+}
+
+
+def pyndent_process(source_lines, args):
+{
+	output_lines = []
+	indent_level = 0
+	opn_delim = '{'		# code-block open delimiter (default)
+	cls_delim = '}'		# code-block close delimiter (default)
+
+	log_message(INFO, f"Processing in to out", args)
+	log_message(DEBUG, f"Delimiters: {opn_delim} {cls_delim}", args)
+	log_message(TRACE, f"pyndent_process: START", args)
+
+	for line in source_lines:
+	{
+		# convert any tab in spaces, to avoid mixing spaces/tabs
+		line = line.expandtabs(4)
+		# strip spaces before and after any content
+		line = line.strip()
+		# check if we're having a Pyndent's code-block open delimiter
+		if line == opn_delim:
+		{
+			# if we're not just stripping Pyndent's delims away
+			if not args.strip:
+			{
+				# rebuild the indentation from scratch and add the (pyndent) delimiter, commented
+				output_lines.append(' ' * indent_level + '#' + line + '\n')
+			}
+			# then bump the indentation level 1 step forward
+			indent_level += 4
+			log_message(TRACE, f"pyndent_process: ({indent_level:03d}) {LO1} {' ' * indent_level + line}", args)
+		}
+		# check if we're having a Pyndent's code-block close delimiter
+		elif line == cls_delim:
+		{
+			# bump the indentation back, before to work at contents
+			indent_level = max(0, indent_level - 4)
+			# if we're not just stripping Pyndent's delims away
+			if not args.strip:
+			{
+				# rebuild the indentation from scratch and add the (pyndent) delimiter, commented
+				output_lines.append(' ' * indent_level + '#' + line + '\n')
+			}
+			log_message(TRACE, f"pyndent_process: ({indent_level:03d}) {LO2} {' ' * indent_level + line}", args)
+		}
+		# else it means the line contains "something else": maybe Python code, maybe garbage: we don't care at all
+		else:
+		{
+			log_message(TRACE, f"pyndent_process: ({indent_level:03d}) {LO3} {' ' * indent_level + line}", args)
+			# just rebuild the indentation and add whichever content to the output
+			output_lines.append(' ' * indent_level + line + '\n')
+		}
+	}
+	log_message(TRACE, f"pyndent_process: END", args)
+	return output_lines
+}
+
+def main():
+{
+	parser = argparse.ArgumentParser(description=DESC, epilog=f'Pyndent {VER} {REL} ({BUILD}) - {LIC}', add_help=False)
+	parser.add_argument('input_file', nargs='?', help='Input .pyn file to process')
+	parser.add_argument('-o', '--output', nargs='?', const=True, default=None, help='Output .py file (use without value for auto-name, default: <stdout>) (mutually exclusive with -x)')
+	parser.add_argument('-e', '--exec', '--execute', action='store_true', help='Execute the processed Python code immediately (mutually exclusive with -x)')
+	parser.add_argument('-x', '--execout', '--execute-output', nargs='?', const=True, metavar='OUTPUT_FILE', help='Auto-compile and execute (optional output filename, auto-generate if not provided)')
+	parser.add_argument('-f', '--force', action='store_true', help='Force overwrite existing output file')
+	parser.add_argument('-s', '--strip', '--strip-delims', action='store_true', help='Strips Pyndent meta-code totally')
+	parser.add_argument('-v', '--verbose', action='count', default=0, help='Verbose output: -v (info), -vv (debug), -vvv (trace) verbose activity logging (to <stderr>)')
+	parser.add_argument('-h', action='store_true', help='Show usage summary')
+	parser.add_argument('--help', action='store_true', help='Show full help')
+	parser.add_argument('-V', '--version', action='store_true', help='Show version and exit')
+	
+	args = parser.parse_args()
+
+	log_message(INFO, f"Starting Pyndent {VER}", args)
+	log_message(DEBUG, f"Command line: {' '.join(sys.argv)}", args)
+	log_message(TRACE, f"main", args)
+
+	# Help
+	if args.h:
+	{
+		log_message(TRACE, f"args.h -> parser.print_usage() -> {RC_OK}", args)
+		parser.print_usage()  # Syntax only
+		return RC_OK
+	}
+	if args.help:
+	{
+		log_message(TRACE, f"args.help -> parser.print_help() -> {RC_OK}", args)
+		parser.print_help()   # Full Help
+		return RC_OK
+	}
+
+	if args.version:
+	{
+		log_message(TRACE, f"args.version -> print version -> {RC_OK}", args)
+		print(f"Pyndent {VER} {REL} ({BUILD}) - {LIC}")
+		return RC_OK
+	}
+
+	if not args.input_file:
+	{
+		log_message(TRACE, f"args.input_file MISSING -> parser.print_help() -> {RC_WARN}", args)
+		parser.print_help()
+		return RC_WARN
+	}
+
+	# Check mutual exclusivity: -x vs -e/-o
+	if args.execout is not None and (args.exec or args.output is not None):
+	{
+		log_message(TRACE, f"args.execout not exclusive -> ERROR -> {RC_FATAL}", args)
+		print("Error: -x and -e/-o options are mutually exclusive")
+		return RC_FATAL
+	}
+
+	input_file = args.input_file
+
+	if not os.path.exists(input_file):
+	{
+		log_message(TRACE, f"os.path.exists({input_file}) failed -> ERROR -> {RC_FATAL}", args)
+		print(f"Error: Input file '{input_file}' not found.")
+		return RC_FATAL
+	}
+
+	with open(input_file, 'r') as f:
+	{
+		log_message(TRACE, f"Reading {input_file}", args)
+		input_lines = f.readlines()
+	}
+
+	#log_message(TRACE, f"Processing I/O", args)
+	output_lines = pyndent_process(input_lines, args)
+
+	# Determine output_file
+	output_file = None
+	if args.execout is not None:
+	{
+		# -x with optional output filename
+		if args.execout is True:
+		{
+			log_message(TRACE, f"args.execout outfile auto-naming from {input_file}", args)
+			# Auto-generate output filename
+			input_base = os.path.splitext(input_file)[0]
+			output_file = input_base + '.py'
+		}
+		else:
+		{
+			log_message(TRACE, f"args.execout outfile from {args.execout}", args)
+			# Use provided output filename
+			output_file = args.execout
+		}
+	}
+	elif args.output is not None:
+	{
+		if args.output is True:
+		{
+			log_message(TRACE, f"args.output outfile auto-naming from {input_file}", args)
+			# -o without argument: auto-naming
+			input_base = os.path.splitext(input_file)[0]
+			output_file = input_base + '.py'
+		}
+		else:
+		{
+			log_message(TRACE, f"args.execout outfile from {args.output}", args)
+			# -o with argument
+			output_file = args.output
+		}
+	}
+	
+	log_message(TRACE, f"Infile: {args.input_file} -> Outfile: {output_file}", args)
+
+	# Check for -f if output_file is set
+	if output_file and os.path.exists(output_file) and not args.force:
+	{
+		log_message(TRACE, f"outfile requested without {args.force} -> ERROR -> {RC_FATAL}", args)
+		print(f"Error: Output file '{output_file}' already exists. Use -f to overwrite.")
+		return RC_FATAL
+	}
+
+	# Execution logic
+	if args.execout is not None:
+	{
+		# -x: always write to file and execute
+		with open(output_file, 'w') as f:
+		{
+			log_message(TRACE, f"args.execout outfile {output_file} write", args)
+			f.writelines(output_lines)
+		}
+		print(f"Processed code written to: {output_file}")
+		log_message(TRACE, f"args.execout calling Python to execute {output_file}", args)
+		subprocess.run([sys.executable, output_file])
+	}
+	elif args.exec:
+	{
+		# -e: execute with optional file output
+		if output_file:
+		{
+			# -e with -o: write to file and execute
+			with open(output_file, 'w') as f:
+			{
+				log_message(TRACE, f"args.exec outfile {output_file} write", args)
+				f.writelines(output_lines)
+			}
+			print(f"Processed code written to: {output_file}")
+			log_message(TRACE, f"args.exec calling Python to execute {output_file}", args)
+			subprocess.run([sys.executable, output_file])
+		}
+		else:
+		{
+			# -e without -o: execute from <stdin> (no code output)
+			log_message(TRACE, f"args.exec calling Python to execute <stdout> stream", args)
+			code = ''.join(output_lines)
+			subprocess.run([sys.executable], input=code, text=True)
+		}
+	}
+	else:
+	{
+		# No execution: normal output
+		if output_file:
+		{
+			with open(output_file, 'w') as f:
+			{
+				log_message(TRACE, f"outfile {output_file} write", args)
+				f.writelines(output_lines)
+			}
+			print(f"Processed code written to: {output_file}")
+		}
+		else:
+		{
+			log_message(TRACE, f"output to <stdout>", args)
+			# Default: output to <stdout>
+			for line in output_lines:
+			{
+				print(line, end='')
+			}
+		}
+	}
+
+	log_message(TRACE, f"main: {RC_OK}", args)
+	return RC_OK
+}
+
+if __name__ == '__main__':
+{
+	sys.exit(main())
+}

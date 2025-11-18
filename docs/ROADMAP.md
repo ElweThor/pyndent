@@ -2,22 +2,25 @@
 
 ## 🕰️ Ideal Timeline:
 
-### ◻️ Phase 0 (Alpha - COMPLETED): ✅
+### ◻️ Phase 0 (Alpha COMPLETED): ✅
 - [x] Working code
 - [x] Complete documentation
 - [x] Basic testing
 - **Scope:** Personal use/testing
 
-### ⚀ Phase 1 (Beta 0.1 - COMPLETED): ✅
+### ⚀ Phase 1 (Beta 0.1 COMPLETED): ✅
 - [x] `-o` --output file
 - [x] `-e` --exec --execute
 - [x] `-x` --execout --execute-output (combo)
 
-### ⚁ Phase 2 (Beta 0.2 DEVELOPING): 🏗️
+### ⚁ Phase 2 (Beta 0.2 COMPLETED): ✅
 - [x] `-s` --strip-delimiters
-- [ ] `-v` --verbose
+- [x] `-q` --quiet
+- [x] `-v` --verbose
+- [x] `--vl` --verbose-logfile
+- [x] `--vp` --verbose-prefix
 
-### ⚂ Phase 3 (Beta 0.3): 🔵
+### ⚂ Phase 3 (Beta 0.3 DEVELOPING): 🏗️
 - [ ] `-r` --restore (more complex)
 - [ ] `#delim` directive
 

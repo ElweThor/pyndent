@@ -12,18 +12,62 @@ import sys
 import os
 import argparse
 import subprocess
+from datetime import datetime
 
 # Version info
-VER = "0.2.6.17"
+VER = "0.2.8.24"
 REL = "Beta 2"
-BUILD = "20251115"
+BUILD = "20251117"
 LIC = "see LICENSE.md"
 DESC = "Pyndent - Python preprocessor with code-block delimiters"
+
+# =============================================================================
+#
+# GLOBALS
+#
+# =============================================================================
 
 # Standard RCs
 RC_OK = 0                                           # correct exit
 RC_WARN = 1                                         # non-blocking error: execution continue
 RC_FATAL = 2                                        # fatal error: program stops
+
+# Logging constants
+INFO = 1                                            # 1st level: just what the tool does
+DEBUG = 2                                           # 2nd level: detail about how the tool works
+TRACE = 3                                           # 3rd level: details on involved variables, states and such
+M_INFO = "[I]"                                      # -v
+M_DEBUG = "[D]"                                     # -vv
+M_TRACE = "[T]"                                     # -vvv
+LO1 = "->"                                          # LogObject #1 (def.) {
+LO2 = "<-"                                          # LogObject #2 (def.) }
+LO3 = "C "                                          # LogObject #3 whatever else
+
+# var
+INVSPC = "\x01" * 48
+
+# =============================================================================
+#
+# VERBOSE LOGGING
+#
+# =============================================================================
+
+def log_message(level, message, args):
+#{
+    if args.verbose >= level:
+    #{
+        prefixes = [M_INFO, M_DEBUG, M_TRACE]
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S.%f")
+        print(f"{timestamp} {prefixes[level-1]} {message}", file=sys.stderr)
+    #}
+#}
+
+
+# =============================================================================
+#
+# META-SOURCE PROCESSING
+#
+# =============================================================================
 
 def pyndent_process(source_lines, args):
 #{
@@ -31,6 +75,11 @@ def pyndent_process(source_lines, args):
     indent_level = 0
     opn_delim = '{'     # code-block open delimiter (default)
     cls_delim = '}'     # code-block close delimiter (default)
+    
+    log_message(INFO, f"Processing in to out", args)
+    log_message(DEBUG, f"Delimiters: {opn_delim} {cls_delim}", args)
+    #log_message(TRACE, f"pyndent_process: ~START~", args)
+    log_message(DEBUG, f"pyndent_process: ~START~", args)
     
     for line in source_lines:
     #{
@@ -49,6 +98,8 @@ def pyndent_process(source_lines, args):
             #}
             # then bump the indentation level 1 step forward
             indent_level += 4
+            #log_message(TRACE, f"pyndent_process: ({indent_level:03d}) {LO1} {' ' * indent_level + line}", args)
+            log_message(DEBUG, f"pyndent_process: ({indent_level:03d}) {LO1} {' ' * indent_level + line}", args)
         #}
         # check if we're having a Pyndent's code-block close delimiter
         elif line == cls_delim:
@@ -61,14 +112,20 @@ def pyndent_process(source_lines, args):
                 # rebuild the indentation from scratch and add the (pyndent) delimiter, commented
                 output_lines.append(' ' * indent_level + '#' + line + '\n')
             #}
+            #log_message(TRACE, f"pyndent_process: ({indent_level:03d}) {LO2} {' ' * indent_level + line}", args)
+            log_message(DEBUG, f"pyndent_process: ({indent_level:03d}) {LO2} {' ' * indent_level + line}", args)
         #}
         # else it means the line contains "something else": maybe Python code, maybe garbage: we don't care at all
         else:
         #{
+            #log_message(TRACE, f"pyndent_process: ({indent_level:03d}) {LO3} {' ' * indent_level + line}", args)
+            log_message(DEBUG, f"pyndent_process: ({indent_level:03d}) {LO3} {' ' * indent_level + line}", args)
             # just rebuild the indentation and add whichever content to the output
             output_lines.append(' ' * indent_level + line + '\n')
         #}
     #}
+    #log_message(TRACE, f"pyndent_process: ~END~", args)
+    log_message(DEBUG, f"pyndent_process: ~END~", args)
     return output_lines
 #}
 
@@ -76,62 +133,213 @@ def main():
 #{
     parser = argparse.ArgumentParser(description=DESC, epilog=f'Pyndent {VER} {REL} ({BUILD}) - {LIC}', add_help=False)
     parser.add_argument('input_file', nargs='?', help='Input .pyn file to process')
-    parser.add_argument('-o', '--output', nargs='?', const=True, default=None, help='Output .py file (use without value for auto-name, default: stdout) (mutually exclusive with -x)')
-    parser.add_argument('-e', '--exec', '--execute', action='store_true', help='Execute the processed Python code immediately (mutually exclusive with -x)')
-    parser.add_argument('-x', '--execout', '--execute-output', nargs='?', const=True, metavar='OUTPUT_FILE', help='Auto-compile and execute (optional output filename, auto-generate if not provided)')
-    parser.add_argument('-f', '--force', action='store_true', help='Force overwrite existing output file')
-    parser.add_argument('-s', '--strip', '--strip-delims', action='store_true', help='Strips Pyndent meta-code totally')
-    parser.add_argument('-h', action='store_true', help='Show usage summary')
-    parser.add_argument('--help', action='store_true', help='Show full help')
+    parser.add_argument('-o', '--output', nargs='?', const=True, default=None, help=f'Output .py file (use without value for auto-name, default: <stdout>) (mutually exclusive with -x) {INVSPC}')
+    parser.add_argument('-e', '--exec', '--execute', action='store_true', help=f'Execute the processed Python code immediately (mutually exclusive with -x)  {INVSPC}')
+    parser.add_argument('-x', '--execout', '--execute-output', nargs='?', const=True, metavar='OUTPUT_FILE', help=f'Auto-compile and execute (optional output filename, auto-generate if not provided)  {INVSPC}')
+    parser.add_argument('-f', '--force', action='store_true', help=f'Force overwrite existing output file  {INVSPC}')
+    parser.add_argument('-s', '--strip', '--strip-delims', action='store_true', help=f'Strips Pyndent meta-code totally  {INVSPC}')
+    parser.add_argument('-q', '--quiet', action='store_true', help=f'Suppress any output to <stdout> only (file output remains, if requested)  {INVSPC}')
+    parser.add_argument('-v', '--verbose', action='count', default=0, help=f'Verbose output: -v (info), -vv (debug), -vvv (trace) verbose activity logging (to <stderr>)  {INVSPC}')
+    parser.add_argument('--vp', '--verbpfx', '--verbose-prefix', type=int, choices=[0,1,2,3], default=0, help=f'Timestamp prefix for verbose logfile: 0=no prefix (overwrite any existing logfile), 1=YYYYMMDD, 2=YYYYMMDD-HHMM, 3=YYYYMMDD-HHMMSS  {INVSPC}')
+    parser.add_argument('--vl', '--verblog', '--verbose-logfile', nargs='?', const=True, default=None, help=f'Write a verbose <logfile>.log (use without value for auto-name, default output to <stderr> if this option is not given)  {INVSPC}')
+    parser.add_argument('-h', action='store_true', help=f'Show usage summary  {INVSPC}')
+    parser.add_argument('--help', action='store_true', help=f'Show full help  {INVSPC}')
     parser.add_argument('-V', '--version', action='store_true', help='Show version and exit')
     
     args = parser.parse_args()
     
+    #
+    # from HERE on is possible to check options etc.
+    #
+    
+    #
+    # absolute first: logging options/files, to have logging on ASAP
+    #
+    
+    # Check if --vl is given but no verbose logging -v is requested
+    if args.vl is not None and args.verbose == 0:
+    #{
+        print("Warning: --vl specified but verbose level is 0: nothing will be logged (continuing)")
+        #return RC_WARN                             # continue
+    #}
+    
+    # Check if --vp is given but we miss --vl
+    if args.vp > 0 and args.vl is None:
+    #{
+        #log_message(TRACE, f"args.vp logfile prefix (--vp) given but missing logfile option (--vl) -> WARNING -> {RC_WARN}", args)
+        log_message(DEBUG, f"args.vp logfile prefix (--vp) given but missing logfile option (--vl) -> WARNING({RC_WARN})", args)
+        #print("Warning: missing --vl [<logfile>.log] option: continue logging to <stderr>")
+        print("Warning: --vp has no effect without --vl (continuing)")
+        #return RC_WARN                             # continue
+    #}
+    
+    #
+    # VERBOSE LOGFILE SETUP
+    #
+    
+    # Redirect stderr to logfile if --vl specified
+    original_stderr = sys.stderr
+    logfile_handler = None
+    
+    if args.vl is not None and args.verbose > 0:
+    #{
+        # Determine log filename
+        if args.vl is True:
+        #{
+            # Auto-generate filename, basing on SOURCE filename
+            input_base = os.path.splitext(args.input_file)[0]
+            base_logfile = input_base + '.log'
+        #}
+        else:
+        #{
+            # Use provided filename
+            base_logfile = args.vl
+        #}
+        
+        # Apply timestamp prefix based on --vp
+        if args.vp > 0:
+        #{
+            timestamp = datetime.now()
+            #if args.verbpfx == 1:
+            if args.vp == 1:
+            #{
+                prefix = timestamp.strftime("%Y%m%d_")
+            #}
+            #elif args.verbpfx == 2:
+            elif args.vp == 2:
+            #{
+                prefix = timestamp.strftime("%Y%m%d-%H%M_")
+            #}
+            else:  # args.verbpfx == 3
+            #{
+                prefix = timestamp.strftime("%Y%m%d-%H%M%S_")
+            #}
+            # Insert prefix before filename
+            dirname = os.path.dirname(base_logfile)
+            filename = os.path.basename(base_logfile)
+            final_logfile = os.path.join(dirname, prefix + filename)
+        #}
+        else:
+        #{
+            # --vp 0: no prefix, potential overwrite
+            final_logfile = base_logfile
+        #}
+        
+        # 20251117=ET disabled: if logfile exist it will be overwritten anyway: use more fine-grained timestamp to avoid it
+        # Check if logfile exists and handle --force
+        #if os.path.exists(final_logfile) and not args.force:
+        # {
+        #   print(f"Error: Log file '{final_logfile}' already exists. Use -f to overwrite.")
+        #   return RC_FATAL
+        # }
+        
+        # Open logfile and redirect stderr
+        try:
+        #{
+            logfile_handler = open(final_logfile, 'w')
+            sys.stderr = logfile_handler
+            log_message(INFO, f"Verbose logging redirected to: {final_logfile}", args)
+        #}
+        except Exception as e:
+        #{
+            print(f"Error: Cannot open log file '{final_logfile}': {e}")
+            return RC_FATAL
+        #}
+    #}
+    
+    #
+    # from HERE on is possible to log on file, if requested
+    #
+    
+    log_message(INFO, f"= INFO", args)
+    log_message(DEBUG, f"= DEBUG", args)
+    log_message(TRACE, f"= TRACE", args)
+    #log_message(TRACE, f"= TRACE", args)
+    #log_message(TRACE, f"___TRACE_SYMBOLS___", args)
+    #log_message(TRACE, f"-> indent", args)
+    #log_message(TRACE, f"<- deindent", args)
+    #log_message(TRACE, f"C code", args)
+    log_message(DEBUG, f"___DEBUG_SYMBOLS___", args)
+    log_message(DEBUG, f"-> indent", args)
+    log_message(DEBUG, f"<- deindent", args)
+    log_message(DEBUG, f"C code", args)
+    log_message(INFO, f"Starting Pyndent {VER}", args)
+    log_message(DEBUG, f"Command line: {' '.join(sys.argv)}", args)
+    #log_message(TRACE, f"main ~START~", args)
+    log_message(DEBUG, f"main ~START~", args)
+    
+    # =============================================================================
+    #
+    # OPTIONS CHECK
+    #
+    # =============================================================================
+    
     # Help
     if args.h:
     #{
+        log_message(TRACE, f"args.h -> parser.print_usage() RC({RC_OK})", args)
         parser.print_usage()  # Syntax only
         return RC_OK
     #}
     if args.help:
     #{
+        log_message(TRACE, f"args.help -> parser.print_help() RC({RC_OK})", args)
         parser.print_help()   # Full Help
         return RC_OK
     #}
     
     if args.version:
     #{
+        log_message(TRACE, f"args.version -> print version RC({RC_OK})", args)
         print(f"Pyndent {VER} {REL} ({BUILD}) - {LIC}")
         return RC_OK
     #}
     
     if not args.input_file:
     #{
-        parser.print_help()
+        log_message(TRACE, f"args.input_file MISSING -> parser.print_help() RC({RC_WARN})", args)
+        #parser.print_help()
+        parser.print_usage()  # Syntax only
         return RC_WARN
     #}
     
     # Check mutual exclusivity: -x vs -e/-o
     if args.execout is not None and (args.exec or args.output is not None):
     #{
+        log_message(TRACE, f"args.execout not exclusive -> ERROR({RC_FATAL})", args)
         print("Error: -x and -e/-o options are mutually exclusive")
         return RC_FATAL
     #}
     
+    # =============================================================================
+    #
+    # OPERATIONS
+    #
+    # =============================================================================
+    
+    #
+    # INPUT FILE SETUP
+    #
+    
     input_file = args.input_file
+    log_message(TRACE, f"args.input_file infile: {input_file}", args)
     
     if not os.path.exists(input_file):
     #{
+        log_message(TRACE, f"os.path.exists({input_file}) failed -> ERROR({RC_FATAL})", args)
         print(f"Error: Input file '{input_file}' not found.")
         return RC_FATAL
     #}
     
     with open(input_file, 'r') as f:
     #{
+        log_message(TRACE, f"{input_file} opened: reading...", args)
         input_lines = f.readlines()
     #}
     
-    output_lines = pyndent_process(input_lines, args)
+    #
+    # OUTPUT FILE SETUP
+    #
     
     # Determine output_file
     output_file = None
@@ -140,12 +348,14 @@ def main():
         # -x with optional output filename
         if args.execout is True:
         #{
+            log_message(TRACE, f"args.execout outfile auto-naming from {input_file}", args)
             # Auto-generate output filename
             input_base = os.path.splitext(input_file)[0]
             output_file = input_base + '.py'
         #}
         else:
         #{
+            log_message(TRACE, f"args.execout outfile from {args.execout}", args)
             # Use provided output filename
             output_file = args.execout
         #}
@@ -154,23 +364,34 @@ def main():
     #{
         if args.output is True:
         #{
+            log_message(TRACE, f"args.output outfile auto-naming from {input_file}", args)
             # -o without argument: auto-naming
             input_base = os.path.splitext(input_file)[0]
             output_file = input_base + '.py'
         #}
         else:
         #{
+            log_message(TRACE, f"args.execout outfile from {args.output}", args)
             # -o with argument
             output_file = args.output
         #}
     #}
     
+    log_message(TRACE, f"Infile: {args.input_file} -> Outfile: {output_file}", args)
+    
     # Check for -f if output_file is set
     if output_file and os.path.exists(output_file) and not args.force:
     #{
+        #log_message(TRACE, f"outfile requested without {args.force} -> ERROR -> {RC_FATAL}", args)
+        log_message(TRACE, f"outfile exists but -f not specified -> ERROR({RC_FATAL})", args)
         print(f"Error: Output file '{output_file}' already exists. Use -f to overwrite.")
         return RC_FATAL
     #}
+    
+    log_message(TRACE, f"Processing {input_file} to {output_file}", args)
+    output_lines = pyndent_process(input_lines, args)
+    
+    # EXEC/EXECOUT LOGIC SETUP
     
     # Execution logic
     if args.execout is not None:
@@ -178,9 +399,11 @@ def main():
         # -x: always write to file and execute
         with open(output_file, 'w') as f:
         #{
+            log_message(TRACE, f"args.execout outfile {output_file} write", args)
             f.writelines(output_lines)
         #}
         print(f"Processed code written to: {output_file}")
+        log_message(TRACE, f"args.execout calling Python to execute {output_file}", args)
         subprocess.run([sys.executable, output_file])
     #}
     elif args.exec:
@@ -191,14 +414,17 @@ def main():
             # -e with -o: write to file and execute
             with open(output_file, 'w') as f:
             #{
+                log_message(TRACE, f"args.exec outfile {output_file} write", args)
                 f.writelines(output_lines)
             #}
             print(f"Processed code written to: {output_file}")
+            log_message(TRACE, f"args.exec calling Python to execute {output_file}", args)
             subprocess.run([sys.executable, output_file])
         #}
         else:
         #{
-            # -e without -o: execute from stdin (no code output)
+            # -e without -o: execute from <stdin> (no code output)
+            log_message(TRACE, f"args.exec calling Python to execute <stdout> stream", args)
             code = ''.join(output_lines)
             subprocess.run([sys.executable], input=code, text=True)
         #}
@@ -210,18 +436,42 @@ def main():
         #{
             with open(output_file, 'w') as f:
             #{
+                log_message(TRACE, f"{output_file} opened: writing...", args)
                 f.writelines(output_lines)
             #}
             print(f"Processed code written to: {output_file}")
         #}
         else:
         #{
-            # Default: output to stdout
-            for line in output_lines:
+            if not args.quiet:
             #{
-                print(line, end='')
+                log_message(TRACE, f"output to <stdout>", args)
+                # Default: output to <stdout>
+                for line in output_lines:
+                #{
+                    print(line, end='')
+                #}
+            #}
+            else:
+            #{
+                #print(f"DEBUG: args.quiet={args.quiet}, args.verbose={args.verbose}", file=sys.stderr)
+                log_message(INFO, f"output to <stdout> suppressed: quiet mode", args)
             #}
         #}
+    #}
+    
+    # moved here to log it on file, if asked
+    #log_message(TRACE, f"main ~END~ {RC_OK}", args)
+    log_message(DEBUG, f"main ~END~ {RC_OK}", args)
+    
+    # VERBOSE LOGFILE CLEANUP
+    
+    # Restore stderr if we redirected it
+    if logfile_handler is not None:
+    #{
+        sys.stderr = original_stderr
+        logfile_handler.close()
+        log_message(INFO, f"Verbose logging to {final_logfile} completed", args)
     #}
     
     return RC_OK

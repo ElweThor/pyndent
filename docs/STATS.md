@@ -16,6 +16,8 @@ Pyndent proves that powerful tools don't need thousands of lines of code.
 | Beta2 | 0.2.4.15 | 104 | 5.431 B (8 KB) | 5.815 B (8 KB) | delims management fix,  -s/--strip |
 | Beta2 | 0.2.5.16 | 104 | 6.529 B (8 KB) | 7.064 B (8 KB) | bugfix release |
 | Beta2 | 0.2.6.17 | 107 | 6.344 B (8 KB) | 7.613 B (8 KB) | RC codes standardization |
+| Beta2 | 0.2.7.21 | 154 | 9.637 B (12 KB) |10.683 B (12 KB) | --verbose and levels |
+| Beta2 | 0.2.8.24 | 207 | 16.127 B (16 KB) | 17.609 B (20 KB) | logfile and --quiet |
 
 _(note: the reason why, most of the times .pyn meta-source disk usage is smaller than the processed .py one is due to the fact it uses `TABs`, while the final .py code uses `spaces`: by default, 1 `TAB` = 4 `spaces`)_
 
@@ -31,4 +33,4 @@ _(note: the reason why, most of the times .pyn meta-source disk usage is smaller
 - Current beta: **~0.6%** the size of Python's parser
 - Yet solves a real pain point for developers
 
-*"Simplicity is the ultimate sophistication" - Leonardo da Vinci*
+*"_Simplicity is the ultimate sophistication_" - Leonardo da Vinci*

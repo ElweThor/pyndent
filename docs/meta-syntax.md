@@ -168,10 +168,13 @@ example()
  | [-o](#optdet_o) | [--outfile](#optdet_o) | asks Pyndent to write the output to a \<filename\>**.py** instead of \<stdout\>.<br>\<filename\> is optional: if not given, the meta-source one is used |
  | [-x](#optdet_x) | [--execout<br>--execute-output](#optdet_x) | _combo_ switch implying `-e` and `-o`: everything valid for `-e` and `-o` is valid for `-x` too<br>(`-x` and `-e`/`-o` are of course <ins>mutually exclusive</ins>) |
  | [-f](#optdet_f) | [--force](#optdet_f) | allows to _silently overwrite_ the output file if already present: if not given and Pyndent finds the output file when going to write it, an **error** is emitted and the original target file is <ins>not overwritten</ins><br>**Force** is an option to `-o`, `-x` and `-r` |
+ | [-q](#optdet_q) | [--quiet](#optdet_q) | Suppress any output to <stdout> **only** (file output remains, if requested) |
  | [-i](#optdet_i) | [--interactive](#optdet_i) | _prompts_ to replace an output target file, if found, instead of exit in error |
  | [-s](#optdet_s) | [--strip<br>--strip-delims](#optdet_s) | _**strips** the delimiters away_ from the final Python code (AKA avoid to write them out at all), as well as every Pyndent element (like `#delim` or hashbang swapping), producing <ins>**100% pure Python source**</ins> without any Pyndent meta-source element into. |
  | [-r](#optdet_r) | [--restore](#optdet_r) | asks Pyndent to _restore_ (de-process) a meta-source from a Python .py source (mandatory), restoring all the Pyndent elements (delimiters, hashbang if present) from commented ones<br>having Pyndent elements commented in the source .py file is not mandatory <ins>if the source correctly executes</ins> in Python<br>(a .pyn file will be written, if using `-o` switch)<br>(disables `-e` and `-x` option) |
- | [-v](#optdet_v) | [--verbose<br>--v1<br>--v2](#optdet_v) | will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where -v/--v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given). |  
+ | [-v](#optdet_v) | [--verbose<br>--v1<br>--v2](#optdet_v) | will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where -v/--v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given). |
+ | | [--vl<br>--verblog<br>--verbose-logfile](#optdet_vl) | Write a <logfile>.log for verbose option (use without value for auto-name, default output to <stderr> if this option is not given) |
+ | | [--vp<br>--verbpfx<br>--verbose-prefix](#optdet_vp) 0..3 | Timestamp prefix for verbose logfile: 0=no prefix (overwrite any existing logfile), 1=YYYYMMDD, 2=YYYYMMDD-HHMM, 3=YYYYMMDD-HHMMSS |
  | [-h](#optdet_h) | [--help](#optdet_h) | shows simpler usage (`-h`) or full help (`--help`) |
  | [-V](#optdet_V) | [--version](#optdet_V) | shows the current Pyndent version |
  
@@ -264,6 +267,15 @@ example()
 `pyndent meta.pyn -o`  
 - the same, even if _less intuitive_ but it works too  
 
+<hr> 
+ | [-q](#optdet_q) | [--quiet](#optdet_q) | Suppress any output to <stdout> **only** (file output remains, if requested) |
+
+ ### -q --quiet<a name="optdet_q"></a>
+ Suppress any output to <stdout> **only** (file output remains, if requested)
+
+`pyndent -q meta.pyn`  
+- will process meta.pyn file without any processing output to \<stdout\> (useful for scripts which needs the RC only or to **validate** the meta-source). If any error will arise, it will be shown, tho, and RC will be set accordingly.
+
 <hr>
  
  ### -s --strip<a name="optdet_s"></a>
@@ -289,23 +301,57 @@ example()
 
 <hr>
 
- ### -v --v1 --verbose --v2<a name="optdet_v"></a>
+ ### -v --verbose <a name="optdet_v"></a>
  Will write all `--verbose` messages to \<stderr\>, for the asked verbosity level (where --v1 = **INFO**, --v2 = **DEBUG**), as well as the produced Python code to \<stdout\> (unless `-o` switch is given).
 
 `pyndent -v meta.pyn`  
 - will read meta.pyn, write processed code to \<stdout\>, and **INFO** level messages to \<stderr\>  
 
-`pyndent --v1 meta.pyn`  
-- the same: `-v`, `--v1`, and `--verbose` are all _aliases_ for **INFO** messages level  
+`pyndent --verbose meta.pyn`  
+- the same: `-v`, and `--verbose` are _aliases_ for **INFO** messages level  
 
 `pyndent -v -o source.py meta.pyn`  
-- will read meta.pyn and write source.py file, and **INFO** level messages to \<stderr\>  
+- will read meta.pyn and write source.py file, and **INFO** level messages to \<stderr\>. INFO messages are just the main ones, confirming the tool is working.
 
 `pyndent -v meta.pyn -o source.py`  
 - the same, with more "natural" syntax  
 
-`pyndent --v2 -o source.py meta.pyn`  
-- the same, but with more details: **INFO** and **DEBUG** level messages will be written to \<stderr\>  
+`pyndent -vv -o source.py meta.pyn`  
+- the same, but with **<ins>a lot</ins>** more details: **INFO** and **DEBUG** level messages will be written to \<stderr\>. DEBUG messages gives much more informations on options, input and output file, together with processing details on read meta-code.
+
+`pyndent -vvv -o source.py meta.pyn`  
+- the same, but with **even more** details: **INFO**, **DEBUG**, and **TRACE** level messages will be written to \<stderr\>. TRACE adds to DEBUG level some Pyndent's inner states, warnings and errors details.
+
+<hr>
+
+ ### --vl --verblog --verbose-logfile<a name="optdet_vl"></a>
+ Write a <logfile>.log for verbose option (use without value for auto-name, default output to <stderr> if this option is not given)
+
+`pyndent meta.pyn -v --vl`  
+- will read meta.pyn and write meta.log file with INFO level informations, the processed output will be sent to \<stdout\>  
+
+`pyndent meta.pyn -o -vv --vl`  
+- will read meta.pyn and write meta.log file with DEBUG level informations, the processed output will be sent to meta.py file.  
+
+`pyndent meta.pyn -o source.py -vvv --vl processing.log`  
+- will read meta.pyn and write processing.log file with TRACE level informations, the processed output will be sent to source.py file.  
+
+<hr>
+
+ ### --vp --verbpfx --verbose-prefix [\<0..3\>]<a name="optdet_vp"></a>
+ Timestamp prefix for verbose logfile: 0=no prefix (overwrite any existing logfile), 1=\<YYYYMMDD\>, 2=\<YYYYMMDD-hhmm\>, 3=\<YYYYMMDD-hhmmss\>
+
+`pyndent meta.pyn -v --vl`  
+- will read meta.pyn and write **meta.log file** with INFO level informations, the processed output will be sent to \<stdout\>. meta.log filename <ins>won't be timestamped</ins>: if you'll repeat the command, it will be _silently overwritten_ (good for non-progressive logfiles).  
+
+`pyndent meta.pyn -o -vv --vl --vp 1`  
+- will read meta.pyn and write **\<YYYYMMDD\>_meta.log file** with DEBUG level informations, the processed output will be sent to meta.py file. Logfile timestamp will _persist for the entire day_: during that time every rewrite to meta.log file will _silently overwrite_ it.  
+
+`pyndent meta.pyn -o source.py -vvv --vl processing.log --vp 2`  
+- will read meta.pyn and write **\<YYYYMMDD-hhmm\>processing.log file** with TRACE level informations, the processed output will be sent to source.py file. Logfile timestamp will _persist for a minute_: during that time every rewrite to meta.log file will _silently overwrite_ it.  
+
+`pyndent meta.pyn -o source.py -vvv --vl fast.log --vp 3`  
+- will read meta.pyn and write **\<YYYYMMDD-hhmmss\>fast.log file** with TRACE level informations, the processed output will be sent to source.py file. Logfile timestamp will _persist for a second_: during that time every rewrite to meta.log file will _silently overwrite_ it.  
 
 <hr>
 
