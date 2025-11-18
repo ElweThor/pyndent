@@ -1,6 +1,6 @@
 # 🐍 Pyndent - Solving Python's Indentation Dilemma
 
-[![Version](https://img.shields.io/badge/version-0.2.6.17--beta-yellow)]()
+[![Version](https://img.shields.io/badge/version-0.2.8.24--beta-yellow)]()
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE.md)
 
 > **Preprocessor that adds block delimiters to Python, making indentation errors a thing of the past.**
@@ -8,7 +8,8 @@
  *Now in BETA 2 with argparse options: see [ROADMAP](docs/ROADMAP.md) to know what's implemented already*
 
  Don't you like the idea of converting a generalized rant into a pleasant and efficient coding experience?  
- <ins>I did</ins>: I wanted to better learn Python, after leaving it 20 years ago, without the hassle of being biten too much by the serpent, only 'cause of **indentation**.
+ <ins>I did</ins>: I wanted to better learn Python, after leaving it 20 years ago, without the hassle of being biten too much by the serpent, only 'cause of **indentation**.  
+ Even more, I was discouraged by the possible "_**random execution**_" just 'cause a `TAB` moved one place back or I pasted a snippet with different spacing, resulting in **no** error but <ins>wrong logic</ins>!
 
 <br>  
 
@@ -95,7 +96,7 @@ Consider these disk space requirements:
 | IDLE | 0 MB (included with standard Python install) | 0 MB (part of the core Python installation) | Basic | Has "smart indent" for new lines, which indents after certain keywords or colons. It requires manual block indenting/dedenting for existing code using `Tab` and `Shift + Tab` |  
 
 Anyway, despite the advanced capabilities, a truth remains: **no IDE can read your mind**. 🔮  
-To be honest: even Pyndent can't... but it gives you a way to <ins>explicitly define your code blocks</ins> so that it later can pre-process your code _without having to "guess the logic"_ (read the mind 🔮), rebuilding the indentation on strong basis.  
+To be honest: even Pyndent can't... but it gives you a way to <ins>explicitly define your code blocks</ins> so that it later can pre-process your code _without having to "guess the logic"_ (AKA read the mind 🔮), rebuilding the indentation on strong basis.  
 The simplest thing we can tell about it is: **it works**. 🦾  
 
 Pyndent isn't an editor nor an IDE: it relies on your own ones: using a 3.5 GB full fledged suite or just Nano (or Notepad++ like I do) is totally up to you.  
@@ -158,8 +159,10 @@ print()
 - ✅ **File output** `-o` option (Beta 1)
 - ✅ **Execute directly** `-e` option (Beta 1)
 - ✅ **Strip artifacts** `-s` option (Beta 2) you can remove every non-Python elements
+- ✅ **Quiet null-output** `-q` option (Beta 2) validate your meta-source and get back RC codes
+- ✅ **Verbose processing** `-v` options (Beta 2) see more about what Pyndent is doing
+- ✅ **Logfile** `--vl` and `--vp` options (Beta 2) write details to review them later
 - 🔵 **Customizable delimiters** via `#delim` directive (coming)
-- 🔵 **Verbose processing** `-v1`/`-v2` options (coming)
 - 🔵 **Restore pyndent meta-source** `-r` option (coming)
 
 <br>  

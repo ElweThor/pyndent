@@ -30,10 +30,11 @@
 - **Scope:** General community
 
 ### ⚄ Release 1.x: 🔵
-- [ ] Graphical User Interface: 🐕‍🦺 PynGUI, anternative way to use Pyndent
+- [ ] Graphical User Interface: 🐕‍🦺 PynGUI, anternative way to use Pyndent (**OPTIONAL**/_possible_)
+- **Scope:** GUI 💘 lovers who dislike 💨 CLI
 
 ### 🎲 General Tasks: 🔵
 - [x] Public GitHub repository
 - [x] Formatted documentation
-- [ ] PyPI package (OPTIONAL/possible)
+- [ ] PyPI package (**OPTIONAL**/_possible_)
 - **Scope:** Steps not tied to a specific phase
